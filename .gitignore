@@ -8,6 +8,9 @@
 *.iml
 *.iws
 
+# Database files
+*.db
+
 ## Plugin-specific files:
 
 # IntelliJ
