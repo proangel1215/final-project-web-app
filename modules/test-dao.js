@@ -31,7 +31,7 @@ async function retrieveAllTestData() {
 async function updateTestData(testData) {
     const db = await dbPromise;
 
-    await db.run(SQL`
+    return await db.run(SQL`
         update test
         set stuff = ${testData.stuff}
         where id = ${testData.id}`);
@@ -40,7 +40,7 @@ async function updateTestData(testData) {
 async function deleteTestData(id) {
     const db = await dbPromise;
 
-    await db.run(SQL`
+    return await db.run(SQL`
         delete from test
         where id = ${id}`);
 }

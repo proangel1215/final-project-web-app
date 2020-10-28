@@ -2,11 +2,13 @@
   "name": "cs719-final-project-app",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "cookie-parser": "^1.4.4",
     "express": "~4.16.1",
     "express-handlebars": "^3.1.0",
-    "express-session": "^1.16.2",
     "sql-template-strings": "^2.2.2",
     "sqlite": "^3.0.3",
     "jimp": "^0.8.4",
