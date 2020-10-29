@@ -24,14 +24,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
-// Setup express-session
-const session = require("express-session");
-app.use(session({
-   resave: false,
-   saveUninitialized: false,
-   secret: "CS719"
-}));
-
 // Make the "public" folder available statically
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
