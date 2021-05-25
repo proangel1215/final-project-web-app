@@ -1,0 +1,26 @@
+/* * {
+    border: black 1px solid;
+} */
+
+#header {
+    background-color: orange;
+    text-align: center;
+}
+
+#navbar {
+    background-color: #10cde6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: ". c .";
+}
+
+#content {
+    grid-area: c;
+}
