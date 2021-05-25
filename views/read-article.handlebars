@@ -1,16 +1,41 @@
 <form action="read-article" method="GET">
 
-<div id ="articleView">
-    <h1>Article heading placeholder</h1>
-    <img src="./images/Dragonite.png">
-    <p>
-        Article content placeholder
-    </p>
-</div>
-<br>
-<div id="commentView">
-    <label for="commentBox">Comments:</label>
-    <br>
-    <textarea id="commentBox" name="commentBox" rows="4" cols="50" maxlength="300">Add a comment!</textarea>
-</div>
+    <div id="readArticleContainer">
+
+        <div id="articleView">
+            <h1>Article heading placeholder</h1>
+            <img src="./images/Dragonite.png">
+            <p>
+                Article content placeholder
+            </p>
+        </div>
+        <br>
+
+        {{! if logged in}}
+        <label for="commentInput">Comments:</label>
+        <br>
+        <textarea id="commentInput" name="commentInput" rows="4" cols="50" maxlength="300">Add a comment!</textarea>
+    </div>
+
+    <div id="commentBox">
+
+        <p>Comments will be displayed here!</p>
+
+        {{!#if comments}
+        {#each comments}
+        <div id="commentDisplay">
+            {{this.content}
+        </div>
+            {{#if comments have child}
+            <div class="reply">
+                {reply}
+            </div>
+
+            {{#else}
+            There are no comments yet!
+            {{/if}}
+        </div>
+
+    </div>
+
 </form>

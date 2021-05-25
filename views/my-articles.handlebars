@@ -1,4 +1,6 @@
-<form action="./myarticles" method="GET">
+<form action="./my-articles" method="GET">
+
+<div id="myArticlesContainer">
 
 <h1>Articles by me:</h1>
 
@@ -12,9 +14,17 @@
 
 <div id ="myArticlesView">
     {{!
-    If articles by user, display here in a grid/flex
-    What to display: just title as a link? Option to go straight to edit page?
+    {#if articles}
+    {#each article}
+    <div class="articlePreview">
+        If articles by user, display here in a grid/flex
+        What to display: just title as a link? 
+        Image preview?
+        Option to go straight to edit page?
+    </div>
      }}
+</div>
+
 </div>
 
 </form>

@@ -11,9 +11,9 @@ router.get("/", async function(req, res) {
     res.render("home");
 });
 
-router.get("/myarticles", async function(req, res) {
+router.get("/my-articles", async function(req, res) {
 
-    res.render("myarticles");
+    res.render("my-articles");
 });
 
 router.get("/read-article", async function(req, res) {
