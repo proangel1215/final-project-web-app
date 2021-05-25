@@ -11,4 +11,18 @@ router.get("/", async function(req, res) {
     res.render("home");
 });
 
+router.get("/login", async function(req, res) {
+    res.render("login");
+});
+
+router.post("/login", async function(req, res) {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    console.log(username);
+    console.log(password);
+    
+    res.redirect("/");
+});
+
 module.exports = router;
