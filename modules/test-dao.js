@@ -53,3 +53,14 @@ const dbPromise = require("./database.js");
 //     updateTestData,
 //     deleteTestData
 // };
+
+async function retrieveAllArticles() {
+    const db = await dbPromise; 
+    return await db.all(SQL`
+    SELECT * FROM articles
+    `);
+}; 
+
+module.exports = {
+    retrieveAllArticles
+};

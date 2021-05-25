@@ -30,6 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Setup routes
 const appRouter = require("./routes/application-routes.js");
+const { retrieveAllArticles } = require("./modules/test-dao.js");
 app.use(appRouter);
 
 // Start the server running.
