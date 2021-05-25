@@ -35,4 +35,11 @@ router.post("/login", async function(req, res) {
     res.redirect("/");
 });
 
+router.get("/home", async function(req, res) {
+    res.locals.articles = await testDao.retrieveAllArticles();
+    //const sort = req.query.sort; 
+
+    res.render("home");
+}); 
+
 module.exports = router;
