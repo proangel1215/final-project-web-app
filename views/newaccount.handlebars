@@ -1,0 +1,50 @@
+<h1>New Account</h1>
+    
+    <form action="./newAccount" method="POST">
+        <div class="field">
+            <label for="txtUsername">Username:</label>
+            <input type="text" name="username" id="txtUsername" required>
+        </div>
+
+        <div class="field">
+            <label for="txtPassword">Password:</label>
+            <input type="password" name="password" id="txtPassword" required>
+        </div>
+
+        <div class="field">
+            <label for="reenterPassword">Re-enter Password:</label>
+            <input type="password" name="rePassword" id="reenterPassword" required>
+        </div>
+
+        <div class="field">
+            <label for="txtName">Name:</label>
+            <input type="text" name="name" id="txtName" required>
+        </div>
+
+        <div class="field">
+            <label for="txtDOB">Date of Birth:</label>
+            <input type="date" name="birthday" id="DOB" required>
+        </div>
+
+        <div class="field">
+            <label for="txtdesc">Description:</label>
+            <textarea id="txtdesc" name="description" rows="4" cols="50" maxlength="300">Describe yourself in 300 characters</textarea>
+        </div>
+
+        Pick your avatar!
+
+        <div class="field">
+            <input type="radio" id="avatar1" name="avatar" value="Avatar1">
+            <label for="avatar1">Avatar1</label><br>
+            <input type="radio" id="avatar2" name="avatar" value="avatar2">
+            <label for="avatar2">Avatar2</label><br>
+            <input type="radio" id="avatar3" name="avatar" value="avatar3">
+            <label for="avatar3">Avatar1</label>
+        </div>
+
+        
+
+        <div class="field justify-sb align-center">
+            <button type="submit">Create account</button>
+        </div>
+    </form>
