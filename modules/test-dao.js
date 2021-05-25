@@ -1,55 +1,66 @@
 const SQL = require("sql-template-strings");
 const dbPromise = require("./database.js");
 
-async function createTestData(testData) {
-    const db = await dbPromise;
+// async function createTestData(testData) {
+//     const db = await dbPromise;
 
-    const result = await db.run(SQL`
-        insert into test (stuff) values(${testData.stuff})`);
+//     const result = await db.run(SQL`
+//         insert into test (stuff) values(${testData.stuff})`);
 
-    testData.id = result.lastID;
-}
+//     testData.id = result.lastID;
+// }
 
-async function retrieveTestDataById(id) {
-    const db = await dbPromise;
+// async function retrieveTestDataById(id) {
+//     const db = await dbPromise;
 
-    const testData = await db.get(SQL`
-        select * from test
-        where id = ${id}`);
+//     const testData = await db.get(SQL`
+//         select * from test
+//         where id = ${id}`);
 
-    return testData;
-}
+//     return testData;
+// }
 
-async function retrieveAllTestData() {
-    const db = await dbPromise;
+// async function retrieveAllTestData() {
+//     const db = await dbPromise;
 
-    const allTestData = await db.all(SQL`select * from test`);
+//     const allTestData = await db.all(SQL`select * from test`);
 
-    return allTestData;
-}
+//     return allTestData;
+// }
 
-async function updateTestData(testData) {
-    const db = await dbPromise;
+// async function updateTestData(testData) {
+//     const db = await dbPromise;
 
-    return await db.run(SQL`
-        update test
-        set stuff = ${testData.stuff}
-        where id = ${testData.id}`);
-}
+//     return await db.run(SQL`
+//         update test
+//         set stuff = ${testData.stuff}
+//         where id = ${testData.id}`);
+// }
 
-async function deleteTestData(id) {
-    const db = await dbPromise;
+// async function deleteTestData(id) {
+//     const db = await dbPromise;
 
-    return await db.run(SQL`
-        delete from test
-        where id = ${id}`);
-}
+//     return await db.run(SQL`
+//         delete from test
+//         where id = ${id}`);
+// }
 
-// Export functions.
+// // Export functions.
+// module.exports = {
+//     createTestData,
+//     retrieveTestDataById,
+//     retrieveAllTestData,
+//     updateTestData,
+//     deleteTestData
+// };
+
+async function retrieveAllArticles() {
+    const db = await dbPromise; 
+    return await db.all(SQL`
+    SELECT * FROM articles
+    `);
+}; 
+
 module.exports = {
-    createTestData,
-    retrieveTestDataById,
-    retrieveAllTestData,
-    updateTestData,
-    deleteTestData
+    retrieveAllArticles
 };

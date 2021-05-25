@@ -30,9 +30,16 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Setup routes
 const appRouter = require("./routes/application-routes.js");
+const { retrieveAllArticles } = require("./modules/test-dao.js");
 app.use(appRouter);
 
 // Start the server running.
 app.listen(port, function () {
     console.log(`App listening on port ${port}!`);
+});
+
+// Get the sort request in home view 
+app.get("/home", function (req, res) {
+    res.send(retrieveAllArticles());
+    console.log(retrieveAllArticles())
 });
