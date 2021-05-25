@@ -37,9 +37,3 @@ app.use(appRouter);
 app.listen(port, function () {
     console.log(`App listening on port ${port}!`);
 });
-
-// Get the sort request in home view 
-app.get("/home", function (req, res) {
-    res.send(retrieveAllArticles());
-    console.log(retrieveAllArticles())
-});
