@@ -34,6 +34,7 @@ CREATE TABLE articles (
 CREATE TABLE comments (
     id INTEGER NOT NULL PRIMARY KEY,
     postTime TIMESTAMP,
+    content VARCHAR(300),
     upvotes INTEGER,
     downvotes INTEGER,
     parentCommentID INTEGER,
