@@ -11,4 +11,10 @@ router.get("/", async function(req, res) {
     res.render("home");
 });
 
+router.get("/newaccount", async function(req, res) {
+
+
+    res.render("newaccount");
+});
+
 module.exports = router;
