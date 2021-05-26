@@ -12,13 +12,15 @@ router.get("/", async function(req, res) {
 });
 
 router.get("/my-articles", async function(req, res) {
-
     res.render("my-articles");
 });
 
 router.get("/read-article", async function(req, res) {
-
     res.render("read-article");
+});
+
+router.get("/new-article", async function(req, res) {
+    res.render("new-article");
 });
 
 router.get("/login", async function(req, res) {
