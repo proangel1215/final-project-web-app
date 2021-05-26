@@ -90,11 +90,17 @@ async function retrieveVotesByCommentId(id) {
     return votes;
 };
 
+async function deleteUserById(id) {
+    const db = await dbPromise;
+    return await db.run(SQL`DELETE FROM users WHERE id = ${id}`);
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesByAuthorId,
     retrieveArticleById,
     retrieveUserById,
     retrieveCommentsByArticleId,
+    deleteUserById,
     retrieveVotesByCommentId
 };
