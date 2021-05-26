@@ -30,6 +30,10 @@ router.get("/newaccount", async function(req, res) {
 });
 
 router.get("/accountdetails", async function(req, res) {
+    //Change user id input later, this is hardcoded for now//
+    const userinfo = await testDao.retrieveUserById(2);
+    res.locals.user = userinfo;
+
     res.render("accountdetails");
 });
 
