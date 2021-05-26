@@ -8,7 +8,7 @@ router.get("/", async function(req, res) {
     // res.locals.title = “My route title!“;
     // res.locals.allTestData = await testDao.retrieveAllTestData();
 
-    res.render("accountdetails");
+    res.render("home");
 });
 
 router.get("/my-articles", async function(req, res) {
