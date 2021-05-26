@@ -74,8 +74,14 @@ async function retrieveArticlesByAuthorId(id) {
     return await db.all(SQL`SELECT * FROM articles WHERE userID = ${id}`);
 };
 
+async function retrieveArticleById(id) {
+    const db = await dbPromise;
+    return await db.get(SQL`SELECT * FROM articles WHERE id = ${id}`);
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesByAuthorId,
+    retrieveArticleById,
     retrieveUserById
 };
