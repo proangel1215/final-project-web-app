@@ -25,6 +25,7 @@ CREATE TABLE articles (
     id INTEGER NOT NULL PRIMARY KEY,
     title VARCHAR(100),
     postTime TIMESTAMP,
+    content VARCHAR(8000),
     imageSource VARCHAR(100),
     userID INTEGER,
     FOREIGN KEY (userID) REFERENCES users(id)
