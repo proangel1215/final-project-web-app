@@ -20,8 +20,7 @@ router.get("/read-article", async function(req, res) {
 
 router.get("/new-article", async function(req, res) {
 
-    //const newArticleContent = tinymce.get("newArticle").getContent();
-    //alert(newArticleContent);
+    //should be post
 
     res.render("new-article");
 });

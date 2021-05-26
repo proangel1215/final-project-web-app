@@ -100,6 +100,13 @@ async function deleteCommentById(id) {
     return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
 };
 
+//problem
+async function createNewArticle(article) {
+    const db = await dbPromise;
+    const result = await db.run(SQL`
+        insert into articles (id, title, postTime, content, imageSource, userID) values ()`);
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesByAuthorId,

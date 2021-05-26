@@ -12,6 +12,4 @@ function getNewArticleContent() {
     console.log(newArticleContent);
 }
 
-function updateArticleContent(newArticleContent) {
-    appendChild
-}
+//store as a string in the database - innerHTML
