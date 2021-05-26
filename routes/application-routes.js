@@ -3,13 +3,13 @@ const router = express.Router();
 
 const testDao = require("../modules/test-dao.js");
 
-router.get("/", async function(req, res) {
+// router.get("/", async function(req, res) {
 
-    // res.locals.title = “My route title!“;
-    // res.locals.allTestData = await testDao.retrieveAllTestData();
+//     // res.locals.title = “My route title!“;
+//     // res.locals.allTestData = await testDao.retrieveAllTestData();
 
-    res.render("home");
-});
+//     res.render("home");
+// });
 
 router.get("/login", async function(req, res) {
     res.render("login");
@@ -25,11 +25,14 @@ router.post("/login", async function(req, res) {
     res.redirect("/");
 });
 
-router.get("/home", async function(req, res) {
-    res.locals.articles = await testDao.retrieveAllArticles();
-    //const sort = req.query.sort; 
-
+router.get("/", async function(req, res) {
+    res.locals.articles = await testDao.retrieveArticlesBySort(); 
     res.render("home");
 }); 
+
+// router.get("/getSort", async function(req, res) {
+//     const sortBy = req.query.sort; 
+//     res.json(sortBy);
+// });
 
 module.exports = router;

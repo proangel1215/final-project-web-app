@@ -1,23 +1,27 @@
+<script type="text/javascript" src="sort.js"></script>
+
 <h2>Newest articles for you</h2>
 <p class="sort">Sort by: </p> 
-<form action="./home" method="GET">
-<select name="sort">
-    <option value="mostRecent">Most recent</option>
-    <option value="leastRecent">Least recent</option>
-    <option value="author">Author</option>
-    <option value="title">Title</option>
-</select>
-</form>
-
+<button type="button" class="sort" id="title" onclick="getSort(this.id)">Title</button>
+<button type="button" class="sort" id="author" onclick="getSort(this.id)">Author</button>
+<button type="button" class="sort" id="postTime" onclick="getSort(this.id)">Date/Time</button>
 
 
 <div class="articleContainer">
-
+<table>
+    <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Post date/time</th>
+    </tr>
 {{#if articles}}
 {{#each articles}}
-<div class="article">
-<a href="./article/{{this.id}}">{{this.title}}</a>
-</div>
+<tr>
+<td><a href="./article/{{this.id}}">{{this.title}}</a></td>
+<td>this.author</td>
+<td>{{this.postTime}}</td>
+</tr>
 {{/each}}
 {{/if}}
+</table>
 </div>
