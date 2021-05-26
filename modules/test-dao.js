@@ -95,6 +95,11 @@ async function deleteUserById(id) {
     return await db.run(SQL`DELETE FROM users WHERE id = ${id}`);
 };
 
+async function deleteCommentById(id) {
+    const db = await dbPromise;
+    return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesByAuthorId,
@@ -102,5 +107,6 @@ module.exports = {
     retrieveUserById,
     retrieveCommentsByArticleId,
     deleteUserById,
-    retrieveVotesByCommentId
+    retrieveVotesByCommentId,
+    deleteCommentById
 };
