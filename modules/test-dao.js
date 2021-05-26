@@ -84,10 +84,17 @@ async function retrieveCommentsByArticleId(id) {
     return await db.all(SQL`SELECT * FROM comments WHERE articleID = ${id}`);
 };
 
+async function retrieveVotesByCommentId(id) {
+    const db = await dbPromise;
+    votes = await db.get(SQL`SELECT upvotes, downvotes FROM comments WHERE id = ${id}`);
+    return votes;
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesByAuthorId,
     retrieveArticleById,
     retrieveUserById,
-    retrieveCommentsByArticleId
+    retrieveCommentsByArticleId,
+    retrieveVotesByCommentId
 };
