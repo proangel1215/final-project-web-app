@@ -54,6 +54,14 @@ const dbPromise = require("./database.js");
 //     deleteTestData
 // };
 
+async function retrieveUserById(id) {
+    const db = await dbPromise;
+    const user = await db.get(SQL`
+        SELECT fname, lname, username, dob, description, imageSource FROM users
+        WHERE id = ${id}`);
+        return user;
+};
+
 async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
@@ -68,5 +76,6 @@ async function retrieveArticlesByAuthorId(id) {
 
 module.exports = {
     retrieveAllArticles,
-    retrieveArticlesByAuthorId
+    retrieveArticlesByAuthorId,
+    retrieveUserById
 };
