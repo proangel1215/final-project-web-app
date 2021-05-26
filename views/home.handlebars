@@ -1,4 +1,4 @@
-<script type="text/javascript" src="sort.js"></script>
+
 
 <h2>Newest articles for you</h2>
 <p class="sort">Sort by: </p> 
@@ -8,20 +8,13 @@
 
 
 <div class="articleContainer">
-<table>
+<table id="articleTable">
     <tr>
     <th>Title</th>
     <th>Author</th>
     <th>Post date/time</th>
     </tr>
-{{#if articles}}
-{{#each articles}}
-<tr>
-<td><a href="./article/{{this.id}}">{{this.title}}</a></td>
-<td>this.author</td>
-<td>{{this.postTime}}</td>
-</tr>
-{{/each}}
-{{/if}}
 </table>
 </div>
+
+<script type="text/javascript" src="sort.js"></script>

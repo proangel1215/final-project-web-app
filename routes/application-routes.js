@@ -26,13 +26,17 @@ router.post("/login", async function(req, res) {
 });
 
 router.get("/", async function(req, res) {
-    res.locals.articles = await testDao.retrieveArticlesBySort(); 
+
     res.render("home");
 }); 
 
-// router.get("/getSort", async function(req, res) {
-//     const sortBy = req.query.sort; 
-//     res.json(sortBy);
-// });
+router.get("/articles", async function(req, res){
+    
+    const sortBy = req.query.sortBy;
+    res.locals.articles = await testDao.retrieveArticlesBySort(sortBy);
+
+    articles = await testDao.retrieveArticlesBySort(sortBy);
+    res.json(articles);
+});
 
 module.exports = router;
