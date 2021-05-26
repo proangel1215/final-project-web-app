@@ -79,9 +79,15 @@ async function retrieveArticleById(id) {
     return await db.get(SQL`SELECT * FROM articles WHERE id = ${id}`);
 };
 
+async function retrieveCommentsByArticleId(id) {
+    const db = await dbPromise;
+    return await db.all(SQL`SELECT * FROM comments WHERE articleID = ${id}`);
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesByAuthorId,
     retrieveArticleById,
-    retrieveUserById
+    retrieveUserById,
+    retrieveCommentsByArticleId
 };
