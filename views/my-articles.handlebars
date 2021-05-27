@@ -1,0 +1,31 @@
+<div id="myArticlesContainer">
+
+    <h1>Articles by me:</h1>
+
+    <div id ="orderMyArticlesBox">
+        <form action="./my-articles" method="GET"></form>
+        <label for="orderMyArticles">Sort by:</label>
+            <select name="orderMyArticles" id="orderMyArticles">
+            <option value="date">Date</option>
+            <option value="title">Title</option>
+            </select>
+        </form>
+    </div>
+
+    <div id ="myArticlesView">
+        {{! commented out for now as no database input
+        {{#if articles}
+        {{#each article}
+        <div class="articlePreview">
+            <a href="./article/{{this.id}">{{this.title}</a>
+        </div>
+        {{/each}
+        {{#else}
+        <h3>You haven't written any articles!</h3>
+        {{/if}}
+        
+    </div>
+
+</div>
+
+
