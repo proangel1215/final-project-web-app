@@ -66,7 +66,16 @@ async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
     SELECT * FROM articles
+    ORDER BY postTime DESC
     `);
+}; 
+
+async function retrieveArticlesBySort(sortBy) {
+    const db = await dbPromise; 
+    return await db.all(`
+    SELECT * FROM articles 
+    ORDER BY ${sortBy}
+    `); 
 }; 
 
 async function retrieveArticlesByAuthorId(id) {
@@ -116,10 +125,16 @@ async function addUpvoteByCommentId(id) {
     //not finished yet//
     const db = await dbPromise;
     return await db.run(SQL`UPDATE comments SET upvotes = ISNULL(upvotes, 0) + 1`);
-}
+};
+
+async function deleteArticleById(id) {
+    const db = await dbPromise;
+    return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`)
+};
 
 module.exports = {
     retrieveAllArticles,
+    retrieveArticlesBySort,
     retrieveArticlesByAuthorId,
     retrieveArticleById,
     retrieveUserById,
@@ -127,5 +142,6 @@ module.exports = {
     deleteUserById,
     retrieveVotesByCommentId,
     deleteCommentById,
-    addUpvoteByCommentId
+    addUpvoteByCommentId,
+    deleteArticleById
 };
