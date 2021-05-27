@@ -58,16 +58,16 @@ async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
     SELECT * FROM articles
+    ORDER BY postTime DESC
     `);
 }; 
 
 async function retrieveArticlesBySort(sortBy) {
-
     const db = await dbPromise; 
-    return await db.all(SQL`
+    return await db.all(`
     SELECT * FROM articles 
     ORDER BY ${sortBy}
-    `);  
+    `); 
 }; 
 
 module.exports = {
