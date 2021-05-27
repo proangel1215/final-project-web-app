@@ -98,17 +98,13 @@ async function deleteUserById(id) {
 async function deleteCommentById(id) {
     const db = await dbPromise;
     const nestedID = await db.get(SQL`SELECT id FROM comments WHERE parentCommentID = ${id}`);
-    //console.log(nestedID.id);
 
-        if (nestedID != undefined) {
-            console.log("Using if")
+        if (nestedID != null) {
             const nestedID2 = await db.get(SQL`SELECT id FROM comments WHERE parentCommentID = ${nestedID.id}`);
-            console.log (nestedID2.id);
             await deleteCommentById(`${nestedID2.id}`);
             await db.run(SQL`DELETE FROM comments WHERE id = ${nestedID.id}`);
             return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
         } else {
-            console.log("Using ELSE")
             return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
         }
 };
