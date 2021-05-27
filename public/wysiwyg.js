@@ -10,6 +10,10 @@ tinymce.init({
 function getNewArticleContent() {
     const newArticleContent = tinymce.get("newArticle").getContent();
     console.log(newArticleContent);
+
+    //const heading = str.split("</h1>");
+    //console.log(heading);
+
 };
 
 //store as a string in the database - innerHTML

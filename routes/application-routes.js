@@ -23,9 +23,9 @@ router.get("/read-article", async function(req, res) {
 
 router.get("/new-article", async function(req, res) {
 
-    //should be post
+    //should be post 
 
-    res.redirect("new-article");
+    res.render("new-article");
 });
 
 router.get("/login", async function(req, res) {
