@@ -102,9 +102,12 @@ async function deleteCommentById(id) {
         if (nestedID != null) {
             const nestedID2 = await db.get(SQL`SELECT id FROM comments WHERE parentCommentID = ${nestedID.id}`);
             await deleteCommentById(`${nestedID2.id}`);
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${nestedID.id}`);
             await db.run(SQL`DELETE FROM comments WHERE id = ${nestedID.id}`);
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${id}`);
             return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
         } else {
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${id}`);
             return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
         }
 };
