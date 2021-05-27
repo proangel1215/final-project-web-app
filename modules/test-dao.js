@@ -66,7 +66,16 @@ async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
     SELECT * FROM articles
+    ORDER BY postTime DESC
     `);
+}; 
+
+async function retrieveArticlesBySort(sortBy) {
+    const db = await dbPromise; 
+    return await db.all(`
+    SELECT * FROM articles 
+    ORDER BY ${sortBy}
+    `); 
 }; 
 
 async function retrieveArticlesByAuthorId(id) {
@@ -106,14 +115,20 @@ async function createNewArticle(article) {
     const result = await db.run(SQL`
         insert into articles (id, title, postTime, content, imageSource, userID) values ()`);
 };
+async function deleteArticleById(id) {
+    const db = await dbPromise;
+    return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`)
+}
 
 module.exports = {
     retrieveAllArticles,
+    retrieveArticlesBySort,
     retrieveArticlesByAuthorId,
     retrieveArticleById,
     retrieveUserById,
     retrieveCommentsByArticleId,
     deleteUserById,
     retrieveVotesByCommentId,
-    deleteCommentById
+    deleteCommentById,
+    deleteArticleById
 };
