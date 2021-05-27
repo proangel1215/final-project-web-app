@@ -6,12 +6,12 @@
 
     <h1>Create or edit an article:</h1>
 
-    <form action="./new-article" method="GET">
+    <form onsubmit="./new-article" method="GET">
         <textbox id="newArticle">
          {{! wysiwyg implemented here}}
         </textbox>
     </form>
     <br>
-    <button onclick="getNewArticleContent()">Save and post article</button>
+    {{!<button onclick="getNewArticleContent()">Save and post article</button>}}
 
 </div>
