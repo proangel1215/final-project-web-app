@@ -36,8 +36,6 @@ router.get("/accountdetails", async function(req, res) {
     const userinfo = await testDao.retrieveUserById(2);
     res.locals.user = userinfo;
 
-    testDao.deleteCommentById(1);
-
     res.render("accountdetails");
 });
 
