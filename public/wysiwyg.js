@@ -10,6 +10,6 @@ tinymce.init({
 function getNewArticleContent() {
     const newArticleContent = tinymce.get("newArticle").getContent();
     console.log(newArticleContent);
-}
+};
 
 //store as a string in the database - innerHTML
