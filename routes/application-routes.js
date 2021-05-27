@@ -49,6 +49,12 @@ router.post("/new-account", async function(req, res) {
 });
 
 
+router.get("/usernames", async function(req, res) {
+    const usernames = await testDao.retrieveAllUsernames();
+    res.json(usernames);
+});
+
+
 router.get("/accountdetails", async function(req, res) {
     //Change user id input later, this is hardcoded for now//
     const userinfo = await testDao.retrieveUserById(2);

@@ -62,6 +62,11 @@ async function retrieveUserById(id) {
         return user;
 };
 
+async function retrieveAllUsernames() {
+    const db = await dbPromise;
+    return await db.all(SQL`SELECT username FROM users`);
+};
+
 async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
@@ -120,5 +125,6 @@ module.exports = {
     retrieveVotesByCommentId,
     deleteCommentById,
     deleteArticleById,
-    createUser
+    createUser,
+    retrieveAllUsernames
 };

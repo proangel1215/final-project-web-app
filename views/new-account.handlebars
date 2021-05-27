@@ -12,13 +12,14 @@
         </div>
 
         <div class="field">
-            <label for="txtDOB">Date of birth:</label>
-            <input type="date" name="dob" id="DOB" required>
+            <label for="dob">Date of birth:</label>
+            <input type="date" name="dob" id="dob" required>
         </div>
         
-        <div class="field">
+        <div class="field" id="usernameDiv">
             <label for="txtUsername">Username:</label>
             <input type="text" name="username" id="txtUsername" required>
+            <span id="usernameMessage"></span>
         </div>
 
         <div class="field">
@@ -29,6 +30,7 @@
         <div class="field">
             <label for="confirmPassword">Confirm password:</label>
             <input type="password" name="confirmPassword" id="confirmPassword" required>
+            <span id="confirmPasswordMessage"></span>
         </div>
 
         <div class="field">
@@ -50,6 +52,7 @@
         
 
         <div class="field justify-sb align-center">
-            <button type="submit">Create account</button>
+            {{!-- <button type="submit" id="submitButton">Create account</button> --}}
+            <input type="submit" id="submitButton">
         </div>
     </form>
