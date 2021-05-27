@@ -36,15 +36,15 @@ router.post("/new-account", async function(req, res) {
     const username = req.body.username;
     const dob = req.body.dob;
     const password = req.body.password;
-    const rePassword = req.body.rePassword;
+    const confirmPassword = req.body.confirmPassword;
     const description = req.body.description;
     const imageSource = req.body.avatar;
 
-    if (password == rePassword) {
+    if (password == confirmPassword) {
         await testDao.createUser(fname, lname, username, dob, password, description, imageSource);
         res.redirect("/");
     } else {
-        res.send("Please re-enter the same password");
+        res.redirect("/new-account");
     }
 });
 
