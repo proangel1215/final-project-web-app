@@ -22,7 +22,7 @@ router.get("/new-article", async function(req, res) {
 
     //should be post
 
-    res.render("new-article");
+    res.redirect("new-article");
 });
 
 router.get("/login", async function(req, res) {
