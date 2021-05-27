@@ -26,8 +26,26 @@ router.get("/login", async function(req, res) {
 });
 
 
-router.get("/newaccount", async function(req, res) {
-    res.render("newaccount");
+router.get("/new-account", async function(req, res) {
+    res.render("new-account");
+});
+
+router.post("/new-account", async function(req, res) {
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const username = req.body.username;
+    const dob = req.body.dob;
+    const password = req.body.password;
+    const rePassword = req.body.rePassword;
+    const description = req.body.description;
+    const imageSource = req.body.avatar;
+
+    if (password == rePassword) {
+        await testDao.createUser(fname, lname, username, dob, password, description, imageSource);
+        res.redirect("/");
+    } else {
+        res.send("Please re-enter the same password");
+    }
 });
 
 
