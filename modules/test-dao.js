@@ -71,7 +71,16 @@ async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
     SELECT * FROM articles
+    ORDER BY postTime DESC
     `);
+}; 
+
+async function retrieveArticlesBySort(sortBy) {
+    const db = await dbPromise; 
+    return await db.all(`
+    SELECT * FROM articles 
+    ORDER BY ${sortBy}
+    `); 
 }; 
 
 async function retrieveArticlesByAuthorId(id) {
@@ -102,7 +111,25 @@ async function deleteUserById(id) {
 
 async function deleteCommentById(id) {
     const db = await dbPromise;
-    return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
+    const nestedID = await db.get(SQL`SELECT id FROM comments WHERE parentCommentID = ${id}`);
+
+        if (nestedID != null) {
+            const nestedID2 = await db.get(SQL`SELECT id FROM comments WHERE parentCommentID = ${nestedID.id}`);
+            await deleteCommentById(`${nestedID2.id}`);
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${nestedID.id}`);
+            await db.run(SQL`DELETE FROM comments WHERE id = ${nestedID.id}`);
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${id}`);
+            return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
+        } else {
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${id}`);
+            return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
+        }
+};
+
+async function addUpvoteByCommentId(id) {
+    //not finished yet//
+    const db = await dbPromise;
+    return await db.run(SQL`UPDATE comments SET upvotes = ISNULL(upvotes, 0) + 1`);
 };
 
 async function deleteArticleById(id) {
@@ -117,6 +144,7 @@ async function createUser(fname, lname, username, dob, password, description, im
 
 module.exports = {
     retrieveAllArticles,
+    retrieveArticlesBySort,
     retrieveArticlesByAuthorId,
     retrieveArticleById,
     retrieveUserById,
@@ -124,7 +152,8 @@ module.exports = {
     deleteUserById,
     retrieveVotesByCommentId,
     deleteCommentById,
-    deleteArticleById,
     createUser,
-    retrieveAllUsernames
+    retrieveAllUsernames,
+    addUpvoteByCommentId,
+    deleteArticleById
 };
