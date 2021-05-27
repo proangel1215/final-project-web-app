@@ -113,6 +113,7 @@ async function deleteCommentById(id) {
 };
 
 async function addUpvoteByCommentId(id) {
+    //not finished yet//
     const db = await dbPromise;
     return await db.run(SQL`UPDATE comments SET upvotes = ISNULL(upvotes, 0) + 1`);
 }
