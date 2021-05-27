@@ -62,6 +62,11 @@ async function retrieveUserById(id) {
         return user;
 };
 
+async function retrieveAllUsernames() {
+    const db = await dbPromise;
+    return await db.all(SQL`SELECT username FROM users`);
+};
+
 async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
@@ -132,6 +137,11 @@ async function deleteArticleById(id) {
     return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`)
 };
 
+async function createUser(fname, lname, username, dob, password, description, imageSource) {
+    const db = await dbPromise;
+    return await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource) VALUES (${fname}, ${lname}, ${username}, ${dob}, ${password}, ${description}, ${imageSource})`);
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesBySort,
@@ -142,6 +152,8 @@ module.exports = {
     deleteUserById,
     retrieveVotesByCommentId,
     deleteCommentById,
+    createUser,
+    retrieveAllUsernames,
     addUpvoteByCommentId,
     deleteArticleById
 };
