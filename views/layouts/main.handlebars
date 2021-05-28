@@ -16,7 +16,7 @@
     <div id="navbar">
         <a href="/"><span>Home</span></a>
         <div id = "rightNavButtons">
-            {{#if cookie}}
+            {{#if user.authToken}}
                 <a href="/create-article"><span>Create article</span></a>
                 <a href="/my-articles"><span>My articles</span></a>
                 <a href="/account-details"><span>My account</span></a>

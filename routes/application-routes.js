@@ -1,18 +1,19 @@
+const { v4: uuid } = require("uuid");
 const express = require("express");
 const router = express.Router();
 
-const testDao = require("../modules/test-dao.js");
-
-// router.get("/", async function(req, res) {
-
-//     // res.locals.title = “My route title!“;
-//     // res.locals.allTestData = await testDao.retrieveAllTestData();
-
-//     res.render("home");
-// });
+const testDao = require("../modules/dao.js");
+const userDao = require("../modules/users-dao.js");
+const { verifyAuthenticated } = require("../middleware/auth-middleware.js");
 
 
-router.get("/my-articles", async function(req, res) {
+router.get("/", async function(req, res) {
+    res.locals.articles = await testDao.retrieveAllArticles(); 
+    res.render("home");
+}); 
+
+
+router.get("/my-articles", verifyAuthenticated, async function(req, res) {
 
     res.render("my-articles");
 });
@@ -21,11 +22,6 @@ router.get("/my-articles", async function(req, res) {
 router.get("/read-article", async function(req, res) {
 
     res.render("read-article");
-});
-
-
-router.get("/login", async function(req, res) {
-    res.render("login");
 });
 
 
@@ -44,8 +40,11 @@ router.post("/create-account", async function(req, res) {
     const imageSource = req.body.avatar;
 
     if (password == confirmPassword) {
-        const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: password, description: description, imageSource: imageSource};
+        const authToken = uuid();
+        const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: password, description: description, imageSource: imageSource, authToken: authToken};
         await testDao.createUser(newUser);
+        res.cookie("authToken", authToken);
+        res.locals.user = newUser;
         res.redirect("/");
     } else {
         res.redirect("/create-account");
@@ -59,29 +58,10 @@ router.get("/usernames", async function(req, res) {
 });
 
 
-router.get("/account-details", async function(req, res) {
-    //Change user id input later, this is hardcoded for now//
-    const userinfo = await testDao.retrieveUserById(2);
-    res.locals.user = userinfo;
+router.get("/account-details", verifyAuthenticated, async function(req, res) {
     res.render("account-details");
 });
 
-
-router.post("/login", async function(req, res) {
-    const username = req.body.username;
-    const password = req.body.password;
-
-    console.log(username);
-    console.log(password);
-
-    res.redirect("/");
-});
-
-router.get("/", async function(req, res) {
-    res.locals.articles = await testDao.retrieveAllArticles(); 
-    // res.locals.cookie = "cookie";
-    res.render("home");
-}); 
 
 router.get("/articles", async function(req, res){
     const sortBy = req.query.sortBy;

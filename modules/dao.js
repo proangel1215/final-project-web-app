@@ -1,32 +1,6 @@
 const SQL = require("sql-template-strings");
 const dbPromise = require("./database.js");
 
-// async function createTestData(testData) {
-//     const db = await dbPromise;
-
-//     const result = await db.run(SQL`
-//         insert into test (stuff) values(${testData.stuff})`);
-
-//     testData.id = result.lastID;
-// }
-
-// async function retrieveTestDataById(id) {
-//     const db = await dbPromise;
-
-//     const testData = await db.get(SQL`
-//         select * from test
-//         where id = ${id}`);
-
-//     return testData;
-// }
-
-// async function retrieveAllTestData() {
-//     const db = await dbPromise;
-
-//     const allTestData = await db.all(SQL`select * from test`);
-
-//     return allTestData;
-// }
 
 // async function updateTestData(testData) {
 //     const db = await dbPromise;
@@ -37,29 +11,13 @@ const dbPromise = require("./database.js");
 //         where id = ${testData.id}`);
 // }
 
-// async function deleteTestData(id) {
-//     const db = await dbPromise;
-
-//     return await db.run(SQL`
-//         delete from test
-//         where id = ${id}`);
-// }
-
-// // Export functions.
-// module.exports = {
-//     createTestData,
-//     retrieveTestDataById,
-//     retrieveAllTestData,
-//     updateTestData,
-//     deleteTestData
-// };
 
 async function retrieveUserById(id) {
     const db = await dbPromise;
     const user = await db.get(SQL`
-        SELECT fname, lname, username, dob, description, imageSource FROM users
+        SELECT * FROM users
         WHERE id = ${id}`);
-        return user;
+    return user;
 };
 
 async function retrieveAllUsernames() {
@@ -139,7 +97,9 @@ async function deleteArticleById(id) {
 
 async function createUser(user) {
     const db = await dbPromise;
-    return await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource) VALUES (${user.fname}, ${user.lname}, ${user.username}, ${user.dob}, ${user.password}, ${user.description}, ${user.imageSource})`);
+    const newUser =  await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource, authToken) VALUES (${user.fname}, ${user.lname}, ${user.username}, ${user.dob}, ${user.password}, ${user.description}, ${user.imageSource}, ${user.authToken})`);
+    user.id = newUser.lastID;
+    return newUser;
 };
 
 module.exports = {
