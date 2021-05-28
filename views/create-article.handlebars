@@ -11,7 +11,13 @@ tinymce.init({
     });
 </script>
 
-<script src="./wysiwyg.js"></script>
+<script type="text/javascript">
+    async function getNewArticleContent() {
+    const newArticleContent = tinymce.get("newArticleContent").getContent();
+    console.log(newArticleContent)
+    //return newArticleContent;
+};
+</script>
 
 <div id="newArticleContainer">
 
@@ -34,6 +40,9 @@ tinymce.init({
         </textbox>
         <br>
         <button type="submit">Save and post article</button>
+        
     </form>
+    <br>
+    <button onclick="getNewArticleContent()">Show WYSIWYG input in console for testing</button>
 
 </div>

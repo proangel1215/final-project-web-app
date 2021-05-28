@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const testDao = require("../modules/test-dao.js");
-const wysiwyg = require("../public/wysiwyg.js");
+//const wysiwyg = require("../public/wysiwyg.js");
 
 // router.get("/", async function(req, res) {
 
@@ -32,12 +32,12 @@ router.post("/create-article", async function(req, res) {
     const imageSource = req.body.articleImage;
     //const content = await wysiwyg.getNewArticleContent();
 
-    const newArticle = {title: title, imageSource: imageSource /*userID: logged in user*/};
+    const newArticle = {title: title, imageSource: imageSource /*userID: logged in user*/}; 
     await testDao.createNewArticle(newArticle);
+    //get ID of newly created article
     res.redirect("/");
-});
+}); 
 
-//insert into articles (title, postTime, content, imageSource, userID) values ()`);
 
 router.get("/login", async function(req, res) {
     res.render("login");
