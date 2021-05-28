@@ -44,7 +44,8 @@ router.post("/new-account", async function(req, res) {
     const imageSource = req.body.avatar;
 
     if (password == confirmPassword) {
-        await testDao.createUser(fname, lname, username, dob, password, description, imageSource);
+        const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: password, description: description, imageSource: imageSource};
+        await testDao.createUser(newUser);
         res.redirect("/");
     } else {
         res.redirect("/new-account");
@@ -58,12 +59,11 @@ router.get("/usernames", async function(req, res) {
 });
 
 
-router.get("/accountdetails", async function(req, res) {
+router.get("/account-details", async function(req, res) {
     //Change user id input later, this is hardcoded for now//
     const userinfo = await testDao.retrieveUserById(2);
     res.locals.user = userinfo;
-
-    res.render("accountdetails");
+    res.render("account-details");
 });
 
 
