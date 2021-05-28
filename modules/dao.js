@@ -1,12 +1,23 @@
 const SQL = require("sql-template-strings");
 const dbPromise = require("./database.js");
 
+
+// async function updateTestData(testData) {
+//     const db = await dbPromise;
+
+//     return await db.run(SQL`
+//         update test
+//         set stuff = ${testData.stuff}
+//         where id = ${testData.id}`);
+// }
+
+
 async function retrieveUserById(id) {
     const db = await dbPromise;
     const user = await db.get(SQL`
-        SELECT fname, lname, username, dob, description, imageSource FROM users
+        SELECT * FROM users
         WHERE id = ${id}`);
-        return user;
+    return user;
 };
 
 async function retrieveAllUsernames() {
@@ -87,13 +98,13 @@ async function addUpvoteByCommentId(id) {
 async function createNewArticle(article) {
     //need if logged in function to get userID - placeholder ID used here
     const db = await dbPromise;
-    const newArticle = await db.run(SQL`
-        INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, 607713)`);
+    await db.run(SQL`
+        INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID})`);
 
     //select most recent article id where user = logged in user 
     const newArticleID = await db.run(SQL`
         SELECT id FROM articles
-        WHERE id = 607713
+        WHERE id = ${article.userID}
         ORDER BY postTime
         LIMIT 1`)
     
@@ -107,7 +118,9 @@ async function deleteArticleById(id) {
 
 async function createUser(user) {
     const db = await dbPromise;
-    return await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource) VALUES (${user.fname}, ${user.lname}, ${user.username}, ${user.dob}, ${user.password}, ${user.description}, ${user.imageSource})`);
+    const newUser =  await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource, authToken) VALUES (${user.fname}, ${user.lname}, ${user.username}, ${user.dob}, ${user.password}, ${user.description}, ${user.imageSource}, ${user.authToken})`);
+    user.id = newUser.lastID;
+    return newUser;
 };
 
 module.exports = {
