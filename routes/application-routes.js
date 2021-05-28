@@ -30,10 +30,11 @@ router.post("/create-article", async function(req, res) {
 
     const title = req.body.articleTitle;
     const imageSource = req.body.articleImage;
-    //const content = await wysiwyg.getNewArticleContent();
-
-    const newArticle = {title: title, imageSource: imageSource /*userID: logged in user*/}; 
+    const content = req.body.newArticleContent;
+    
+    const newArticle = {title: title, content: content, imageSource: imageSource /*userID: logged in user*/}; 
     await testDao.createNewArticle(newArticle);
+    
     //get ID of newly created article
     res.redirect("/");
 }); 

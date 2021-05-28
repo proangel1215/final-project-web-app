@@ -11,17 +11,9 @@ tinymce.init({
     });
 </script>
 
-<script type="text/javascript">
-    async function getNewArticleContent() {
-    const newArticleContent = tinymce.get("newArticleContent").getContent();
-    console.log(newArticleContent)
-    //return newArticleContent;
-};
-</script>
-
 <div id="newArticleContainer">
 
-    <h1>Create or edit an article:</h1>
+    <h1>Create a new article:</h1>
 
     <form action="./create-article" method="POST">
 
@@ -35,14 +27,12 @@ tinymce.init({
             <input type="file" id="articleImage" name="articleImage" accept="image/*">
         </div>
         <br>
-        <textbox id="newArticleContent">
+        <textbox id="newArticleContent" name="newArticleContent">
          {{! WYSIWYG implemented here for paragraph input}}
         </textbox>
         <br>
         <button type="submit">Save and post article</button>
         
     </form>
-    <br>
-    <button onclick="getNewArticleContent()">Show WYSIWYG input in console for testing</button>
 
 </div>
