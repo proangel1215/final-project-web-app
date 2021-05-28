@@ -33,7 +33,8 @@ router.post("/create-article", async function(req, res) {
     const content = req.body.newArticleContent;
     
     const newArticle = {title: title, content: content, imageSource: imageSource /*userID: logged in user*/}; 
-    await testDao.createNewArticle(newArticle);
+    const newArticleID = await testDao.createNewArticle(newArticle);
+    console.log(newArticleID);
     
     //get ID of newly created article
     res.redirect("/");
