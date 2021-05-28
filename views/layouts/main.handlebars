@@ -14,8 +14,15 @@
     <div id="navbar">
         <span>Home Placeholder</span>
         <div id = "rightNavButtons">
-            <span>Placeholder</span>
-            <span>Placeholder</span>
+            {{#if cookie}}
+                <span>Create article</span>
+                <span>My articles</span>
+                <span>My account</span>
+                <span>Log out</span>   
+                {{else}}
+                <span>Log in</span>
+                <span>Create account</span>
+            {{/if}}
         </div>
     </div>
     <div id="container">

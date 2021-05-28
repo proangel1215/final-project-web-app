@@ -79,6 +79,7 @@ router.post("/login", async function(req, res) {
 
 router.get("/", async function(req, res) {
     res.locals.articles = await testDao.retrieveAllArticles(); 
+    // res.locals.cookie = "cookie";
     res.render("home");
 }); 
 
