@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const testDao = require("../modules/dao.js");
+const userDao = require("../modules/users-dao.js");
 const { verifyAuthenticated } = require("../middleware/auth-middleware.js");
 
 
@@ -13,7 +14,8 @@ router.get("/", async function(req, res) {
 
 
 router.get("/my-articles", verifyAuthenticated, async function(req, res) {
-    res.locals.articles = await testDao.retrieveArticlesByAuthorId(user); 
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    res.locals.articles = await testDao.retrieveArticlesByAuthorId(user.id); 
     res.render("my-articles");
 });
 
@@ -22,17 +24,18 @@ router.get("/read-article", async function(req, res) {
     res.render("read-article");
 });
 
-router.get("/create-article", async function(req, res) {
+router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
 });
 
-router.post("/create-article", async function(req, res) {
+router.post("/create-article", verifyAuthenticated, async function(req, res) {
 
     const title = req.body.articleTitle;
     const imageSource = req.body.articleImage;
     const content = req.body.newArticleContent;
     
-    const newArticle = {title: title, content: content, imageSource: imageSource /*userID: logged in user*/}; 
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id}; 
     const newArticleID = await testDao.createNewArticle(newArticle);
     console.log(newArticleID);
     //get ID of newly created article

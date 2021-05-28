@@ -39,7 +39,7 @@ router.post("/login", async function(req, res) {
     else {
         // Auth fail
         res.locals.user = null;
-        res.redirect("./login?message=Username and/or password were incorrect");
+        res.redirect("./login?message=Username and/or password are incorrect");
     }
 });
 

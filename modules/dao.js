@@ -93,13 +93,13 @@ async function addUpvoteByCommentId(id) {
 async function createNewArticle(article) {
     //need if logged in function to get userID - placeholder ID used here
     const db = await dbPromise;
-    const newArticle = await db.run(SQL`
-        INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, 607713)`);
+    await db.run(SQL`
+        INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID})`);
 
     //select most recent article id where user = logged in user 
     const newArticleID = await db.run(SQL`
         SELECT id FROM articles
-        WHERE id = 607713
+        WHERE id = ${article.userID}
         ORDER BY postTime
         LIMIT 1`)
     
