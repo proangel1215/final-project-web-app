@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const testDao = require("../modules/test-dao.js");
+const wysiwyg = require("../public/wysiwyg.js");
 
 // router.get("/", async function(req, res) {
 
@@ -27,10 +28,15 @@ router.get("/new-article", async function(req, res) {
 
 router.post("/new-article", async function(req, res) {
 
-    //get the data from the form input
-    //split into title, content, image
+    const title = req.body.articleTitle;
+    const imageSource = req.body.articleImage;
+    //const content = await wysiwyg.getNewArticleContent();
     
-    res.redirect("/read-article");
+    console.log(title);
+    console.log(imageSource);
+    //console.log(content);
+
+    res.redirect("/");
 });
 
 router.get("/login", async function(req, res) {
