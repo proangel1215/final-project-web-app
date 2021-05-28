@@ -1,59 +1,6 @@
 const SQL = require("sql-template-strings");
 const dbPromise = require("./database.js");
 
-// async function createTestData(testData) {
-//     const db = await dbPromise;
-
-//     const result = await db.run(SQL`
-//         insert into test (stuff) values(${testData.stuff})`);
-
-//     testData.id = result.lastID;
-// }
-
-// async function retrieveTestDataById(id) {
-//     const db = await dbPromise;
-
-//     const testData = await db.get(SQL`
-//         select * from test
-//         where id = ${id}`);
-
-//     return testData;
-// }
-
-// async function retrieveAllTestData() {
-//     const db = await dbPromise;
-
-//     const allTestData = await db.all(SQL`select * from test`);
-
-//     return allTestData;
-// }
-
-// async function updateTestData(testData) {
-//     const db = await dbPromise;
-
-//     return await db.run(SQL`
-//         update test
-//         set stuff = ${testData.stuff}
-//         where id = ${testData.id}`);
-// }
-
-// async function deleteTestData(id) {
-//     const db = await dbPromise;
-
-//     return await db.run(SQL`
-//         delete from test
-//         where id = ${id}`);
-// }
-
-// // Export functions.
-// module.exports = {
-//     createTestData,
-//     retrieveTestDataById,
-//     retrieveAllTestData,
-//     updateTestData,
-//     deleteTestData
-// };
-
 async function retrieveUserById(id) {
     const db = await dbPromise;
     const user = await db.get(SQL`
@@ -132,6 +79,22 @@ async function addUpvoteByCommentId(id) {
     return await db.run(SQL`UPDATE comments SET upvotes = ISNULL(upvotes, 0) + 1`);
 };
 
+async function createNewArticle(article) {
+    //need if logged in function to get userID - placeholder ID used here
+    const db = await dbPromise;
+    const newArticle = await db.run(SQL`
+        INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, 607713)`);
+
+    //select most recent article id where user = logged in user 
+    const newArticleID = await db.run(SQL`
+        SELECT id FROM articles
+        WHERE id = 607713
+        ORDER BY postTime
+        LIMIT 1`)
+    
+        return newArticleID;
+};
+
 async function deleteArticleById(id) {
     const db = await dbPromise;
     return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`)
@@ -155,5 +118,6 @@ module.exports = {
     createUser,
     retrieveAllUsernames,
     addUpvoteByCommentId,
-    deleteArticleById
+    deleteArticleById,
+    createNewArticle
 };

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const testDao = require("../modules/test-dao.js");
+//const wysiwyg = require("../public/wysiwyg.js");
 
 // router.get("/", async function(req, res) {
 
@@ -13,15 +14,32 @@ const testDao = require("../modules/test-dao.js");
 
 
 router.get("/my-articles", async function(req, res) {
-
+    res.locals.articles = await testDao.retrieveArticlesByAuthorId(user); 
     res.render("my-articles");
 });
 
 
 router.get("/read-article", async function(req, res) {
-
     res.render("read-article");
 });
+
+router.get("/create-article", async function(req, res) {
+    res.render("create-article");
+});
+
+router.post("/create-article", async function(req, res) {
+
+    const title = req.body.articleTitle;
+    const imageSource = req.body.articleImage;
+    const content = req.body.newArticleContent;
+    
+    const newArticle = {title: title, content: content, imageSource: imageSource /*userID: logged in user*/}; 
+    const newArticleID = await testDao.createNewArticle(newArticle);
+    console.log(newArticleID);
+    //get ID of newly created article
+
+    res.redirect("/");
+}); 
 
 
 router.get("/login", async function(req, res) {

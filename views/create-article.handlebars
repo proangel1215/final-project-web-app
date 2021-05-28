@@ -1,0 +1,38 @@
+<script src="https://cdn.tiny.cloud/1/4zc1z98ilf3klitpp7ou6h01pbtqopz2i2r62lq5kp86weu2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+tinymce.init({
+    selector: '#newArticleContent',
+    menubar: false,
+    plugins: 'autoresize lists save emoticons wordcount',
+    autoresize_bottom_margin: 50,
+    toolbar: 'undo redo | styleselect | forecolor | bold italic underline | numlist bullist | emoticons | wordcount | save',
+    images_file_types: 'jpeg,jpg,png,gif'
+    });
+</script>
+
+<div id="newArticleContainer">
+
+    <h1>Create a new article:</h1>
+
+    <form action="./create-article" method="POST">
+
+        <div>
+            <label for="articleTitle">Add a title:</label>
+            <input type="text" id="articleTitle" name="articleTitle">
+        </div>
+        <br>
+        <div>
+            <label for="articleImage">Upload image:</label>
+            <input type="file" id="articleImage" name="articleImage" accept="image/*">
+        </div>
+        <br>
+        <textbox id="newArticleContent" name="newArticleContent">
+         {{! WYSIWYG implemented here for paragraph input}}
+        </textbox>
+        <br>
+        <button type="submit">Save and post article</button>
+        
+    </form>
+
+</div>

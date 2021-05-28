@@ -1,30 +1,31 @@
+<script type="text/javascript" src="sort.js"></script>
+
 <div id="myArticlesContainer">
 
-    <h1>Articles by me:</h1>
+    <h1>My articles</h1>
 
-    <div id ="orderMyArticlesBox">
-        <form action="./my-articles" method="GET"></form>
-        <label for="orderMyArticles">Sort by:</label>
-            <select name="orderMyArticles" id="orderMyArticles">
-            <option value="date">Date</option>
-            <option value="title">Title</option>
-            </select>
-        </form>
-    </div>
+    {{#if articles}} {{! should work the same as home view sort only if user is logged in returning users articles}}
 
-    <div id ="myArticlesView">
-        {{! commented out for now as no database input
-        {{#if articles}
-        {{#each article}
-        <div class="articlePreview">
-            <a href="./article/{{this.id}">{{this.title}</a>
-        </div>
-        {{/each}
-        {{#else}
-        <h3>You haven't written any articles!</h3>
-        {{/if}}
+        <p class="sort">Sort by: </p>
+            <button type="button" class="sort" id="postTime" onclick="getSort(this.id)">Oldest</button>
+            <button type="button" class="sort" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
+            <button type="button" class="sort" id="title" onclick="getSort(this.id)">Title</button>
+
+        <div class="articleContainer">
+            <table>
+            {{#each articles}}
+                <tr>
+                    <td><a href="./articles/{{this.id}}">{{this.title}}</a></td>
+                    <td>{{this.postTime}}</td>
+                </tr>
+            {{/each}}
+            </table>
         
-    </div>
+        {{else}}
+        <h2>You haven't written any articles!</h2>
+        {{/if}}
+        </div>
+
 
 </div>
 
