@@ -62,6 +62,11 @@ async function retrieveUserById(id) {
         return user;
 };
 
+async function retrieveAllUsernames() {
+    const db = await dbPromise;
+    return await db.all(SQL`SELECT username FROM users`);
+};
+
 async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
@@ -106,7 +111,25 @@ async function deleteUserById(id) {
 
 async function deleteCommentById(id) {
     const db = await dbPromise;
-    return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
+    const nestedID = await db.get(SQL`SELECT id FROM comments WHERE parentCommentID = ${id}`);
+
+        if (nestedID != null) {
+            const nestedID2 = await db.get(SQL`SELECT id FROM comments WHERE parentCommentID = ${nestedID.id}`);
+            await deleteCommentById(`${nestedID2.id}`);
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${nestedID.id}`);
+            await db.run(SQL`DELETE FROM comments WHERE id = ${nestedID.id}`);
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${id}`);
+            return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
+        } else {
+            await db.run(SQL`DELETE FROM votes WHERE commentID = ${id}`);
+            return await db.run(SQL`DELETE FROM comments WHERE id = ${id}`);
+        }
+};
+
+async function addUpvoteByCommentId(id) {
+    //not finished yet//
+    const db = await dbPromise;
+    return await db.run(SQL`UPDATE comments SET upvotes = ISNULL(upvotes, 0) + 1`);
 };
 
 async function createNewArticle(article) {
@@ -117,7 +140,12 @@ async function createNewArticle(article) {
 async function deleteArticleById(id) {
     const db = await dbPromise;
     return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`)
-}
+};
+
+async function createUser(user) {
+    const db = await dbPromise;
+    return await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource) VALUES (${user.fname}, ${user.lname}, ${user.username}, ${user.dob}, ${user.password}, ${user.description}, ${user.imageSource})`);
+};
 
 module.exports = {
     retrieveAllArticles,
@@ -129,5 +157,8 @@ module.exports = {
     deleteUserById,
     retrieveVotesByCommentId,
     deleteCommentById,
+    createUser,
+    retrieveAllUsernames,
+    addUpvoteByCommentId,
     deleteArticleById
 };

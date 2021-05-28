@@ -1,0 +1,60 @@
+<script src="checkNewAccount.js"></script>
+
+<h1>Create a new account</h1>
+
+    <form action="./new-account" method="POST">
+        <div class="field">
+            <label for="txtfName">First name:</label>
+            <input type="text" name="fname" id="txtfName" required>
+        </div>
+
+        <div class="field">
+            <label for="txtlName">Last name:</label>
+            <input type="text" name="lname" id="txtlName" required>
+        </div>
+
+        <div class="field">
+            <label for="dob">Date of birth:</label>
+            <input type="date" name="dob" id="dob" required>
+        </div>
+        
+        <div class="field" id="usernameDiv">
+            <label for="txtUsername">Username:</label>
+            <input type="text" name="username" id="txtUsername" required>
+            <span id="usernameMessage"></span>
+        </div>
+
+        <div class="field">
+            <label for="txtPassword">Password:</label>
+            <input type="password" name="password" id="txtPassword" required>
+        </div>
+
+        <div class="field">
+            <label for="confirmPassword">Confirm password:</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" required>
+            <span id="confirmPasswordMessage"></span>
+        </div>
+
+        <div class="field">
+            <label for="txtdesc">Description:</label>
+            <textarea id="txtdesc" name="description" rows="4" cols="50" maxlength="300">Describe yourself in 300 characters</textarea>
+        </div>
+
+        Pick your avatar!
+
+        <div class="field">
+            <input type="radio" id="avatar1" name="avatar" value="avatar1">
+            <label for="avatar1">Avatar1</label><br>
+            <input type="radio" id="avatar2" name="avatar" value="avatar2">
+            <label for="avatar2">Avatar2</label><br>
+            <input type="radio" id="avatar3" name="avatar" value="avatar3">
+            <label for="avatar3">Avatar3</label>
+        </div>
+
+        
+
+        <div class="field justify-sb align-center">
+            {{!-- <button type="submit" id="submitButton">Create account</button> --}}
+            <input type="submit" id="submitButton">
+        </div>
+    </form>

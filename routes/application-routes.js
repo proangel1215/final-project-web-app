@@ -44,17 +44,41 @@ router.get("/login", async function(req, res) {
 });
 
 
-router.get("/newaccount", async function(req, res) {
-    res.render("newaccount");
+router.get("/new-account", async function(req, res) {
+    res.render("new-account");
+});
+
+router.post("/new-account", async function(req, res) {
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const username = req.body.username;
+    const dob = req.body.dob;
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+    const description = req.body.description;
+    const imageSource = req.body.avatar;
+
+    if (password == confirmPassword) {
+        const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: password, description: description, imageSource: imageSource};
+        await testDao.createUser(newUser);
+        res.redirect("/");
+    } else {
+        res.redirect("/new-account");
+    }
 });
 
 
-router.get("/accountdetails", async function(req, res) {
+router.get("/usernames", async function(req, res) {
+    const usernames = await testDao.retrieveAllUsernames();
+    res.json(usernames);
+});
+
+
+router.get("/account-details", async function(req, res) {
     //Change user id input later, this is hardcoded for now//
     const userinfo = await testDao.retrieveUserById(2);
     res.locals.user = userinfo;
-
-    res.render("accountdetails");
+    res.render("account-details");
 });
 
 
