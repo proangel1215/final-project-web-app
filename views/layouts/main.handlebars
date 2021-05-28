@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Blog Title</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Roboto:wght@300;400;500;700&family=Yanone+Kaffeesatz:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -12,10 +14,17 @@
         <h1>Blog Title</h1>
     </div>
     <div id="navbar">
-        <span>Home Placeholder</span>
+        <a href="/"><span>Home</span></a>
         <div id = "rightNavButtons">
-            <span>Placeholder</span>
-            <span>Placeholder</span>
+            {{#if cookie}}
+                <a href="/create-article"><span>Create article</span></a>
+                <a href="/my-articles"><span>My articles</span></a>
+                <a href="/account-details"><span>My account</span></a>
+                <a href="/logout"><span>Log out</span></a>   
+                {{else}}
+                <a href="/login"><span>Log in</span></a>
+                <a href="/create-account"><span>Create account</span></a>
+            {{/if}}
         </div>
     </div>
     <div id="container">

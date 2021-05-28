@@ -9,13 +9,13 @@
 
 
 <div class="articleContainer">
-    {{#if articles}}
-        <table>
-        <tr>
-            <td>Title</td>
-            <td>Author</td>
-            <td>Posted on</td>
-        </tr>
+{{#if articles}}
+    <table>
+    <tr>
+        <td>Title</td>
+        <td>Author</td>
+        <td>Posted on</td>
+    </tr>
     {{#each articles}}
         <tr>
         <td><a href="./articles/{{this.id}}">{{this.title}}</a></td>
@@ -23,9 +23,9 @@
         <td>{{this.postTime}}</td>
         </tr>
     {{/each}}
-        </table>
-    {{/if}}
-    
+    </table>
+{{/if}}
+
 </div>
 
 <script type="text/javascript" src="sort.js"></script>

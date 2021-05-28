@@ -47,11 +47,11 @@ router.get("/login", async function(req, res) {
 });
 
 
-router.get("/new-account", async function(req, res) {
-    res.render("new-account");
+router.get("/create-account", async function(req, res) {
+    res.render("create-account");
 });
 
-router.post("/new-account", async function(req, res) {
+router.post("/create-account", async function(req, res) {
     const fname = req.body.fname;
     const lname = req.body.lname;
     const username = req.body.username;
@@ -66,7 +66,7 @@ router.post("/new-account", async function(req, res) {
         await testDao.createUser(newUser);
         res.redirect("/");
     } else {
-        res.redirect("/new-account");
+        res.redirect("/create-account");
     }
 });
 
@@ -97,6 +97,7 @@ router.post("/login", async function(req, res) {
 
 router.get("/", async function(req, res) {
     res.locals.articles = await testDao.retrieveAllArticles(); 
+    // res.locals.cookie = "cookie";
     res.render("home");
 }); 
 
