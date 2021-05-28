@@ -138,14 +138,14 @@ async function createNewArticle(article) {
     const newArticle = await db.run(SQL`
         INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, 607713)`);
 
-//select most recent article id where user = logged in user 
+    //select most recent article id where user = logged in user 
     const newArticleID = await db.run(SQL`
         SELECT id FROM articles
         WHERE id = 607713
         ORDER BY postTime
         LIMIT 1`)
     
-        return newArticleID;  
+        return newArticleID;
 };
 
 async function deleteArticleById(id) {
