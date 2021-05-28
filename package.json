@@ -6,6 +6,8 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcrypt-salt": "^1.1.9",
     "cookie-parser": "^1.4.4",
     "express": "~4.16.1",
     "express-handlebars": "^3.1.0",
