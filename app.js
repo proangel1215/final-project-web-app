@@ -38,15 +38,3 @@ app.listen(port, function () {
     console.log(`App listening on port ${port}!`);
 });
 
-// Set up bcrypt for hashing and salting
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-const plainTextPassword1 = "hols757204-25783"; //test password
-
-bcrypt
-  .hash(plainTextPassword1, saltRounds)
-  .then(hash => {
-    console.log(`Hash: ${hash}`);
-    // Store hash in your password DB.
-  })
-  .catch(err => console.error(err.message));
