@@ -28,10 +28,16 @@ app.use(cookieParser());
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 
+// Setup our middleware
+const { addUserToLocals } = require("./middleware/auth-middleware.js");
+app.use(addUserToLocals);
+
 // Setup routes
 const appRouter = require("./routes/application-routes.js");
-const { retrieveAllArticles } = require("./modules/test-dao.js");
 app.use(appRouter);
+
+const authRouter = require("./routes/auth-routes.js");
+app.use(authRouter);
 
 // Start the server running.
 app.listen(port, function () {

@@ -18,7 +18,8 @@ CREATE TABLE users (
     dob DATE,
     password VARCHAR(50),
     description VARCHAR(300),
-    imageSource VARCHAR(100)
+    imageSource VARCHAR(100),
+    authToken VARCHAR(128)
 );
 
 CREATE TABLE articles (
@@ -54,9 +55,9 @@ CREATE TABLE votes (
 
 );
 
-INSERT INTO users VALUES (1, 'Johnny', 'Walker', 'walk', '1996-06-17', 'testpass', 'This is my description yayaya!', 'public\images\Dragonite.png');
-INSERT INTO users VALUES (2,'Jim', 'Beam', 'getlit', '1993-01-11', 'newpass', 'Lorem Ipsum or something', 'public\images\Dragonite.png');
-INSERT INTO users VALUES (3,'Jack', 'Daniels', 'jdbro', '2000-03-23', 'oldpass', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum.', 'public\images\Dragonite.png');
+INSERT INTO users VALUES (1, 'Johnny', 'Walker', 'walk', '1996-06-17', 'testpass', 'This is my description yayaya!', 'public\images\Dragonite.png', 'null');
+INSERT INTO users VALUES (2,'Jim', 'Beam', 'getlit', '1993-01-11', 'newpass', 'Lorem Ipsum or something', 'public\images\Dragonite.png', 'null');
+INSERT INTO users VALUES (3,'Jack', 'Daniels', 'jdbro', '2000-03-23', 'oldpass', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum.', 'public\images\Dragonite.png', 'null');
 
 INSERT INTO articles VALUES (1, 'Fake Title 1', '2021-01-19 03:14:07','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'public\images\Dragonite.png', 1);
 
