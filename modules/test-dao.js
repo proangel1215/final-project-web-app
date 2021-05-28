@@ -137,9 +137,9 @@ async function deleteArticleById(id) {
     return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`)
 };
 
-async function createUser(fname, lname, username, dob, password, description, imageSource) {
+async function createUser(user) {
     const db = await dbPromise;
-    return await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource) VALUES (${fname}, ${lname}, ${username}, ${dob}, ${password}, ${description}, ${imageSource})`);
+    return await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource) VALUES (${user.fname}, ${user.lname}, ${user.username}, ${user.dob}, ${user.password}, ${user.description}, ${user.imageSource})`);
 };
 
 module.exports = {
