@@ -25,7 +25,7 @@ async function getSort(sortBy) {
     const articleTitle = document.createElement("td"); 
     articleTitle.innerHTML = "<a href='./articles/" + articleJsonObject[i].id + "'>" + articleJsonObject[i].title + "</a>"; 
     const articleAuthor = document.createElement("td");
-    articleAuthor.innerHTML = "Author undefined"; 
+    articleAuthor.innerHTML = articleJsonObject[i].username; 
     const articleTime = document.createElement("td"); 
     articleTime.innerHTML = articleJsonObject[i].postTime;
     articleRow.appendChild(articleTitle);articleRow.appendChild(articleAuthor);articleRow.appendChild(articleTime); 

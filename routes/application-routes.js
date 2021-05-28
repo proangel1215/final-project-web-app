@@ -85,6 +85,11 @@ router.get("/account-details", verifyAuthenticated, async function(req, res) {
 router.get("/articles", async function(req, res){
     const sortBy = req.query.sortBy;
     const articles = await testDao.retrieveArticlesBySort(sortBy);
+    var usersArray = new Array(); 
+    for (let i = 0; i < articles.length; i++){
+    usersArray[i] = await testDao.retrieveUserById(articles[i].userID); 
+    articles[i].username = usersArray[i].username;
+    }; 
     res.json(articles);
 });
 

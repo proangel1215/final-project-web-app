@@ -22,13 +22,12 @@
     {{#each articles}}
         <tr>
         <td><a href="./articles/{{this.id}}">{{this.title}}</a></td>
-        <td>Author undefined</td>
+        <td>{{this.username}}</td>
         <td>{{this.postTime}}</td>
         </tr>
     {{/each}}
-    </table>
 {{/if}}
-
+</table>
 </div>
 
 <script type="text/javascript" src="sort.js"></script>
