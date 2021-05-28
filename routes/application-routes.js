@@ -14,6 +14,7 @@ const testDao = require("../modules/test-dao.js");
 
 
 router.get("/my-articles", async function(req, res) {
+    res.locals.articles = await testDao.retrieveArticlesByAuthorId(user); 
     res.render("my-articles");
 });
 
@@ -35,8 +36,8 @@ router.post("/create-article", async function(req, res) {
     const newArticle = {title: title, content: content, imageSource: imageSource /*userID: logged in user*/}; 
     const newArticleID = await testDao.createNewArticle(newArticle);
     console.log(newArticleID);
-    
     //get ID of newly created article
+
     res.redirect("/");
 }); 
 
