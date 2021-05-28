@@ -24,6 +24,16 @@ router.get("/read-article", async function(req, res) {
     res.render("read-article");
 });
 
+router.post("/createComment", async function(req, res) {
+    const content = req.body.commentInput; 
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken); 
+
+    const comment = {content: content, commenterID: user.id, articleID: null, parentID: null}; 
+    await testDao.createComment(comment);
+
+    res.redirect("/read-article"); 
+});
+
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
 });
