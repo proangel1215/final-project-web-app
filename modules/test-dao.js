@@ -134,7 +134,12 @@ async function addUpvoteByCommentId(id) {
 
 async function deleteArticleById(id) {
     const db = await dbPromise;
-    return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`)
+    const articleComments = await db.all(SQL`SELECT id FROM comments WHERE articleID = ${id}`);
+    for (let i = 0; i < articleComments.length; i++) {
+        const commentID = articleComments[i];
+        await deleteCommentById(commentID.id);
+    }
+    return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`);
 };
 
 async function createUser(fname, lname, username, dob, password, description, imageSource) {
