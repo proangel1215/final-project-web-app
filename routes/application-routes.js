@@ -36,8 +36,12 @@ router.post("/new-article", async function(req, res) {
     console.log(imageSource);
     //console.log(content);
 
+    const newArticle = {title: title, content: content, imageSource: imageSource /*userID: logged in user*/};
+    await testDao.createNewArticle(newArticle);
     res.redirect("/");
 });
+
+//insert into articles (title, postTime, content, imageSource, userID) values ()`);
 
 router.get("/login", async function(req, res) {
     res.render("login");

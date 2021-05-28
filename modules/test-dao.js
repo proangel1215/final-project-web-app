@@ -133,9 +133,10 @@ async function addUpvoteByCommentId(id) {
 };
 
 async function createNewArticle(article) {
+    //not yet recieving paragraph content from WYSIWYG
     const db = await dbPromise;
     const result = await db.run(SQL`
-        insert into articles (id, title, postTime, content, imageSource, userID) values ()`);
+        insert into articles (title, content, imageSource, userID) values (${article.title}, ${article.content}, ${article.imageSource}, ${article.userID})`);
 };
 async function deleteArticleById(id) {
     const db = await dbPromise;
