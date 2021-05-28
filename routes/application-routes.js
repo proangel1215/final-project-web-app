@@ -22,21 +22,17 @@ router.get("/read-article", async function(req, res) {
     res.render("read-article");
 });
 
-router.get("/new-article", async function(req, res) {
-    res.render("new-article");
+router.get("/create-article", async function(req, res) {
+    res.render("create-article");
 });
 
-router.post("/new-article", async function(req, res) {
+router.post("/create-article", async function(req, res) {
 
     const title = req.body.articleTitle;
     const imageSource = req.body.articleImage;
     //const content = await wysiwyg.getNewArticleContent();
-    
-    console.log(title);
-    console.log(imageSource);
-    //console.log(content);
 
-    const newArticle = {title: title, content: content, imageSource: imageSource /*userID: logged in user*/};
+    const newArticle = {title: title, imageSource: imageSource /*userID: logged in user*/};
     await testDao.createNewArticle(newArticle);
     res.redirect("/");
 });

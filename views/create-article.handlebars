@@ -17,7 +17,7 @@ tinymce.init({
 
     <h1>Create or edit an article:</h1>
 
-    <form action="./new-article" method="POST">
+    <form action="./create-article" method="POST">
 
         <div>
             <label for="articleTitle">Add a title:</label>
@@ -30,7 +30,7 @@ tinymce.init({
         </div>
         <br>
         <textbox id="newArticleContent">
-         {{! wysiwyg implemented here}}
+         {{! WYSIWYG implemented here for paragraph input}}
         </textbox>
         <br>
         <button type="submit">Save and post article</button>

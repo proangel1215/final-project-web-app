@@ -134,10 +134,12 @@ async function addUpvoteByCommentId(id) {
 
 async function createNewArticle(article) {
     //not yet recieving paragraph content from WYSIWYG
+    //need if logged in function to get userID
     const db = await dbPromise;
-    const result = await db.run(SQL`
-        insert into articles (title, content, imageSource, userID) values (${article.title}, ${article.content}, ${article.imageSource}, ${article.userID})`);
+    return await db.run(SQL`
+        INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, "Test content - cos my WYSIWYG hates me..", ${article.imageSource}, 607713)`);
 };
+
 async function deleteArticleById(id) {
     const db = await dbPromise;
     return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`)
@@ -161,5 +163,6 @@ module.exports = {
     createUser,
     retrieveAllUsernames,
     addUpvoteByCommentId,
-    deleteArticleById
+    deleteArticleById,
+    createNewArticle
 };
