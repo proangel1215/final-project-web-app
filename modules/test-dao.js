@@ -122,7 +122,7 @@ async function deleteUserById(id) {
     const userComments = await db.all(SQL`SELECT id FROM comments WHERE commenterID = ${id}`);
     //console.log (userComments);
     if (userComments != null || nestedID != undefined) {
-        console.log ("Comment deletion in progress");
+        //console.log ("Comment deletion in progress");
         for (let i = 0; i < userComments.length; i++) {
             const commentID = userComments[i];
             await deleteCommentById(commentID.id);
@@ -170,13 +170,15 @@ async function deleteCommentById(id) {
         }
 };
 
-async function addUpvoteByCommentId(id) {
+async function addUpvoteByCommentId(id, userid) {
     const db = await dbPromise;
+    await db.run(SQL`INSERT INTO votes (commentID, voterID) VALUES (${id}, ${userid});`);
     return await db.run(SQL`UPDATE comments SET upvotes = upvotes + 1 WHERE id = ${id}`);
 };
 
-async function addDownvoteByCommentId(id) {
+async function addDownvoteByCommentId(id, userid) {
     const db = await dbPromise;
+    await db.run(SQL`INSERT INTO votes (commentID, voterID) VALUES (${id}, ${userid});`);
     return await db.run(SQL`UPDATE comments SET downvotes = downvotes + 1 WHERE id = ${id}`);
 };
 
