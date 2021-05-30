@@ -171,9 +171,13 @@ async function deleteCommentById(id) {
 };
 
 async function addUpvoteByCommentId(id) {
-    //not finished yet//
     const db = await dbPromise;
-    return await db.run(SQL`UPDATE comments SET upvotes = ISNULL(upvotes, 0) + 1`);
+    return await db.run(SQL`UPDATE comments SET upvotes = upvotes + 1 WHERE id = ${id}`);
+};
+
+async function addDownvoteByCommentId(id) {
+    const db = await dbPromise;
+    return await db.run(SQL`UPDATE comments SET downvotes = downvotes + 1 WHERE id = ${id}`);
 };
 
 async function deleteArticleById(id) {
@@ -206,5 +210,6 @@ module.exports = {
     createUser,
     retrieveAllUsernames,
     addUpvoteByCommentId,
-    deleteArticleById
+    deleteArticleById,
+    addDownvoteByCommentId
 };
