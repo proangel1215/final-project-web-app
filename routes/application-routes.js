@@ -1,24 +1,23 @@
 const { v4: uuid } = require("uuid");
 const express = require("express");
 const router = express.Router();
+const fs = require("fs");
 
 const testDao = require("../modules/dao.js");
 const userDao = require("../modules/users-dao.js");
+const multer = require("../modules/multer-uploader.js");
 const { verifyAuthenticated } = require("../middleware/auth-middleware.js");
-
 
 router.get("/", async function(req, res) {
     res.locals.articles = await testDao.retrieveAllArticles(); 
     res.render("home");
 }); 
 
-
 router.get("/my-articles", verifyAuthenticated, async function(req, res) {
     const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
     res.locals.articles = await testDao.retrieveArticlesByAuthorId(user.id); 
     res.render("my-articles");
 });
-
 
 router.get("/read-article", async function(req, res) {
     res.render("read-article");
@@ -28,11 +27,16 @@ router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
 });
 
-router.post("/create-article", verifyAuthenticated, async function(req, res) {
+router.post("/create-article", multer.upload.single("articleImage"), verifyAuthenticated, async function(req, res) {
 
     const title = req.body.articleTitle;
     const imageSource = req.body.articleImage;
+    const imageFile = req.file;
     const content = req.body.newArticleContent;
+
+    const oldFileName = imageFile.path;
+    const newFileName = `./public/imageUploads/${imageFile.originalname}`;
+    fs.renameSync(oldFileName, newFileName);
     
     const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id}; 
