@@ -6,8 +6,8 @@ tinymce.init({
     menubar: false,
     plugins: 'autoresize lists save emoticons wordcount',
     autoresize_bottom_margin: 50,
-    toolbar: 'undo redo | styleselect | forecolor | bold italic underline | numlist bullist | emoticons | wordcount | save',
-    images_file_types: 'jpeg,jpg,png,gif'
+    toolbar: 'undo redo | styleselect | forecolor | bold italic underline | numlist bullist | emoticons | wordcount',
+    paste_data_images: false
     });
 </script>
 
@@ -15,7 +15,7 @@ tinymce.init({
 
     <h1>Create a new article:</h1>
 
-    <form action="./create-article" method="POST">
+    <form action="./create-article" method="POST" enctype="multipart/form-data">
 
         <div>
             <label for="articleTitle">Add a title:</label>

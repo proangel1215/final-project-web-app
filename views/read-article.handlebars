@@ -1,13 +1,11 @@
 <div id="readArticleContainer">
 
     <div id="articleView">
-        {{!./articles/{{this.id}}
-        {{! pass from getNewArticleContent}}
-        {{#if articles}}
-        <h1>{{this.title}}</h1>
-        <img src="{{this.imageSource}}">
-        {{this.content}}
-        {{/if}}
+
+        <h1>{{article.title}}</h1>
+        <img src="./imageUploads/{{article.imageSource}}">
+        {{{article.content}}}
+        
     </div>
     <br>
 

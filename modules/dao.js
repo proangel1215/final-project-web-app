@@ -11,7 +11,6 @@ const dbPromise = require("./database.js");
 //         where id = ${testData.id}`);
 // }
 
-
 async function retrieveUserById(id) {
     const db = await dbPromise;
     const user = await db.get(SQL`
@@ -141,19 +140,19 @@ async function addDownvoteByCommentId(id, userid) {
 };
 
 async function createNewArticle(article) {
-    //need if logged in function to get userID - placeholder ID used here
     const db = await dbPromise;
-    await db.run(SQL`
-        INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID})`);
+    return await db.run(SQL`
+        INSERT INTO articles (title, postTime, content, imageSource, userID, username) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID}, ${article.username})`);
+};
 
-    //select most recent article id where user = logged in user 
-    const newArticleID = await db.run(SQL`
+async function retrieveNewArticleID() {
+    const db = await dbPromise;
+
+    const newArticleID = await db.get(SQL`
         SELECT id FROM articles
-        WHERE id = ${article.userID}
-        ORDER BY postTime
-        LIMIT 1`)
+        ORDER BY id desc`)
     
-        return newArticleID;
+        return newArticleID.id;
 };
 
 async function deleteArticleById(id) {
@@ -205,7 +204,8 @@ module.exports = {
     retrieveAllUsernames,
     addUpvoteByCommentId,
     deleteArticleById,
-    createNewArticle, 
+    createNewArticle,
+    retrieveNewArticleID,
     createComment,
     addDownvoteByCommentId,
     editUser,
