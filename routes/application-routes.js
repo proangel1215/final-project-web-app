@@ -45,9 +45,8 @@ router.get("/create-article", verifyAuthenticated, async function(req, res) {
 router.post("/create-article", multer.upload.single("articleImage"), verifyAuthenticated, async function(req, res) {
 
     const title = req.body.articleTitle;
-    const imageSource = req.body.articleImage;
-    //not getting imageSource name going into database - hollie to fix
-    console.log(imageSource);
+    const reqImage = req.file;
+    const imageSource = reqImage.originalname;
     const content = req.body.newArticleContent;
 
     if (req.file !== undefined) {
@@ -55,7 +54,6 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
         const oldFileName = imageFile.path;
         const newFileName = `./public/imageUploads/${imageFile.originalname}`;
         fs.renameSync(oldFileName, newFileName);
-        console.log(newFileName);
     }
     
     //create article in database
