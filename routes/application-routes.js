@@ -47,7 +47,7 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
 
     const title = req.body.articleTitle;
     // const reqImage = req.file;
-    // const imageSource = reqImage.originalname;
+    const imageSource = "";
     const content = req.body.newArticleContent;
 
     //if the user has uploaded an image, I need to get the imageFile.originalname to set as the imageSource
@@ -60,6 +60,9 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
         const resizedImage = await jimp.read(newFileName);
         resizedImage.resize(800, jimp.AUTO); //not sure what size yet
         await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
+
+        imageSource = imageFile.originalname;
+        return imageSource;
     }
     
     //create article in database
