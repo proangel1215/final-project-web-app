@@ -47,7 +47,7 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
 
     const title = req.body.articleTitle;
     // const reqImage = req.file;
-    const imageSource = "";
+    const imageSource;
     const content = req.body.newArticleContent;
 
     //if the user has uploaded an image, I need to get the imageFile.originalname to set as the imageSource
