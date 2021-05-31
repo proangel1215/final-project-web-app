@@ -204,6 +204,11 @@ async function editUser(id, fname, lname, username, dob, password, description, 
     return await db.run(SQL`UPDATE users SET fname = ${fname}, lname = ${lname}, username = ${username}, dob = ${dob}, password = ${password}, description = ${description}, imageSource = ${imageSource} WHERE id = ${id};`);
 };
 
+async function editArticle(id, title, postTime, content, imageSource) {
+    const db = await dbPromise;
+    return await db.run(SQL`UPDATE articles SET title = ${title}, postTime = ${postTime}, content = ${content}, imageSource = ${imageSource} WHERE id = ${id};`);
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesBySort,
@@ -219,5 +224,6 @@ module.exports = {
     addUpvoteByCommentId,
     deleteArticleById,
     addDownvoteByCommentId,
-    editUser
+    editUser,
+    editArticle
 };
