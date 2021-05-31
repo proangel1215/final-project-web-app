@@ -45,11 +45,6 @@ async function retrieveArticlesByAuthorId(id) {
     return await db.all(SQL`SELECT * FROM articles WHERE userID = ${id}`);
 };
 
-async function retrieveAuthorNameById() {
-    const db = await dbPromise;
-    return await db.all(SQL`SELECT fname, lname FROM`)
-}
-
 async function retrieveArticleById(id) {
     const db = await dbPromise;
     return await db.get(SQL`SELECT * FROM articles WHERE id = ${id}`);
@@ -95,7 +90,6 @@ async function addUpvoteByCommentId(id) {
 };
 
 async function createNewArticle(article) {
-    //need if logged in function to get userID - placeholder ID used here
     const db = await dbPromise;
     return await db.run(SQL`
         INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID})`);

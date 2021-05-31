@@ -44,13 +44,16 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
 
     const title = req.body.articleTitle;
     const imageSource = req.body.articleImage;
+    //not getting imageSource name going into database - this was working before!!!!!! -_-
+    console.log(imageSource);
     const content = req.body.newArticleContent;
 
-    if (req.file !== undefined) { //test
-        const imageFile = req.file; //this is currently required
+    if (req.file !== undefined) {
+        const imageFile = req.file;
         const oldFileName = imageFile.path;
         const newFileName = `./public/imageUploads/${imageFile.originalname}`;
         fs.renameSync(oldFileName, newFileName);
+        console.log(newFileName);
     }
     
     //create article in database
@@ -60,7 +63,7 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
     
     //get ID of newly created article
     const newArticleID = await testDao.retrieveNewArticleID();
-    console.log(newArticleID);
+    //console.log(newArticleID);
 
     res.redirect("/my-articles");
 }); 
@@ -69,10 +72,11 @@ router.get('/read-article', async function (req, res) {
 
     const articleID = req.query.articleID;
     req.params = articleID;
-    console.log(articleID);
+    //console.log(articleID);
     const article = await testDao.retrieveArticleById(articleID); 
-    console.log(article); 
+    //console.log(article); 
     res.locals.article = article;
+    //console.log(article.imageSource)
     
     res.render("read-article");
   });
@@ -103,7 +107,6 @@ router.post("/create-account", async function(req, res) {
     }
 });
 
-
 router.get("/usernames", async function(req, res) {
     const usernames = await testDao.retrieveAllUsernames();
     res.json(usernames);
@@ -113,7 +116,6 @@ router.get("/usernames", async function(req, res) {
 router.get("/account-details", verifyAuthenticated, async function(req, res) {
     res.render("account-details");
 });
-
 
 router.get("/articles", async function(req, res){
     const sortBy = req.query.sortBy;
