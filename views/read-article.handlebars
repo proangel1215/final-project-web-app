@@ -3,11 +3,11 @@
     <div id="articleView">
         {{!./articles/{{this.id}}
         {{! pass from getNewArticleContent}}
-        {{#if articles}}
-        <h1>{{this.title}}</h1>
-        <img src="{{this.imageSource}}">
-        {{this.content}}
-        {{/if}}
+        {{!-- {{#if articles}} --}}
+        <h1>{{article.title}}</h1>
+        <img src="{{article.imageSource}}">
+        {{{article.content}}}
+        {{!-- {{/if}} --}}
     </div>
     <br>
 

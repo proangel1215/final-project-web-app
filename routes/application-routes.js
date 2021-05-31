@@ -19,10 +19,6 @@ router.get("/my-articles", verifyAuthenticated, async function(req, res) {
     res.render("my-articles");
 });
 
-router.get("/read-article", async function(req, res) {
-    res.render("read-article");
-});
-
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
 });
@@ -31,22 +27,38 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
 
     const title = req.body.articleTitle;
     const imageSource = req.body.articleImage;
-    const imageFile = req.file;
     const content = req.body.newArticleContent;
 
-    const oldFileName = imageFile.path;
-    const newFileName = `./public/imageUploads/${imageFile.originalname}`;
-    fs.renameSync(oldFileName, newFileName);
+    if (req.file !== undefined) { //test
+        const imageFile = req.file; //this is currently required
+        const oldFileName = imageFile.path;
+        const newFileName = `./public/imageUploads/${imageFile.originalname}`;
+        fs.renameSync(oldFileName, newFileName);
+    }
     
+    //create article in database
     const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id}; 
-    const newArticleID = await testDao.createNewArticle(newArticle);
-    console.log(newArticleID);
+    await testDao.createNewArticle(newArticle);
+    
     //get ID of newly created article
+    const newArticleID = await testDao.retrieveNewArticleID();
+    console.log(newArticleID);
 
     res.redirect("/");
 }); 
 
+router.get('/read-article', async function (req, res) {
+
+    const articleID = req.query.articleID;
+    req.params = articleID;
+    console.log(articleID);
+    const article = await testDao.retrieveArticleById(articleID); 
+    console.log(article); 
+    res.locals.article = article;
+    
+    res.render("read-article");
+  });
 
 router.get("/create-account", async function(req, res) {
     res.render("create-account");

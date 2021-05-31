@@ -98,17 +98,18 @@ async function addUpvoteByCommentId(id) {
 async function createNewArticle(article) {
     //need if logged in function to get userID - placeholder ID used here
     const db = await dbPromise;
-    await db.run(SQL`
+    return await db.run(SQL`
         INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID})`);
+};
 
-    //select most recent article id where user = logged in user 
-    const newArticleID = await db.run(SQL`
+async function retrieveNewArticleID() {
+    const db = await dbPromise;
+
+    const newArticleID = await db.get(SQL`
         SELECT id FROM articles
-        WHERE id = ${article.userID}
-        ORDER BY postTime
-        LIMIT 1`)
+        ORDER BY id desc`)
     
-        return newArticleID;
+        return newArticleID.id;
 };
 
 async function deleteArticleById(id) {
@@ -137,5 +138,6 @@ module.exports = {
     retrieveAllUsernames,
     addUpvoteByCommentId,
     deleteArticleById,
-    createNewArticle
+    createNewArticle,
+    retrieveNewArticleID
 };
