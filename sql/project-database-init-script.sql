@@ -30,8 +30,7 @@ CREATE TABLE articles (
     imageSource VARCHAR(100),
     userID INTEGER, 
     username VARCHAR(20), 
-    FOREIGN KEY (userID) REFERENCES users(id), 
-    FOREIGN KEY (username) REFERENCES users(username)
+    FOREIGN KEY (userID) REFERENCES users(id)
 );
 
 CREATE TABLE comments (
