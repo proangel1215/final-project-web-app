@@ -9,7 +9,14 @@ const multer = require("../modules/multer-uploader.js");
 const { verifyAuthenticated } = require("../middleware/auth-middleware.js");
 
 router.get("/", async function(req, res) {
-    res.locals.articles = await testDao.retrieveAllArticles(); 
+    const articles = await testDao.retrieveAllArticles(); 
+    
+    var usersArray = new Array(); 
+    for (let i = 0; i < articles.length; i++){
+    usersArray[i] = await testDao.retrieveUserById(articles[i].userID); 
+    articles[i].username = usersArray[i].username;
+    }; 
+    res.locals.articles = articles;
     res.render("home");
 }); 
 
@@ -17,6 +24,21 @@ router.get("/my-articles", verifyAuthenticated, async function(req, res) {
     const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
     res.locals.articles = await testDao.retrieveArticlesByAuthorId(user.id); 
     res.render("my-articles");
+});
+
+
+router.get("/read-article", async function(req, res) {
+    res.render("read-article");
+});
+
+router.post("/createComment", async function(req, res) {
+    const content = req.body.commentInput; 
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken); 
+
+    const comment = {content: content, commenterID: user.id, articleID: null, parentID: null}; 
+    await testDao.createComment(comment);
+
+    res.redirect("/read-article"); 
 });
 
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
@@ -101,6 +123,11 @@ router.get("/account-details", verifyAuthenticated, async function(req, res) {
 router.get("/articles", async function(req, res){
     const sortBy = req.query.sortBy;
     const articles = await testDao.retrieveArticlesBySort(sortBy);
+    var usersArray = new Array(); 
+    for (let i = 0; i < articles.length; i++){
+    usersArray[i] = await testDao.retrieveUserById(articles[i].userID); 
+    articles[i].username = usersArray[i].username;
+    }; 
     res.json(articles);
 });
 

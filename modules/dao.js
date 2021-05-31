@@ -124,6 +124,12 @@ async function createUser(user) {
     return newUser;
 };
 
+async function createComment(comment){
+    const db = await dbPromise; 
+    const newComment = await db.run(SQL`INSERT INTO comments (postTime, content, parentCommentID, commenterID, articleID) VALUES (CURRENT_TIMESTAMP, ${comment.content}, ${comment.parentID}, ${comment.commenterID}, ${comment.articleID})`); 
+    return newComment; 
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesBySort,
@@ -139,5 +145,6 @@ module.exports = {
     addUpvoteByCommentId,
     deleteArticleById,
     createNewArticle,
-    retrieveNewArticleID
+    retrieveNewArticleID,
+    createComment
 };
