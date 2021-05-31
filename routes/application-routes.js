@@ -45,7 +45,7 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
     const newArticleID = await testDao.retrieveNewArticleID();
     console.log(newArticleID);
 
-    res.redirect("/");
+    res.redirect("/my-articles");
 }); 
 
 router.get('/read-article', async function (req, res) {
