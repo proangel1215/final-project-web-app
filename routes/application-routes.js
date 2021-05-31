@@ -63,7 +63,9 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
     const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id, username: user.username}; 
     await testDao.createNewArticle(newArticle);
 
-    res.redirect("/my-articles");
+    const newArticleID = await testDao.retrieveNewArticleID();
+
+    res.redirect(`/read-article?articleID=${newArticleID}`);
 }); 
 
 router.get('/read-article', async function (req, res) {
