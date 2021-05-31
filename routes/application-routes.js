@@ -8,7 +8,14 @@ const { verifyAuthenticated } = require("../middleware/auth-middleware.js");
 
 
 router.get("/", async function(req, res) {
-    res.locals.articles = await testDao.retrieveAllArticles(); 
+    const articles = await testDao.retrieveAllArticles(); 
+    
+    var usersArray = new Array(); 
+    for (let i = 0; i < articles.length; i++){
+    usersArray[i] = await testDao.retrieveUserById(articles[i].userID); 
+    articles[i].username = usersArray[i].username;
+    }; 
+    res.locals.articles = articles;
     res.render("home");
 }); 
 
