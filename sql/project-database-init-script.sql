@@ -28,7 +28,8 @@ CREATE TABLE articles (
     postTime TIMESTAMP,
     content VARCHAR(8000),
     imageSource VARCHAR(100),
-    userID INTEGER,
+    userID INTEGER, 
+    username VARCHAR(20), 
     FOREIGN KEY (userID) REFERENCES users(id)
 );
 
@@ -60,11 +61,11 @@ INSERT INTO users VALUES (2,'Jim', 'Beam', 'getlit', '1993-01-11', 'newpass', 'L
 INSERT INTO users VALUES (3,'Jack', 'Daniels', 'jdbro', '2000-03-23', 'oldpass', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum.', 'public\images\Dragonite.png', 'null');
 INSERT INTO users VALUES (4,'Ivanov', 'Wodka', 'privyet', '2001-05-11', 'sidepass', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum.', 'public\images\Dragonite.png', 'null');
 
-INSERT INTO articles VALUES (1, 'Fake Title 1', '2021-01-19 03:14:07','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'public\images\Dragonite.png', 1);
+INSERT INTO articles VALUES (1, 'Fake Title 1', '2021-01-19 03:14:07','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'public\images\Dragonite.png', 1, 'walk');
 
-INSERT INTO articles VALUES (2, 'Fake Title 2', '2021-04-24 04:20:00','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'public\images\Dragonite.png', 2);
+INSERT INTO articles VALUES (2, 'Fake Title 2', '2021-04-24 04:20:00','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'public\images\Dragonite.png', 2, 'getlit');
 
-INSERT INTO articles VALUES (3, 'Fake Title 3', '2021-04-20 11:01:07','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'public\images\Dragonite.png', 3);
+INSERT INTO articles VALUES (3, 'Fake Title 3', '2021-04-20 11:01:07','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'public\images\Dragonite.png', 3, 'jdbro');
 
 INSERT INTO articles VALUES (4, 'Fake Title 4', '2021-03-19 03:16:08','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'public\images\Dragonite.png', 4);
 
