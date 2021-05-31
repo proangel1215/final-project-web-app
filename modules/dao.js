@@ -11,7 +11,6 @@ const dbPromise = require("./database.js");
 //         where id = ${testData.id}`);
 // }
 
-
 async function retrieveUserById(id) {
     const db = await dbPromise;
     const user = await db.get(SQL`
