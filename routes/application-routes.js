@@ -2,6 +2,7 @@ const { v4: uuid } = require("uuid");
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const jimp = require("jimp");
 
 const testDao = require("../modules/dao.js");
 const userDao = require("../modules/users-dao.js");
@@ -54,6 +55,10 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
         const oldFileName = imageFile.path;
         const newFileName = `./public/imageUploads/${imageFile.originalname}`;
         fs.renameSync(oldFileName, newFileName);
+
+        const resizedImage = await jimp.read(newFileName);
+        resizedImage.resize(800, jimp.AUTO); //not sure what size yet
+        await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
     }
     
     //create article in database
