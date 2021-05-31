@@ -199,6 +199,11 @@ async function createUser(fname, lname, username, dob, password, description, im
     return await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource) VALUES (${fname}, ${lname}, ${username}, ${dob}, ${password}, ${description}, ${imageSource})`);
 };
 
+async function editUser(id, fname, lname, username, dob, password, description, imageSource) {
+    const db = await dbPromise;
+    return await db.run(SQL`UPDATE users SET fname = ${fname}, lname = ${lname}, username = ${username}, dob = ${dob}, password = ${password}, description = ${description}, imageSource = ${imageSource} WHERE id = ${id};`);
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesBySort,
@@ -213,5 +218,6 @@ module.exports = {
     retrieveAllUsernames,
     addUpvoteByCommentId,
     deleteArticleById,
-    addDownvoteByCommentId
+    addDownvoteByCommentId,
+    editUser
 };

@@ -63,6 +63,8 @@ router.get("/accountdetails", async function(req, res) {
     const userinfo = await testDao.retrieveUserById(2);
     res.locals.user = userinfo;
 
+    testDao.editUser(1, 'testing', 'this', 'testthis', '1999-01-01', 'newtest', 'newdesc', 'lolol');
+
     res.render("accountdetails");
 });
 
