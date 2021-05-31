@@ -23,7 +23,7 @@ async function getSort(sortBy) {
     const articleRow = document.createElement("tr"); 
     articleTable.appendChild(articleRow); 
     const articleTitle = document.createElement("td"); 
-    articleTitle.innerHTML = "<a href='./articles/" + articleJsonObject[i].id + "'>" + articleJsonObject[i].title + "</a>"; 
+    articleTitle.innerHTML = "<a href='./read-article?articleID=" + articleJsonObject[i].id + "'>" + articleJsonObject[i].title + "</a>"; 
     const articleAuthor = document.createElement("td");
     articleAuthor.innerHTML = articleJsonObject[i].username; 
     const articleTime = document.createElement("td"); 

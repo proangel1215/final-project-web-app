@@ -46,7 +46,7 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
 
     const title = req.body.articleTitle;
     const imageSource = req.body.articleImage;
-    //not getting imageSource name going into database - this was working before!!!!!! -_-
+    //not getting imageSource name going into database - hollie to fix
     console.log(imageSource);
     const content = req.body.newArticleContent;
 
@@ -73,7 +73,7 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
 router.get('/read-article', async function (req, res) {
 
     const articleID = req.query.articleID;
-    req.params = articleID;
+    //req.params = articleID;
     //console.log(articleID);
     const article = await testDao.retrieveArticleById(articleID); 
     //console.log(article); 
