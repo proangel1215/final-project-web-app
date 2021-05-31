@@ -41,6 +41,8 @@ router.post("/createComment", async function(req, res) {
     res.redirect("/read-article"); 
 });
 
+//router.get("/displayComment", async )
+
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
 });
