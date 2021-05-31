@@ -60,12 +60,8 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
     
     //create article in database
     const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id}; 
+    const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id, username: user.username}; 
     await testDao.createNewArticle(newArticle);
-    
-    //get ID of newly created article
-    const newArticleID = await testDao.retrieveNewArticleID();
-    //console.log(newArticleID);
 
     res.redirect("/my-articles");
 }); 

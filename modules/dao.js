@@ -142,7 +142,7 @@ async function addDownvoteByCommentId(id, userid) {
 async function createNewArticle(article) {
     const db = await dbPromise;
     return await db.run(SQL`
-        INSERT INTO articles (title, postTime, content, imageSource, userID) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID})`);
+        INSERT INTO articles (title, postTime, content, imageSource, userID, username) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID}, ${article.username})`);
 };
 
 async function retrieveNewArticleID() {
