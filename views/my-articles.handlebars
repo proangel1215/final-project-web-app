@@ -1,4 +1,4 @@
-<script type="text/javascript" src="sort.js"></script>
+<script type="text/javascript" src="sortForMyArticle.js"></script>
 
 <div id="myArticlesContainer">
 
@@ -13,9 +13,15 @@
 
         <div class="articleContainer">
             <table>
+            <tr>
+                <td>Title</td>
+                <td>Author</td>
+                <td>Posted on</td>
+            </tr>
             {{#each articles}}
                 <tr>
-                    <td><a href="./articles/{{this.id}}">{{this.title}}</a></td>
+                    <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
+                    <td>{{this.username}}</td>
                     <td>{{this.postTime}}</td>
                 </tr>
             {{/each}}

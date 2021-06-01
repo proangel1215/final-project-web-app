@@ -1,8 +1,11 @@
 // Setup multer (files will temporarily be saved in the "temp" folder).
+const path = require("path");
 const multer = require("multer");
 const upload = multer({
-    dest: "temp"
+    dest: path.join(__dirname, "imageUploads")
 });
 
 // Export the "upload" object, which we can use to actually accept file uploads.
-module.exports = upload;
+module.exports = {
+    upload
+};

@@ -1,5 +1,5 @@
 async function getSort(sortBy) {
-    let response = await fetch(`./articles?sortBy=${sortBy}`);
+    let response = await fetch(`./my-sorted-articles?sortBy=${sortBy}`);
     const articleJsonObject = await response.json();  
 // add a new div within the article container 
     const articleContainer = document.querySelector(".articleContainer"); 
