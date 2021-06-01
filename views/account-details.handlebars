@@ -20,6 +20,8 @@
         </form>
 
         <div class="delete">
-             <input type="button" onclick="alert('Delete Account function here!')" value="Delete Account">
+            <form action="./deleteuser" method="POST">
+                <input type="submit" name="deleteButton" onclick="return confirm('Are you sure you want to delete your account?')" value="Delete acccount">
+            </form>
         </div>
     </div>
