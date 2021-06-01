@@ -10,6 +10,8 @@ router.get("/api/login", function(req, res) {
     res.render("api-login-test");
 });
 
+
+// This route handler is invoked whenever the user attempts to log in from the Java app
 router.post("/api/login", async function(req, res) {
     const userJSON = req.body;
     console.log(userJSON);
@@ -40,6 +42,11 @@ router.post("/api/login", async function(req, res) {
 });
 
 
+// This route handler is invoked whenever the user logs out from the Java app
+router.get("/api/logout", async function(req, res) {
+    res.clearCookie("authToken");
+    res.status(204).send();
+});
 
 
 module.exports = router;
