@@ -132,4 +132,23 @@ router.get("/edituser", verifyAuthenticated, async function(req, res) {
     res.render("edituser");
 });
 
+router.post("/edituser", verifyAuthenticated, async function(req, res) {
+
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const username = req.body.username;
+    const dob = req.body.dob;
+    const description = req.body.description;
+    var imageSource = req.body.avatar;
+
+    if (imageSource == null || imageSource == undefined) {
+        var imageSource = user.imageSource;
+    }
+    
+    await testDao.editUser(user.id, fname, lname, username, dob, description, imageSource);
+    res.redirect("account-details");
+});
+
 module.exports = router;

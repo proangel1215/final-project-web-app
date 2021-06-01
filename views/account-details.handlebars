@@ -13,10 +13,10 @@
 
         <p>Profile Picture: {{user.imageSource}}</p>
 
-        <form action="./edituser.handlebars">
-        <div class="edit">
-            <input type="button" onclick="alert('Edit Account function here!')" value="Edit Account">
-        </div>
+        <form action="./edituser" method="GET">
+            <div class="edit">
+                <input type="submit" value="Edit Account">
+            </div>
         </form>
 
         <div class="delete">
