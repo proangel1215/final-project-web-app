@@ -40,6 +40,15 @@ async function retrieveArticlesBySort(sortBy) {
     `); 
 }; 
 
+async function retrieveMyArticlesBySort(id, sortBy) {
+    const db = await dbPromise; 
+    return await db.all(`
+    SELECT * FROM articles 
+    WHERE userID = ${id}
+    ORDER BY ${sortBy}
+    `); 
+}; 
+
 async function retrieveArticlesByAuthorId(id) {
     const db = await dbPromise;
     return await db.all(SQL`SELECT * FROM articles WHERE userID = ${id}`);
@@ -197,6 +206,7 @@ module.exports = {
     retrieveArticleById,
     retrieveUserById,
     retrieveCommentsByArticleId,
+    retrieveMyArticlesBySort,
     deleteUserById,
     retrieveVotesByCommentId,
     deleteCommentById,
