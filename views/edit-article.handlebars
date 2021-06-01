@@ -27,6 +27,11 @@ tinymce.init({
                 Current image: <i name="imageSource">{{article.imageSource}}</i>
                 <br>
                 <img src="./imagesResized/{{article.imageSource}}">
+                <br>
+                <input type="checkbox" id="deleteImageButton" name="deleteImageButton">
+                <label for="deleteImageButton">Delete current image</label>
+                <br>
+
             {{/if}}
             <br>
             <label for="articleImage">Upload a new image:</label>

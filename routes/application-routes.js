@@ -88,6 +88,11 @@ router.post("/edit-article", multer.upload.single("articleImage"), verifyAuthent
     const title = req.body.articleTitle;
     let imageSource = article.imageSource;
     const content = req.body.editedArticleContent;
+    const deleteCheckbox = req.body.deleteImageButton;
+
+    if (deleteCheckbox == "on") {
+        imageSource = null;
+    }
 
     if (req.file !== undefined) {
         const imageFile = req.file;
@@ -114,6 +119,10 @@ router.get('/read-article', async function (req, res) {
     
     const article = await testDao.retrieveArticleById(articleID); 
     res.locals.article = article;
+
+    // Initialise user so we can check if userID = authorID: if so display edit article button
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    res.locals.user = user;
     
     res.render("read-article");
   });

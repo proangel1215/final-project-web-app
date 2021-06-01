@@ -2,6 +2,10 @@
 
     <div id="articleView">
         
+        {{!-- {{#if article.userID == user.id}} --}}
+            <button type="button" class="editArticleButton" onclick="location.href='./edit-article?articleID={{article.id}}'">Edit article</button>
+        {{!-- {{/if}} --}}
+
         <h1>{{article.title}}</h1>
         <p><i>Submitted by: {{article.username}}</i></p>
         {{#if article.imageSource}}
@@ -20,7 +24,6 @@
             <input type="submit" value="Submit your comment!">
     </form>
     
-
     <div id="commentBox">
 
 
