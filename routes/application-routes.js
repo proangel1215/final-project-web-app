@@ -2,6 +2,7 @@ const { v4: uuid } = require("uuid");
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const jimp = require("jimp");
 
 const testDao = require("../modules/dao.js");
 const userDao = require("../modules/users-dao.js");
@@ -36,8 +37,6 @@ router.post("/createComment", async function(req, res) {
     res.redirect("/read-article"); 
 });
 
-//router.get("/displayComment", async )
-
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
 });
@@ -45,9 +44,7 @@ router.get("/create-article", verifyAuthenticated, async function(req, res) {
 router.post("/create-article", multer.upload.single("articleImage"), verifyAuthenticated, async function(req, res) {
 
     const title = req.body.articleTitle;
-    const imageSource = req.body.articleImage;
-    //not getting imageSource name going into database - hollie to fix
-    console.log(imageSource);
+    let imageSource = null;
     const content = req.body.newArticleContent;
 
     if (req.file !== undefined) {
@@ -55,10 +52,15 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
         const oldFileName = imageFile.path;
         const newFileName = `./public/imageUploads/${imageFile.originalname}`;
         fs.renameSync(oldFileName, newFileName);
-        console.log(newFileName);
+
+        const resizedImage = await jimp.read(newFileName);
+        resizedImage.resize(800, jimp.AUTO); // arbitrary size
+        await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
+
+        imageSource = imageFile.originalname;
     }
     
-    //create article in database
+    // create article in database
     const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id, username: user.username}; 
     await testDao.createNewArticle(newArticle);
@@ -71,12 +73,9 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
 router.get('/read-article', async function (req, res) {
 
     const articleID = req.query.articleID;
-    //req.params = articleID;
-    //console.log(articleID);
+    
     const article = await testDao.retrieveArticleById(articleID); 
-    //console.log(article); 
     res.locals.article = article;
-    //console.log(article.imageSource)
     
     res.render("read-article");
   });
