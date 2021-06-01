@@ -37,8 +37,6 @@ router.post("/createComment", async function(req, res) {
     res.redirect("/read-article"); 
 });
 
-//router.get("/displayComment", async )
-
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
 });
@@ -49,7 +47,6 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
     let imageSource = null;
     const content = req.body.newArticleContent;
 
-    //if the user has uploaded an image, I need to get the imageFile.originalname to set as the imageSource
     if (req.file !== undefined) {
         const imageFile = req.file;
         const oldFileName = imageFile.path;
@@ -57,13 +54,13 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
         fs.renameSync(oldFileName, newFileName);
 
         const resizedImage = await jimp.read(newFileName);
-        resizedImage.resize(800, jimp.AUTO); //not sure what size yet
+        resizedImage.resize(800, jimp.AUTO); // arbitrary size
         await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
 
         imageSource = imageFile.originalname;
     }
     
-    //create article in database
+    // create article in database
     const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id, username: user.username}; 
     await testDao.createNewArticle(newArticle);
@@ -79,10 +76,6 @@ router.get('/read-article', async function (req, res) {
     
     const article = await testDao.retrieveArticleById(articleID); 
     res.locals.article = article;
-
-    const comments = await testDao.retrieveCommentsByArticleId(articleID);
-    res.locals.comments = comments;
-    console.log(comments);
     
     res.render("read-article");
   });
