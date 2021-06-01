@@ -128,4 +128,10 @@ router.get("/articles", async function(req, res){
     res.json(articles);
 });
 
+router.post("/deleteuser", async function(req, res) {
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    await testDao.deleteUserById(user.id);
+    res.redirect("./login?message=Successfully deleted account!");
+});
+
 module.exports = router;
