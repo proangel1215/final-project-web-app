@@ -30,11 +30,10 @@ router.get("/my-articles", verifyAuthenticated, async function(req, res) {
 router.post("/createComment", async function(req, res) {
     const content = req.body.commentInput; 
     const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken); 
-
-    const comment = {content: content, commenterID: user.id, articleID: null, parentID: null}; 
+    const articleID = req.body.articleID;
+    console.log(articleID);
+    const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: null}; 
     await testDao.createComment(comment);
-
-    res.redirect("/read-article"); 
 });
 
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
@@ -76,7 +75,14 @@ router.get('/read-article', async function (req, res) {
     
     const article = await testDao.retrieveArticleById(articleID); 
     res.locals.article = article;
-    
+    //console.log(article.imageSource)
+    const comments = await testDao.retrieveCommentsByArticleId(articleID); 
+    var usersArray = new Array(); 
+    for (let i = 0; i < comments.length; i++){
+        usersArray[i] = await testDao.retrieveUserById(comments[i].commenterID);
+        comments[i].username = usersArray[i].username;
+    }
+    res.locals.comments = comments; 
     res.render("read-article");
   });
 
@@ -120,11 +126,13 @@ router.get("/account-details", verifyAuthenticated, async function(req, res) {
 router.get("/articles", async function(req, res){
     const sortBy = req.query.sortBy;
     const articles = await testDao.retrieveArticlesBySort(sortBy);
-    var usersArray = new Array(); 
-    for (let i = 0; i < articles.length; i++){
-    usersArray[i] = await testDao.retrieveUserById(articles[i].userID); 
-    articles[i].username = usersArray[i].username;
-    }; 
+    res.json(articles);
+});
+
+router.get("/my-sorted-articles", verifyAuthenticated, async function(req, res){
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    const sortBy = req.query.sortBy; 
+    const articles = await testDao.retrieveMyArticlesBySort(user.id, sortBy);
     res.json(articles);
 });
 
