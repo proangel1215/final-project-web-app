@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const userDao = require("../modules/users-dao.js");
+const testDao = require("../modules/dao.js");
 
 
 // Used to simulate Java app sending login credentials - will be deleted before submitting
@@ -24,9 +25,6 @@ router.post("/api/login", async function(req, res) {
     const username = userJSON.username;
     const password = userJSON.password;
 
-    console.log(username);
-    console.log(password);
-
     const user = await userDao.retrieveUserWithCredentials(username, password);
 
     if (user) {
@@ -43,9 +41,53 @@ router.post("/api/login", async function(req, res) {
 
 
 // This route handler is invoked whenever the user logs out from the Java app
-router.get("/api/logout", async function(req, res) {
+router.get("/api/logout", function(req, res) {
     res.clearCookie("authToken");
     res.status(204).send();
+});
+
+
+// This route handler returns an array of all users if the user is an admin, or a 401 response if they are not an admin or not a user
+router.get("/api/users", async function(req, res) {
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+
+    if (user) {
+        if (user.admin) {
+            const userArray = await testDao.retrieveAllUsers();
+
+            for (i = 0; i < userArray.length; i++) {
+                const userArticles = await testDao.retrieveArticlesByAuthorId(userArray[i].id);
+                userArray[i].numArticles = userArticles.length;
+            }
+
+            res.json(userArray);
+        } else {
+            res.status(401).send();
+        }
+    } else {
+        res.status(401).send();
+    }
+});
+
+
+// This route handler deletes the user with the given id, as well as their articles and comments, if the requestor is an admin
+router.delete("/api/users/:id", async function(req, res) {
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    const userIdToDelete = req.params.id;
+
+    console.log(userIdToDelete);
+
+    if (user) {
+        if (user.admin) {
+            const message = await testDao.deleteUserById(userIdToDelete);
+            console.log(message);
+            res.status(204).send();
+        } else {
+            res.status(401).send();
+        }
+    } else {
+        res.status(401).send();
+    }
 });
 
 
