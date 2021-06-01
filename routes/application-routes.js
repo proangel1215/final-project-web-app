@@ -46,8 +46,7 @@ router.get("/create-article", verifyAuthenticated, async function(req, res) {
 router.post("/create-article", multer.upload.single("articleImage"), verifyAuthenticated, async function(req, res) {
 
     const title = req.body.articleTitle;
-    // const reqImage = req.file;
-    const imageSource;
+    let imageSource = null;
     const content = req.body.newArticleContent;
 
     //if the user has uploaded an image, I need to get the imageFile.originalname to set as the imageSource
@@ -62,7 +61,6 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
         await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
 
         imageSource = imageFile.originalname;
-        return imageSource;
     }
     
     //create article in database
@@ -78,12 +76,13 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
 router.get('/read-article', async function (req, res) {
 
     const articleID = req.query.articleID;
-    //req.params = articleID;
-    //console.log(articleID);
+    
     const article = await testDao.retrieveArticleById(articleID); 
-    //console.log(article); 
     res.locals.article = article;
-    //console.log(article.imageSource)
+
+    const comments = await testDao.retrieveCommentsByArticleId(articleID);
+    res.locals.comments = comments;
+    console.log(comments);
     
     res.render("read-article");
   });
@@ -134,5 +133,12 @@ router.get("/articles", async function(req, res){
     }; 
     res.json(articles);
 });
+
+// router.post("./createComment", async function(req, res) {
+
+//     const newCommentContent = req.body.commentInput;
+//     const newComment = await testDao.createComment();
+
+//   });
 
 module.exports = router;

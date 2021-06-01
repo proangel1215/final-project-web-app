@@ -4,7 +4,9 @@
         
         <h1>{{article.title}}</h1>
         <p><i>Submitted by: {{article.username}}</i></p>
+        {{#if article.imageSource}}
         <img src="./imagesResized/{{article.imageSource}}">
+        {{/if}}
         {{{article.content}}}
         
     </div>
@@ -14,28 +16,38 @@
         {{! if logged in}}
             <label for="commentInput">Comments:</label>
             <br>
-            <textarea id="commentInput" name="commentInput" rows="4" cols="50" maxlength="300">Add a comment!</textarea>
+            <textarea id="commentInput" name="commentInput" rows="4" cols="50" maxlength="300" placeholder="Add a comment!"></textarea>
             <input type="submit" value="Submit your comment!">
     </form>
     
 
     <div id="commentBox">
 
-        <p>Comments will be displayed here!</p>
 
-        {{!#if comments}
-        {#each comments}
-        <div id="commentDisplay">
-            {{this.content}
-        </div>
-            {{#if comments have child}
+        {{#if comments}}
+        {{#each comments}}
+{{!-- 
+            {{#if this.parentCommentID == null}} --}}
+
+                <div id="commentDisplay">
+                    {{this.commenterID}}
+                    {{this.postTime}}
+                    <p>{{this.content}}</p>
+                    This is the parent ID: {{this.parentCommentID}}
+                </div>
+                <textarea id="replyInput" name="replyInput" rows="2" cols="50" maxlength="300" placeholder="Add a reply:"></textarea>
+            <input type="submit" value="Reply">
+
+            {{!-- {{#if comments}}
             <div class="reply">
-                {{reply}
-            </div>
+                {{this.content}}
+            </div> --}}
+            {{!-- {{/if}} --}}
 
-            {{#else}
+        {{/each}}
+        {{else}}
             There are no comments yet!
-            {{/if}}
+        {{/if}}
     </div>
 
 </div>

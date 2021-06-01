@@ -30,3 +30,7 @@ div > a {
 #content {
     grid-area: c;
 }
+
+#commentBox, #commentDisplay, .replay {
+    border: 1px black solid;
+}
