@@ -128,4 +128,8 @@ router.get("/articles", async function(req, res){
     res.json(articles);
 });
 
+router.get("/edituser", verifyAuthenticated, async function(req, res) {
+    res.render("edituser");
+});
+
 module.exports = router;
