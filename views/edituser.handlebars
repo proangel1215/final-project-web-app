@@ -1,0 +1,69 @@
+<h1>Current Account Details</h1>
+
+    <div class="currentDetails">
+
+        <p>Account Name: {{user.username}}</p>
+
+        <p>Fullname: {{user.fname}} {{user.lname}}</p>
+
+        <p>Date of Birth: {{user.dob}}</p>
+
+        <p>Description: {{user.description}}</p>
+
+        <p>Profile Picture: {{user.imageSource}}</p>
+
+    </div>
+
+<h2>Edit Details</h2>
+
+    <div class="editDetails">
+        <form action="./edituser" method="POST">
+            <div class="field">
+                <label for="txtfName">First name:</label>
+                <input type="text" name="fname" id="txtfName" value="{{user.fname}}">
+            </div>
+
+            <div class="field">
+                <label for="txtlName">Last name:</label>
+                <input type="text" name="lname" id="txtlName" value="{{user.lname}}">
+            </div>
+
+            <div class="field">
+                <label for="dob">Date of birth:</label>
+                <input type="date" name="dob" id="dob" value="{{user.dob}}">
+            </div>
+            
+            <div class="field" id="usernameDiv">
+                <label for="txtUsername">Username:</label>
+                <input type="text" name="username" id="txtUsername" value="{{user.username}}">
+                <span id="usernameMessage"></span>
+            </div>
+
+            <div class="field">
+                <label for="txtdesc">Description:</label>
+                <textarea id="txtdesc" name="description" rows="4" cols="50" maxlength="300">{{user.description}}</textarea>
+            </div>
+
+            Pick your avatar!
+
+            <div class="field">
+                <input type="radio" id="avatar1" name="avatar" value="avatar1">
+                <label for="avatar1">Avatar1</label><br>
+                <input type="radio" id="avatar2" name="avatar" value="avatar2">
+                <label for="avatar2">Avatar2</label><br>
+                <input type="radio" id="avatar3" name="avatar" value="avatar3">
+                <label for="avatar3">Avatar3</label>
+            </div>
+
+            
+
+            <div class="field justify-sb align-center">
+
+                <input type="submit" id="submitButton">
+            </div>
+        </form>
+
+        <div class="changePassword">
+             <input type="button" onclick="alert('Change password route here!')" value="Change Password">
+        </div>
+    </div>

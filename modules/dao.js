@@ -180,9 +180,9 @@ async function createComment(comment){
     return newComment; 
 };
 
-async function editUser(id, fname, lname, username, dob, password, description, imageSource) {
+async function editUser(id, fname, lname, username, dob, description, imageSource) {
     const db = await dbPromise;
-    return await db.run(SQL`UPDATE users SET fname = ${fname}, lname = ${lname}, username = ${username}, dob = ${dob}, password = ${password}, description = ${description}, imageSource = ${imageSource} WHERE id = ${id};`);
+    return await db.run(SQL`UPDATE users SET fname = ${fname}, lname = ${lname}, username = ${username}, dob = ${dob}, description = ${description}, imageSource = ${imageSource} WHERE id = ${id};`);
 };
 
 async function editArticle(id, title, postTime, content, imageSource) {

@@ -13,10 +13,11 @@
 
         <p>Profile Picture: {{user.imageSource}}</p>
 
-
-        <div class="edit">
-            <input type="button" onclick="testfunction()" value="Edit Account">
-        </div>
+        <form action="./edituser" method="GET">
+            <div class="edit">
+                <input type="submit" value="Edit Account">
+            </div>
+        </form>
 
         <div class="delete">
             <form action="./deleteuser" method="POST">
