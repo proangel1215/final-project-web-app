@@ -75,12 +75,12 @@ router.delete("/api/users/:id", async function(req, res) {
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const userIdToDelete = req.params.id;
 
-    console.log(userIdToDelete);
+    // console.log("User ID to delete: " + userIdToDelete);
 
     if (user) {
         if (user.admin) {
             const message = await appDao.deleteUserById(userIdToDelete);
-            console.log(message);
+            // console.log(message);
             res.status(204).send();
         } else {
             res.status(401).send();
@@ -89,6 +89,12 @@ router.delete("/api/users/:id", async function(req, res) {
         res.status(401).send();
     }
 });
+
+
+// This test route handler renders a Handlebars view that runs a JS file that sends a DELETE request to router.delete 
+router.get("/delete", async function(req, res) {
+    res.render("api-delete-test");
+})
 
 
 module.exports = router;
