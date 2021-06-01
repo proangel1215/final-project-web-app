@@ -69,12 +69,60 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
     res.redirect(`/read-article?articleID=${newArticleID}`);
 }); 
 
+router.get("/edit-article", verifyAuthenticated, async function(req, res) {
+
+    const editedArticleID = req.query.articleID;
+    const article = await testDao.retrieveArticleById(editedArticleID); 
+    res.locals.article = article;
+    
+    res.render("edit-article");
+
+});
+
+router.post("/edit-article", multer.upload.single("articleImage"), verifyAuthenticated, async function(req, res) {
+
+    const id = req.body.hiddenIDbox;
+    const article = await testDao.retrieveArticleById(id); 
+
+    const title = req.body.articleTitle;
+    let imageSource = article.imageSource;
+    const content = req.body.editedArticleContent;
+    const deleteCheckbox = req.body.deleteImageButton;
+
+    if (deleteCheckbox == "on") {
+        imageSource = null;
+    }
+
+    if (req.file !== undefined) {
+        const imageFile = req.file;
+        const oldFileName = imageFile.path;
+        const newFileName = `./public/imageUploads/${imageFile.originalname}`;
+        fs.renameSync(oldFileName, newFileName);
+
+        const resizedImage = await jimp.read(newFileName);
+        resizedImage.resize(800, jimp.AUTO); // arbitrary size
+        await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
+
+        imageSource = imageFile.originalname;
+    }
+    
+    await testDao.editArticle(id, title, content, imageSource);
+
+    res.redirect(`/read-article?articleID=${id}`);
+});
+
+
 router.get('/read-article', async function (req, res) {
 
     const articleID = req.query.articleID;
     
     const article = await testDao.retrieveArticleById(articleID); 
     res.locals.article = article;
+
+    // Initialise user so we can check if userID = authorID: if so display edit article button
+    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    res.locals.user = user;
+    
     //console.log(article.imageSource)
     const comments = await testDao.retrieveCommentsByArticleId(articleID); 
     var usersArray = new Array(); 
