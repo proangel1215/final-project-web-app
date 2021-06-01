@@ -33,7 +33,7 @@ const { addUserToLocals } = require("./middleware/auth-middleware.js");
 app.use(addUserToLocals);
 
 // Setup routes
-const appRouter = require("./routes/application-routes.js");
+const appRouter = require("./routes/app-routes.js");
 app.use(appRouter);
 
 const authRouter = require("./routes/auth-routes.js");

@@ -2,8 +2,8 @@ const { v4: uuid } = require("uuid");
 const express = require("express");
 const router = express.Router();
 
-const userDao = require("../modules/users-dao.js");
-const testDao = require("../modules/dao.js");
+const authDao = require("../modules/auth-dao.js");
+const appDao = require("../modules/app-dao.js");
 
 
 // Used to simulate Java app sending login credentials - will be deleted before submitting
@@ -25,12 +25,12 @@ router.post("/api/login", async function(req, res) {
     const username = userJSON.username;
     const password = userJSON.password;
 
-    const user = await userDao.retrieveUserWithCredentials(username, password);
+    const user = await authDao.retrieveUserWithCredentials(username, password);
 
     if (user) {
         const authToken = uuid();
         user.authToken = authToken;
-        await userDao.updateUser(user);
+        await authDao.updateUser(user);
         res.cookie("authToken", authToken);
         res.status(204).send();
     }
@@ -49,14 +49,14 @@ router.get("/api/logout", function(req, res) {
 
 // This route handler returns an array of all users if the user is an admin, or a 401 response if they are not an admin or not a user
 router.get("/api/users", async function(req, res) {
-    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
 
     if (user) {
         if (user.admin) {
-            const userArray = await testDao.retrieveAllUsers();
+            const userArray = await appDao.retrieveAllUsers();
 
             for (i = 0; i < userArray.length; i++) {
-                const userArticles = await testDao.retrieveArticlesByAuthorId(userArray[i].id);
+                const userArticles = await appDao.retrieveArticlesByAuthorId(userArray[i].id);
                 userArray[i].numArticles = userArticles.length;
             }
 
@@ -72,14 +72,14 @@ router.get("/api/users", async function(req, res) {
 
 // This route handler deletes the user with the given id, as well as their articles and comments, if the requestor is an admin
 router.delete("/api/users/:id", async function(req, res) {
-    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const userIdToDelete = req.params.id;
 
     console.log(userIdToDelete);
 
     if (user) {
         if (user.admin) {
-            const message = await testDao.deleteUserById(userIdToDelete);
+            const message = await appDao.deleteUserById(userIdToDelete);
             console.log(message);
             res.status(204).send();
         } else {

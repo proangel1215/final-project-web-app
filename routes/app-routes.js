@@ -3,17 +3,18 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 
-const testDao = require("../modules/dao.js");
-const userDao = require("../modules/users-dao.js");
+const appDao = require("../modules/app-dao.js");
+const authDao = require("../modules/auth-dao.js");
 const multer = require("../modules/multer-uploader.js");
 const { verifyAuthenticated } = require("../middleware/auth-middleware.js");
 
+
 router.get("/", async function(req, res) {
-    const articles = await testDao.retrieveAllArticles(); 
+    const articles = await appDao.retrieveAllArticles(); 
     
     var usersArray = new Array(); 
     for (let i = 0; i < articles.length; i++){
-    usersArray[i] = await testDao.retrieveUserById(articles[i].userID); 
+    usersArray[i] = await appDao.retrieveUserById(articles[i].userID); 
     articles[i].username = usersArray[i].username;
     }; 
     res.locals.articles = articles;
@@ -21,17 +22,17 @@ router.get("/", async function(req, res) {
 }); 
 
 router.get("/my-articles", verifyAuthenticated, async function(req, res) {
-    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    res.locals.articles = await testDao.retrieveArticlesByAuthorId(user.id); 
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    res.locals.articles = await appDao.retrieveArticlesByAuthorId(user.id); 
     res.render("my-articles");
 });
 
 router.post("/createComment", async function(req, res) {
     const content = req.body.commentInput; 
-    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken); 
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken); 
 
     const comment = {content: content, commenterID: user.id, articleID: null, parentID: null}; 
-    await testDao.createComment(comment);
+    await appDao.createComment(comment);
 
     res.redirect("/read-article"); 
 });
@@ -59,11 +60,11 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
     }
     
     //create article in database
-    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id, username: user.username}; 
-    await testDao.createNewArticle(newArticle);
+    await appDao.createNewArticle(newArticle);
 
-    const newArticleID = await testDao.retrieveNewArticleID();
+    const newArticleID = await appDao.retrieveNewArticleID();
 
     res.redirect(`/read-article?articleID=${newArticleID}`);
 }); 
@@ -73,7 +74,7 @@ router.get('/read-article', async function (req, res) {
     const articleID = req.query.articleID;
     //req.params = articleID;
     //console.log(articleID);
-    const article = await testDao.retrieveArticleById(articleID); 
+    const article = await appDao.retrieveArticleById(articleID); 
     //console.log(article); 
     res.locals.article = article;
     //console.log(article.imageSource)
@@ -98,7 +99,7 @@ router.post("/create-account", async function(req, res) {
     if (password == confirmPassword) {
         const authToken = uuid();
         const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: password, description: description, imageSource: imageSource, authToken: authToken};
-        await testDao.createUser(newUser);
+        await appDao.createUser(newUser);
         res.cookie("authToken", authToken);
         res.locals.user = newUser;
         res.redirect("/");
@@ -108,7 +109,7 @@ router.post("/create-account", async function(req, res) {
 });
 
 router.get("/usernames", async function(req, res) {
-    const usernames = await testDao.retrieveAllUsernames();
+    const usernames = await appDao.retrieveAllUsernames();
     res.json(usernames);
 });
 
@@ -119,10 +120,10 @@ router.get("/account-details", verifyAuthenticated, async function(req, res) {
 
 router.get("/articles", async function(req, res){
     const sortBy = req.query.sortBy;
-    const articles = await testDao.retrieveArticlesBySort(sortBy);
+    const articles = await appDao.retrieveArticlesBySort(sortBy);
     var usersArray = new Array(); 
     for (let i = 0; i < articles.length; i++){
-    usersArray[i] = await testDao.retrieveUserById(articles[i].userID); 
+    usersArray[i] = await appDao.retrieveUserById(articles[i].userID); 
     articles[i].username = usersArray[i].username;
     }; 
     res.json(articles);
