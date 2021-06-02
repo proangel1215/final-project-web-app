@@ -153,9 +153,9 @@ router.get('/read-article', async function (req, res) {
             };
 
         const newcomments = unflatten(comments);
+        console.log(newcomments);
     }
 
-    console.log(newcomments);
 
     res.locals.comments = comments; 
     res.render("read-article");
