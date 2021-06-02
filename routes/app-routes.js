@@ -24,6 +24,7 @@ router.get("/", async function(req, res) {
 }); 
 
 router.get("/my-articles", verifyAuthenticated, async function(req, res) {
+    res.locals.message = req.query.message;
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     res.locals.articles = await appDao.retrieveArticlesByAuthorId(user.id); 
     res.render("my-articles");
@@ -36,6 +37,18 @@ router.post("/createComment", async function(req, res) {
     console.log(articleID);
     const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: null}; 
     await appDao.createComment(comment);
+    
+    res.redirect(`/read-article?articleID=${articleID}`);
+});
+
+router.post("/replyToComment", async function(req, res) {
+    const content = req.body.replyToCommentInput; 
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken); 
+    const articleID = req.body.articleID;
+    const parentID = req.body.parentID;
+    const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: parentID}; 
+    await appDao.createComment(comment);
+    res.redirect(`/read-article?articleID=${articleID}`);
 });
 
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
@@ -125,10 +138,14 @@ router.get('/read-article', async function (req, res) {
 
     // Initialise user so we can check if userID = authorID: if so display edit article button
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    res.locals.user = user;
+    
+    if (user.id == article.userID) {
+        res.locals.author = true;
+    }
     
     //console.log(article.imageSource)
     const comments = await appDao.retrieveCommentsByArticleId(articleID); 
+    var newcomments = null;
     if (comments.length != 0) {
         var usersArray = new Array(); 
         for (let i = 0; i < comments.length; i++){
@@ -153,14 +170,20 @@ router.get('/read-article', async function (req, res) {
                 .find(e => e.id === undefined).children;
             };
 
-        const newcomments = unflatten(comments);
-        console.log(newcomments);
+        newcomments = unflatten(comments);
+        //console.log(newcomments);
     }
 
-
-    res.locals.comments = comments; 
+    res.locals.comments = newcomments;
     res.render("read-article");
   });
+
+router.post("/delete-article", verifyAuthenticated, async function (req, res) {
+
+    const id = req.body.hiddenIDbox;
+    await appDao.deleteArticleById(id);
+    res.redirect("./my-articles?message=Successfully deleted your article!");
+});
 
 router.get("/create-account", async function(req, res) {
     res.render("create-account");
