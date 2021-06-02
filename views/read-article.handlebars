@@ -35,9 +35,7 @@
                 <button onclick="ShowNestedComments({{this.id}})">Show replies</button>
                   <div id="nestedComments{{this.id}}" style="display: none">
                     {{#each this.children}}
-                    {{#each this}}
-                    {{@key}}: {{this.content}}
-                    {{/each}}
+                        {{this.content}}
                     {{/each}}
                   </div>
                   {{/if}}
