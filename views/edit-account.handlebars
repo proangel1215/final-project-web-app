@@ -1,23 +1,7 @@
-<h1>Current Account Details</h1>
-
-    <div class="currentDetails">
-
-        <p>Account Name: {{user.username}}</p>
-
-        <p>Fullname: {{user.fname}} {{user.lname}}</p>
-
-        <p>Date of Birth: {{user.dob}}</p>
-
-        <p>Description: {{user.description}}</p>
-
-        <p>Profile Picture: {{user.imageSource}}</p>
-
-    </div>
-
-<h2>Edit Details</h2>
+<h1>Edit Details</h1>
 
     <div class="editDetails">
-        <form action="./edituser" method="POST">
+        <form action="./edit-account" method="POST">
             <div class="field">
                 <label for="txtfName">First name:</label>
                 <input type="text" name="fname" id="txtfName" value="{{user.fname}}">
@@ -48,11 +32,11 @@
 
             <div class="field">
                 <input type="radio" id="avatar1" name="avatar" value="avatar1">
-                <label for="avatar1">Avatar1</label><br>
+                <label for="avatar1">Avatar 1</label><br>
                 <input type="radio" id="avatar2" name="avatar" value="avatar2">
-                <label for="avatar2">Avatar2</label><br>
+                <label for="avatar2">Avatar 2</label><br>
                 <input type="radio" id="avatar3" name="avatar" value="avatar3">
-                <label for="avatar3">Avatar3</label>
+                <label for="avatar3">Avatar 3</label>
             </div>
 
             
