@@ -37,8 +37,7 @@ const dbPromise = require("./database.js");
 
     await db.run(SQL`
         update users
-        set username = ${user.username}, password = ${user.password},
-            fname = ${user.fname}, lname = ${user.lname}, authToken = ${user.authToken}
+        set authToken = ${user.authToken}
         where id = ${user.id}`);
 }
 
