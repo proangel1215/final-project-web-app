@@ -1,19 +1,20 @@
 <h1>Account Details</h1>
 
     <div class="currentDetails">
-        <h2>Current Details</h2>
 
-        <p>Account Name: {{user.username}}</p>
+        <p>First name: {{user.fname}}</p>
 
-        <p>Fullname: {{user.fname}} {{user.lname}}</p>
+        <p>Last name: {{user.lname}}</p>
 
-        <p>Date of Birth: {{user.dob}}</p>
+        <p>Date of birth: {{user.dob}}</p>
+
+        <p>Username: {{user.username}}</p>
 
         <p>Description: {{user.description}}</p>
 
-        <p>Profile Picture: {{user.imageSource}}</p>
+        <p>Avatar: {{user.imageSource}}</p>
 
-        <form action="./edituser" method="GET">
+        <form action="./edit-account" method="GET">
             <div class="edit">
                 <input type="submit" value="Edit Account">
             </div>
