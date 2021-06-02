@@ -128,11 +128,35 @@ router.get('/read-article', async function (req, res) {
     
     //console.log(article.imageSource)
     const comments = await appDao.retrieveCommentsByArticleId(articleID); 
-    var usersArray = new Array(); 
-    for (let i = 0; i < comments.length; i++){
-        usersArray[i] = await appDao.retrieveUserById(comments[i].commenterID);
-        comments[i].username = usersArray[i].username;
+    if (comments.length != 0) {
+        var usersArray = new Array(); 
+        for (let i = 0; i < comments.length; i++){
+            usersArray[i] = await appDao.retrieveUserById(comments[i].commenterID);
+            comments[i].username = usersArray[i].username;
+        }
+
+        const unflatten = data => {
+            // console.log(data);
+            const tree = data.map(e => ({...e}))
+                .sort((a, b) => a.id - b.id)
+                .reduce((a, e) => {
+                a[e.id] = a[e.id] || e;
+                a[e.parentCommentID] = a[e.parentCommentID] || {};
+                const parent = a[e.parentCommentID];
+                parent.children = parent.children || [];
+                parent.children.push(e);
+                return a;
+                }, {})
+            ;
+            return Object.values(tree)
+                .find(e => e.id === undefined).children;
+            };
+
+        const newcomments = unflatten(comments);
+        console.log(newcomments);
     }
+
+
     res.locals.comments = comments; 
     res.render("read-article");
   });
