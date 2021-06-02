@@ -2,6 +2,7 @@ const { v4: uuid } = require("uuid");
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const jimp = require("jimp");
 
 const appDao = require("../modules/app-dao.js");
 const authDao = require("../modules/auth-dao.js");
@@ -30,14 +31,11 @@ router.get("/my-articles", verifyAuthenticated, async function(req, res) {
 router.post("/createComment", async function(req, res) {
     const content = req.body.commentInput; 
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken); 
-
-    const comment = {content: content, commenterID: user.id, articleID: null, parentID: null}; 
+    const articleID = req.body.articleID;
+    console.log(articleID);
+    const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: null}; 
     await appDao.createComment(comment);
-
-    res.redirect("/read-article"); 
 });
-
-//router.get("/displayComment", async )
 
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
@@ -46,9 +44,7 @@ router.get("/create-article", verifyAuthenticated, async function(req, res) {
 router.post("/create-article", multer.upload.single("articleImage"), verifyAuthenticated, async function(req, res) {
 
     const title = req.body.articleTitle;
-    const imageSource = req.body.articleImage;
-    //not getting imageSource name going into database - hollie to fix
-    console.log(imageSource);
+    let imageSource = null;
     const content = req.body.newArticleContent;
 
     if (req.file !== undefined) {
@@ -56,7 +52,12 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
         const oldFileName = imageFile.path;
         const newFileName = `./public/imageUploads/${imageFile.originalname}`;
         fs.renameSync(oldFileName, newFileName);
-        console.log(newFileName);
+
+        const resizedImage = await jimp.read(newFileName);
+        resizedImage.resize(800, jimp.AUTO); // arbitrary size
+        await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
+
+        imageSource = imageFile.originalname;
     }
     
     //create article in database
@@ -69,6 +70,49 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
     res.redirect(`/read-article?articleID=${newArticleID}`);
 }); 
 
+router.get("/edit-article", verifyAuthenticated, async function(req, res) {
+
+    const editedArticleID = req.query.articleID;
+    const article = await appDao.retrieveArticleById(editedArticleID); 
+    res.locals.article = article;
+    
+    res.render("edit-article");
+
+});
+
+router.post("/edit-article", multer.upload.single("articleImage"), verifyAuthenticated, async function(req, res) {
+
+    const id = req.body.hiddenIDbox;
+    const article = await appDao.retrieveArticleById(id); 
+
+    const title = req.body.articleTitle;
+    let imageSource = article.imageSource;
+    const content = req.body.editedArticleContent;
+    const deleteCheckbox = req.body.deleteImageButton;
+
+    if (deleteCheckbox == "on") {
+        imageSource = null;
+    }
+
+    if (req.file !== undefined) {
+        const imageFile = req.file;
+        const oldFileName = imageFile.path;
+        const newFileName = `./public/imageUploads/${imageFile.originalname}`;
+        fs.renameSync(oldFileName, newFileName);
+
+        const resizedImage = await jimp.read(newFileName);
+        resizedImage.resize(800, jimp.AUTO); // arbitrary size
+        await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
+
+        imageSource = imageFile.originalname;
+    }
+    
+    await appDao.editArticle(id, title, content, imageSource);
+
+    res.redirect(`/read-article?articleID=${id}`);
+});
+
+
 router.get('/read-article', async function (req, res) {
 
     const articleID = req.query.articleID;
@@ -77,8 +121,19 @@ router.get('/read-article', async function (req, res) {
     const article = await appDao.retrieveArticleById(articleID); 
     //console.log(article); 
     res.locals.article = article;
-    //console.log(article.imageSource)
+
+    // Initialise user so we can check if userID = authorID: if so display edit article button
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    res.locals.user = user;
     
+    //console.log(article.imageSource)
+    const comments = await appDao.retrieveCommentsByArticleId(articleID); 
+    var usersArray = new Array(); 
+    for (let i = 0; i < comments.length; i++){
+        usersArray[i] = await appDao.retrieveUserById(comments[i].commenterID);
+        comments[i].username = usersArray[i].username;
+    }
+    res.locals.comments = comments; 
     res.render("read-article");
   });
 
@@ -118,15 +173,50 @@ router.get("/account-details", verifyAuthenticated, async function(req, res) {
     res.render("account-details");
 });
 
+
 router.get("/articles", async function(req, res){
     const sortBy = req.query.sortBy;
     const articles = await appDao.retrieveArticlesBySort(sortBy);
-    var usersArray = new Array(); 
-    for (let i = 0; i < articles.length; i++){
-    usersArray[i] = await appDao.retrieveUserById(articles[i].userID); 
-    articles[i].username = usersArray[i].username;
-    }; 
     res.json(articles);
+});
+
+router.get("/my-sorted-articles", verifyAuthenticated, async function(req, res){
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    const sortBy = req.query.sortBy; 
+    const articles = await appDao.retrieveMyArticlesBySort(user.id, sortBy);
+    res.json(articles);
+});
+
+
+router.get("/edituser", verifyAuthenticated, async function(req, res) {
+    res.render("edituser");
+});
+
+
+router.post("/edituser", verifyAuthenticated, async function(req, res) {
+
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
+
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const username = req.body.username;
+    const dob = req.body.dob;
+    const description = req.body.description;
+    var imageSource = req.body.avatar;
+
+    if (imageSource == null || imageSource == undefined) {
+        var imageSource = user.imageSource;
+    }
+    
+    await appDao.editUser(user.id, fname, lname, username, dob, description, imageSource);
+    res.redirect("account-details");
+});
+
+
+router.post("/deleteuser", async function(req, res) {
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    await appDao.deleteUserById(user.id);
+    res.redirect("./login?message=Successfully deleted account!");
 });
 
 module.exports = router;
