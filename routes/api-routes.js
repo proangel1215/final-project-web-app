@@ -25,11 +25,11 @@ router.post("/api/login", async function(req, res) {
     // console.log(hash);
 
     if (hash != undefined) {
-        const result = await bcrypt.compare(plaintextPassword, hash.password);
-        // console.log(result);
+        const passwordsMatch = await bcrypt.compare(plaintextPassword, hash.password);
+        // console.log(passwordsMatch);
 
          // if the passwords match...
-        if (result) {
+        if (passwordsMatch) {
             const user = await authDao.retrieveUserWithCredentials(username, hash.password);
 
             const authToken = uuid();
