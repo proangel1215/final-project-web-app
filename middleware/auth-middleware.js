@@ -1,7 +1,7 @@
-const userDao = require("../modules/users-dao.js");
+const authDao = require("../modules/auth-dao.js");
 
 async function addUserToLocals(req, res, next) {
-    const user = await userDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     res.locals.user = user;
     next();
 }
