@@ -177,13 +177,13 @@ router.post("/create-account", async function(req, res) {
     const imageSource = req.body.avatar;
 
     if (password == confirmPassword) {
-        const authToken = uuid();
 
         // Hashes and salts the provided password all in one go
         const saltRounds = 10;
         const hash = await bcrypt.hash(password, saltRounds);
-        console.log("My hash: ", hash);
+        // console.log("My hash: ", hash);
 
+        const authToken = uuid();
         const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: hash, description: description, imageSource: imageSource, authToken: authToken};
         await appDao.createUser(newUser);
         res.cookie("authToken", authToken);
