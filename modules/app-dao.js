@@ -204,6 +204,14 @@ async function editArticle(id, title, content, imageSource) {
     return await db.run(SQL`UPDATE articles SET title = ${title}, content = ${content}, imageSource = ${imageSource} WHERE id = ${id};`);
 };
 
+async function updatePassword(user) {
+    const db = await dbPromise;
+    return await db.run(SQL`
+    UPDATE users
+    SET password = ${user.password}
+    WHERE id = ${user.id}`);
+}
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesBySort,
@@ -225,5 +233,6 @@ module.exports = {
     addDownvoteByCommentId,
     editUser,
     editArticle,
-    retrieveAllUsers
+    retrieveAllUsers,
+    updatePassword
 };

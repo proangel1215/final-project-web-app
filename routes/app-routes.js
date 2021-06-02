@@ -226,6 +226,7 @@ router.get("/usernames", async function(req, res) {
 
 
 router.get("/account-details", verifyAuthenticated, async function(req, res) {
+    res.locals.message = req.query.message;
     res.render("account-details");
 });
 
@@ -274,5 +275,34 @@ router.post("/deleteuser", async function(req, res) {
     await appDao.deleteUserById(user.id);
     res.redirect("./login?message=Successfully deleted account!");
 });
+
+
+router.get("/change-password", function(req, res) {
+    res.render("change-password");
+});
+
+
+router.post("/change-password", async function(req, res) {
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    console.log(user);
+
+    const plaintextPassword = req.body.newPassword;
+    console.log(plaintextPassword);
+
+    // Hashes and salts the provided password all in one go
+    const saltRounds = 10;
+    const hash = await bcrypt.hash(plaintextPassword, saltRounds);
+    console.log("My hash: ", hash);
+
+    user.password = hash;
+    console.log(user);
+
+    const message = await appDao.updatePassword(user);
+    console.log(message);
+
+    res.locals.user = user;
+    res.redirect("/account-details?message=Password changed!");    
+});
+
 
 module.exports = router;

@@ -8,10 +8,8 @@ window.addEventListener("load", function () {
     const usernameMessage = document.querySelector("#usernameMessage");
     const confirmPasswordMessage = document.querySelector("#confirmPasswordMessage");
 
-    if (submitButton != null) {
-        submitButton.disabled = true;
-    }
-    // submitButton.disabled = true;
+    submitButton.disabled = true;
+
     let validUsername;
     let validPassword;
 
