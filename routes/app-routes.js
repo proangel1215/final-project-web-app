@@ -139,8 +139,10 @@ router.get('/read-article', async function (req, res) {
     // Initialise user so we can check if userID = authorID: if so display edit article button
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     
-    if (user.id == article.userID) {
-        res.locals.author = true;
+    if (user != undefined) {
+        if (user.id == article.userID) {
+            res.locals.author = true;
+        }
     }
     
     //console.log(article.imageSource)
