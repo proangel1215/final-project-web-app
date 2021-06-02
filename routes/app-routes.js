@@ -212,12 +212,12 @@ router.get("/my-sorted-articles", verifyAuthenticated, async function(req, res){
 });
 
 
-router.get("/edituser", verifyAuthenticated, async function(req, res) {
-    res.render("edituser");
+router.get("/edit-account", verifyAuthenticated, async function(req, res) {
+    res.render("edit-account");
 });
 
 
-router.post("/edituser", verifyAuthenticated, async function(req, res) {
+router.post("/edit-account", verifyAuthenticated, async function(req, res) {
 
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
 
