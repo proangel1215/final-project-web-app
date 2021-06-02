@@ -144,6 +144,7 @@ router.get('/read-article', async function (req, res) {
     
     //console.log(article.imageSource)
     const comments = await appDao.retrieveCommentsByArticleId(articleID); 
+    var newcomments = null;
     if (comments.length != 0) {
         var usersArray = new Array(); 
         for (let i = 0; i < comments.length; i++){
@@ -168,11 +169,11 @@ router.get('/read-article', async function (req, res) {
                 .find(e => e.id === undefined).children;
             };
 
-        const newcomments = unflatten(comments);
-        console.log(newcomments);
+        newcomments = unflatten(comments);
+        //console.log(newcomments);
     }
 
-    res.locals.comments = newcomments; 
+    res.locals.comments = newcomments;
     res.render("read-article");
   });
 
