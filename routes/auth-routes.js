@@ -39,7 +39,7 @@ router.post("/login", async function(req, res) {
             // Auth success - give that user an authToken, save the token in a cookie, and redirect to the homepage.
             const authToken = uuid();
             user.authToken = authToken;
-            await authDao.updateUser(user);
+            await authDao.updateAuthToken(user);
             res.cookie("authToken", authToken);
             res.locals.user = user;
             res.redirect("/");

@@ -32,7 +32,7 @@ const dbPromise = require("./database.js");
 /**
  * Updates the given user in the database, not including auth token
  */
- async function updateUser(user) {
+ async function updateAuthToken(user) {
     const db = await dbPromise;
 
     await db.run(SQL`
@@ -49,6 +49,6 @@ async function retrieveHashByUsername(username) {
 module.exports = {
     retrieveUserWithCredentials,
     retrieveUserWithAuthToken,
-    updateUser,
+    updateAuthToken,
     retrieveHashByUsername
 };

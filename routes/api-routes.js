@@ -34,7 +34,7 @@ router.post("/api/login", async function(req, res) {
 
             const authToken = uuid();
             user.authToken = authToken;
-            await authDao.updateUser(user);
+            await authDao.updateAuthToken(user);
             res.cookie("authToken", authToken);
             res.status(204).send();
         } else {
