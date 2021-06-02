@@ -1,6 +1,7 @@
 const { v4: uuid } = require("uuid");
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt")
 
 const authDao = require("../modules/auth-dao.js");
 const appDao = require("../modules/app-dao.js");
@@ -15,21 +16,31 @@ router.get("/api/login", function(req, res) {
 // This route handler is invoked whenever the user attempts to log in from the Java app
 router.post("/api/login", async function(req, res) {
     const userJSON = req.body;
-    console.log(userJSON);
+    // console.log(userJSON);
 
     const username = userJSON.username;
-    const password = userJSON.password;
+    const plaintextPassword = userJSON.password;
 
-    const user = await authDao.retrieveUserWithCredentials(username, password);
+    const hash = await authDao.retrieveHashByUsername(username);
+    // console.log(hash);
 
-    if (user) {
-        const authToken = uuid();
-        user.authToken = authToken;
-        await authDao.updateUser(user);
-        res.cookie("authToken", authToken);
-        res.status(204).send();
-    }
-    else {
+    if (hash != undefined) {
+        const passwordsMatch = await bcrypt.compare(plaintextPassword, hash.password);
+        // console.log(passwordsMatch);
+
+         // if the passwords match...
+        if (passwordsMatch) {
+            const user = await authDao.retrieveUserWithCredentials(username, hash.password);
+
+            const authToken = uuid();
+            user.authToken = authToken;
+            await authDao.updateAuthToken(user);
+            res.cookie("authToken", authToken);
+            res.status(204).send();
+        } else {
+            res.status(401).send();
+        }
+    } else {
         res.status(401).send();
     }
 });

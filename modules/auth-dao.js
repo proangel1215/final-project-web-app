@@ -32,18 +32,23 @@ const dbPromise = require("./database.js");
 /**
  * Updates the given user in the database, not including auth token
  */
- async function updateUser(user) {
+ async function updateAuthToken(user) {
     const db = await dbPromise;
 
     await db.run(SQL`
         update users
-        set username = ${user.username}, password = ${user.password},
-            fname = ${user.fname}, lname = ${user.lname}, authToken = ${user.authToken}
+        set authToken = ${user.authToken}
         where id = ${user.id}`);
+}
+
+async function retrieveHashByUsername(username) {
+    const db = await dbPromise;
+    return await db.get(SQL`select password from users where username = ${username}`);
 }
 
 module.exports = {
     retrieveUserWithCredentials,
     retrieveUserWithAuthToken,
-    updateUser
+    updateAuthToken,
+    retrieveHashByUsername
 };

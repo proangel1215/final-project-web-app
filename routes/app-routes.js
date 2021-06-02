@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const jimp = require("jimp");
+const bcrypt = require("bcrypt")
 
 const appDao = require("../modules/app-dao.js");
 const authDao = require("../modules/auth-dao.js");
@@ -199,8 +200,14 @@ router.post("/create-account", async function(req, res) {
     const imageSource = req.body.avatar;
 
     if (password == confirmPassword) {
+
+        // Hashes and salts the provided password all in one go
+        const saltRounds = 10;
+        const hash = await bcrypt.hash(password, saltRounds);
+        // console.log("My hash: ", hash);
+
         const authToken = uuid();
-        const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: password, description: description, imageSource: imageSource, authToken: authToken};
+        const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: hash, description: description, imageSource: imageSource, authToken: authToken};
         await appDao.createUser(newUser);
         res.cookie("authToken", authToken);
         res.locals.user = newUser;
