@@ -134,6 +134,13 @@ router.get('/read-article', async function (req, res) {
     res.render("read-article");
   });
 
+router.post("/delete-article", verifyAuthenticated, async function (req, res) {
+
+    const id = req.body.hiddenIDbox;
+    await testDao.deleteArticleById(id);
+    res.redirect("./my-articles?message=Successfully deleted your article!");
+});
+
 router.get("/create-account", async function(req, res) {
     res.render("create-account");
 });
