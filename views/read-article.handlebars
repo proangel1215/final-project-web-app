@@ -15,7 +15,7 @@
         
     </div>
     <br>
-    <button onclick="myFunction()">Click to show / hide comments</button>
+    <button onclick="ShowHideComments()">Click to show / hide comments</button>
     <div id="commentBox">
 
         <h2>Comments: </h2>
@@ -27,12 +27,35 @@
         <td>Comment</td>
         </tr>
             {{#each comments}}
-        <div id="commentDisplay">
-            <tr>
+        {{!-- <div id="level1Comment"> --}}
+          <tr>
                 <td>{{this.username}}</td>
-                <td>{{this.content}}</td>
-            </tr>
-        </div>
+                <td>{{this.content}}<br>
+                {{#if this.children}}
+                <button onclick="ShowNestedComments({{this.id}})">Show replies</button>
+                  <div id="nestedComments{{this.id}}" style="display: none">
+                    {{#each this.children}}
+                    {{#each this}}
+                    {{@key}}: {{this.content}}
+                    {{/each}}
+                    {{/each}}
+                  </div>
+                  {{/if}}
+                </td>
+                <td><button onclick="nestedCommentsBox({{this.id}})">Reply</button>
+                <div id="replyToComment{{this.id}}" style="display: none">
+                    <form action="./replyToComment" method="POST">
+                    <label for="replyToCommentInput">Your Comments:</label>
+                    <br>
+                    <textarea id="replyToCommentInput" name="replyToCommentInput" rows="4" cols="50" maxlength="300" placeholder="Reply to a comment!"></textarea>
+                    <textarea style="display: none" id="articleID" name="articleID" row="0" cols="0">{{this.articleID}}</textarea>  
+                    <textarea style="display: none" id="parentID" name="parentID" row="0" cols="0">{{this.id}}</textarea>
+                    <input type="submit" value="Submit your comment!">
+                    </form>
+                </div>
+                </td>
+          </tr>
+        {{!-- </div> --}}
             {{/each}}
             {{!-- {{#if comments have child}
             <div class="reply">
@@ -57,8 +80,26 @@
 </div>
 
 <script>
-function myFunction() {
+function ShowHideComments() {
 var x = document.getElementById("commentBox");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function nestedCommentsBox(id) {
+var x = document.getElementById(`replyToComment${id}`);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function ShowNestedComments(id) {
+var x = document.getElementById(`nestedComments${id}`);
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {

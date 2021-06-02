@@ -35,6 +35,18 @@ router.post("/createComment", async function(req, res) {
     console.log(articleID);
     const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: null}; 
     await appDao.createComment(comment);
+    
+    res.redirect(`/read-article?articleID=${articleID}`);
+});
+
+router.post("/replyToComment", async function(req, res) {
+    const content = req.body.replyToCommentInput; 
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken); 
+    const articleID = req.body.articleID;
+    const parentID = req.body.parentID;
+    const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: parentID}; 
+    await appDao.createComment(comment);
+    res.redirect(`/read-article?articleID=${articleID}`);
 });
 
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
@@ -156,8 +168,7 @@ router.get('/read-article', async function (req, res) {
         console.log(newcomments);
     }
 
-
-    res.locals.comments = comments; 
+    res.locals.comments = newcomments; 
     res.render("read-article");
   });
 
