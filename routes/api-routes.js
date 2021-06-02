@@ -16,17 +16,17 @@ router.get("/api/login", function(req, res) {
 // This route handler is invoked whenever the user attempts to log in from the Java app
 router.post("/api/login", async function(req, res) {
     const userJSON = req.body;
-    console.log(userJSON);
+    // console.log(userJSON);
 
     const username = userJSON.username;
     const plaintextPassword = userJSON.password;
 
     const hash = await authDao.retrieveHashByUsername(username);
-    console.log(hash);
+    // console.log(hash);
 
     if (hash != undefined) {
         const result = await bcrypt.compare(plaintextPassword, hash.password);
-        console.log(result);
+        // console.log(result);
 
          // if the passwords match...
         if (result) {
