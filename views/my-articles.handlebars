@@ -2,6 +2,10 @@
 
 <div id="myArticlesContainer">
 
+{{#if message}}
+<p>{{message}}</p>
+{{/if}}
+
     <h1>My articles</h1>
 
     {{#if articles}}
@@ -23,7 +27,7 @@
                     <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
                     <td>{{this.username}}</td>
                     <td>{{this.postTime}}</td>
-                    <td><button type="button" class="editArticleButton" onclick="location.href='./edit-article?articleID={{this.id}}'">Edit article</button></td>
+                    {{!-- <td><button type="button" class="editArticleButton" onclick="location.href='./edit-article?articleID={{this.id}}'">Edit article</button></td> --}}
                 </tr>
             {{/each}}
             </table>

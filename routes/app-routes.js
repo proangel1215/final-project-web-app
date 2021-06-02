@@ -23,6 +23,7 @@ router.get("/", async function(req, res) {
 }); 
 
 router.get("/my-articles", verifyAuthenticated, async function(req, res) {
+    res.locals.message = req.query.message;
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     res.locals.articles = await appDao.retrieveArticlesByAuthorId(user.id); 
     res.render("my-articles");
@@ -136,7 +137,10 @@ router.get('/read-article', async function (req, res) {
 
     // Initialise user so we can check if userID = authorID: if so display edit article button
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    res.locals.user = user;
+    
+    if (user.id == article.userID) {
+        res.locals.author = true;
+    }
     
     //console.log(article.imageSource)
     const comments = await appDao.retrieveCommentsByArticleId(articleID); 
@@ -171,6 +175,13 @@ router.get('/read-article', async function (req, res) {
     res.locals.comments = newcomments; 
     res.render("read-article");
   });
+
+router.post("/delete-article", verifyAuthenticated, async function (req, res) {
+
+    const id = req.body.hiddenIDbox;
+    await appDao.deleteArticleById(id);
+    res.redirect("./my-articles?message=Successfully deleted your article!");
+});
 
 router.get("/create-account", async function(req, res) {
     res.render("create-account");
