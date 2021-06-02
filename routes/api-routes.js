@@ -17,11 +17,6 @@ router.post("/api/login", async function(req, res) {
     const userJSON = req.body;
     console.log(userJSON);
 
-    // Will need to convert from JSON string to JS object with actual implementation using the below code:
-    // const userJS = JSON.parse(userJSON);
-    // console.log(userJS);
-
-    // Will need to obtain username and password from userJS not userJSON with actual implementation
     const username = userJSON.username;
     const password = userJSON.password;
 
@@ -75,12 +70,12 @@ router.delete("/api/users/:id", async function(req, res) {
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const userIdToDelete = req.params.id;
 
-    // console.log("User ID to delete: " + userIdToDelete);
+    console.log("User ID to delete: " + userIdToDelete);
 
     if (user) {
         if (user.admin) {
             const message = await appDao.deleteUserById(userIdToDelete);
-            // console.log(message);
+            console.log(message);
             res.status(204).send();
         } else {
             res.status(401).send();
