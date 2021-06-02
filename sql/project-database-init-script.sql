@@ -59,10 +59,10 @@ CREATE TABLE votes (
 
 );
 
-INSERT INTO users VALUES (1, 'Johnny', 'Walker', 'walk', '1996-06-17', 'testpass', 'This is my description yayaya!', 'public\images\Dragonite.png', 'null', 1);
-INSERT INTO users VALUES (2,'Jim', 'Beam', 'getlit', '1993-01-11', 'newpass', 'Lorem Ipsum or something', 'public\images\Dragonite.png', 'null', 1);
-INSERT INTO users VALUES (3,'Jack', 'Daniels', 'jdbro', '2000-03-23', 'oldpass', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum.', 'public\images\Dragonite.png', 'null', 1);
-INSERT INTO users VALUES (4,'Ivanov', 'Wodka', 'privyet', '2001-05-11', 'sidepass', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum.', 'public\images\Dragonite.png', 'null', 0);
+INSERT INTO users VALUES (1, 'Hollie', 'White', 'hols', '1996-06-17', '$2b$10$sxioZDL6KnmOZ1XN3BtPputkHrHk7pcrJUsL1HFGV4SneY7akhWMm', 'This is my description yayaya!', 'public\images\Dragonite.png', 'null', 1);
+INSERT INTO users VALUES (2,'Matthew', 'Ding', 'matt', '1993-01-11', '$2b$10$s9fGaUDYtlvsTU71RrRUtOP7ZOx1ZQuHqIZeKvYVG/BLBRNjzW1s2', 'Lorem Ipsum or something', 'public\images\Dragonite.png', 'null', 1);
+INSERT INTO users VALUES (3,'Declan', 'Williams', 'declan', '2000-03-23', '$2b$10$eMczFg51lxdIWNAJi8lrTODDXRwkWbWsQlKX06swXqf/bUGBqCI/6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum.', 'public\images\Dragonite.png', 'null', 1);
+INSERT INTO users VALUES (4,'Rachel', 'Yang', 'rachel', '2001-05-11', '$2b$10$B/CLSlIxyxySDeawZnl5ROwAxrIftLRTGqxgjukFkCpa8kGS.UYlW', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum.', 'public\images\Dragonite.png', 'null', 0);
 
 INSERT INTO articles VALUES (1, 'Fake Title 1', '2021-01-19 03:14:07','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed semper ex eget dui rhoncus congue. Integer eget nisl laoreet nisl eleifend elementum. Nulla facilisis quis felis eget efficitur. Sed vel fringilla elit. Mauris et purus sem. Praesent nec magna lorem. Quisque condimentum scelerisque luctus. Nam finibus nisl sed purus porta, lobortis pretium neque vestibulum. In hac habitasse platea dictumst. Cras feugiat tristique massa a eleifend.', 'Dragonite.png', 1, 'walk');
 

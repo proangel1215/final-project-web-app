@@ -42,8 +42,14 @@ const dbPromise = require("./database.js");
         where id = ${user.id}`);
 }
 
+async function retrieveHashByUsername(username) {
+    const db = await dbPromise;
+    return await db.get(SQL`select password from users where username = ${username}`);
+}
+
 module.exports = {
     retrieveUserWithCredentials,
     retrieveUserWithAuthToken,
-    updateUser
+    updateUser,
+    retrieveHashByUsername
 };

@@ -1,6 +1,7 @@
 const { v4: uuid } = require("uuid");
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt")
 
 
 // The DAO that handles CRUD operations for users.
@@ -21,24 +22,32 @@ router.get("/login", async function(req, res) {
 
 router.post("/login", async function(req, res) {
     const username = req.body.username;
-    const password = req.body.password;
+    const plaintextPassword = req.body.password;
 
-    const user = await authDao.retrieveUserWithCredentials(username, password);
+    const hash = await authDao.retrieveHashByUsername(username);
+    console.log(hash);
 
-    // if there is a matching user...
-    if (user) {
-        // Auth success - give that user an authToken, save the token in a cookie, and redirect to the homepage.
-        const authToken = uuid();
-        user.authToken = authToken;
-        await authDao.updateUser(user);
-        res.cookie("authToken", authToken);
-        res.locals.user = user;
-        res.redirect("/");
-    }
+    if (hash != undefined) {
+        const result = await bcrypt.compare(plaintextPassword, hash.password);
+        console.log(result);
 
-    // Otherwise, if there's no matching user...
-    else {
-        // Auth fail
+         // if there is a matching user...
+        if (result) {
+
+            const user = await authDao.retrieveUserWithCredentials(username, hash.password);
+
+            // Auth success - give that user an authToken, save the token in a cookie, and redirect to the homepage.
+            const authToken = uuid();
+            user.authToken = authToken;
+            await authDao.updateUser(user);
+            res.cookie("authToken", authToken);
+            res.locals.user = user;
+            res.redirect("/");
+        } else {
+            res.locals.user = null;
+            res.redirect("./login?message=Username and/or password are incorrect");
+        }
+    } else {
         res.locals.user = null;
         res.redirect("./login?message=Username and/or password are incorrect");
     }
