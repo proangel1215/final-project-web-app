@@ -4,7 +4,7 @@
 
     <h1>My articles</h1>
 
-    {{#if articles}} {{! should work the same as home view sort only if user is logged in returning users articles}}
+    {{#if articles}}
 
         <p class="sort">Sort by: </p>
             <button type="button" class="sort" id="postTime" onclick="getSort(this.id)">Oldest</button>
@@ -23,6 +23,7 @@
                     <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
                     <td>{{this.username}}</td>
                     <td>{{this.postTime}}</td>
+                    <td><button type="button" class="editArticleButton" onclick="location.href='./edit-article?articleID={{this.id}}'">Edit article</button></td>
                 </tr>
             {{/each}}
             </table>

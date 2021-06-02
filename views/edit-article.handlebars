@@ -2,7 +2,7 @@
 
 <script>
 tinymce.init({
-    selector: '#newArticleContent',
+    selector: '#editedArticleContent',
     menubar: false,
     plugins: 'autoresize lists save emoticons wordcount',
     autoresize_bottom_margin: 50,
@@ -13,23 +13,38 @@ tinymce.init({
 
 <div id="newArticleContainer">
 
-    <h1>Create a new article:</h1>
+    <h1>Edit your article:</h1>
 
-    <form action="./create-article" method="POST" enctype="multipart/form-data">
+    <form action="./edit-article" method="POST" enctype="multipart/form-data">
 
         <div>
             <label for="articleTitle">Add a title:</label>
-            <input type="text" id="articleTitle" name="articleTitle">
+            <input type="text" id="articleTitle" name="articleTitle" cols="100" value="{{article.title}}">
         </div>
         <br>
         <div>
-            <label for="articleImage">Upload image:</label>
+            {{#if article.imageSource}}
+                Current image: <i name="imageSource">{{article.imageSource}}</i>
+                <br>
+                <img src="./imagesResized/{{article.imageSource}}">
+                <br>
+                <input type="checkbox" id="deleteImageButton" name="deleteImageButton">
+                <label for="deleteImageButton">Delete current image</label>
+                <br>
+
+            {{/if}}
+            <br>
+            <label for="articleImage">Upload a new image:</label>
             <input type="file" id="articleImage" name="articleImage" accept="image/*">
         </div>
         <br>
-        <textbox id="newArticleContent" name="newArticleContent">
+        <br>
+        <textbox id="editedArticleContent" name="editedArticleContent">
          {{! WYSIWYG implemented here for paragraph input}}
+         {{{article.content}}}
         </textbox>
+        <textarea style="display: none" id="hiddenIDbox" name="hiddenIDbox" rows="0" cols="0">{{article.id}}</textarea>
+        
         <br>
         <button type="submit">Save and post article</button>
         
