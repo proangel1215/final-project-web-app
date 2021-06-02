@@ -30,9 +30,17 @@
         {{!-- <div id="level1Comment"> --}}
           <tr>
                 <td>{{this.username}}</td>
-                <td>{{this.content}}<br><button onclick="ShowNestedComments({{this.id}})">Show replies</button>
-                  <div id="nestedComments{{this.id}}" style="display: none">nested Comments!!
+                <td>{{this.content}}<br>
+                {{#if this.children}}
+                <button onclick="ShowNestedComments({{this.id}})">Show replies</button>
+                  <div id="nestedComments{{this.id}}" style="display: none">
+                    {{#each this.children}}
+                    {{#each this}}
+                    {{@key}}: {{this.content}}
+                    {{/each}}
+                    {{/each}}
                   </div>
+                  {{/if}}
                 </td>
                 <td><button onclick="nestedCommentsBox({{this.id}})">Reply</button>
                 <div id="replyToComment{{this.id}}" style="display: none">

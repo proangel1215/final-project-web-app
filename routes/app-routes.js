@@ -164,9 +164,10 @@ router.get('/read-article', async function (req, res) {
          };
     
     const newcomments = unflatten(comments);
-    console.log(newcomments);
-
-    res.locals.comments = comments; 
+    // console.log(newcomments);
+    // console.log(newcomments[1].children); 
+    // console.log(newcomments[1].children[0]); 
+    res.locals.comments = newcomments; 
     res.render("read-article");
   });
 
