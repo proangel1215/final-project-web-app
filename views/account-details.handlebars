@@ -14,6 +14,15 @@
 
         <p>Avatar: <img src="./avatars/{{user.imageSource}}"></p>
 
+        <table id="accountDetailsTable">
+            <tr><th>First name: </th><td>{{user.fname}}</td></tr>
+            <tr><th>Last name: </th><td>{{user.lname}}</td></tr>
+            <tr><th>Date of birth: </th><td>{{user.dob}}</td></tr>
+            <tr><th>Username: </th><td>{{user.username}}</td></tr>
+            <tr><th>Description: </th><td>{{user.description}}</td></tr>
+            <tr><th>Avatar: </th><td><img src="./avatars/{{user.imageSource}}"></td></tr>
+        </table>
+
         <form action="./edit-account" method="GET">
             <div class="edit">
                 <input type="submit" value="Edit Account">
