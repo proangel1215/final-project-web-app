@@ -1,25 +1,27 @@
+<script src="checkNewUsername.js"></script>
+
 <h1>Edit account:</h1>
 
     <div class="editDetails">
         <form action="./edit-account" method="POST">
             <div class="field">
                 <label for="txtfName">First name:</label>
-                <input type="text" name="fname" id="txtfName" value="{{user.fname}}">
+                <input type="text" name="fname" id="txtfName" value="{{user.fname}}" required>
             </div>
 
             <div class="field">
                 <label for="txtlName">Last name:</label>
-                <input type="text" name="lname" id="txtlName" value="{{user.lname}}">
+                <input type="text" name="lname" id="txtlName" value="{{user.lname}}" required>
             </div>
 
             <div class="field">
                 <label for="dob">Date of birth:</label>
-                <input type="date" name="dob" id="dob" value="{{user.dob}}">
+                <input type="date" name="dob" id="dob" value="{{user.dob}}" required>
             </div>
             
             <div class="field" id="usernameDiv">
                 <label for="txtUsername">Username:</label>
-                <input type="text" name="username" id="txtUsername" value="{{user.username}}">
+                <input type="text" name="username" id="txtUsername" value="{{user.username}}" required>
                 <span id="usernameMessage"></span>
             </div>
 
