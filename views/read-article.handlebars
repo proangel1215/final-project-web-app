@@ -41,8 +41,8 @@
           <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
           {{this.username}} posted on {{this.postTime}}:<br>{{this.content}}<br>
         </div>
-        <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-        <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
+        <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes <span>{{this.upvotes}}</span></button>
+        <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes <span>{{this.downvotes}}</span></button>
 
         {{#if this.children}}
         <button onclick="ShowNestedComments({{this.id}})">Show/Hide replies</button>
@@ -52,8 +52,8 @@
             <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
             {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
           </div>
-          <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-          <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
+          <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes <span>{{this.upvotes}}</span></button>
+          <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes <span>{{this.downvotes}}</span></button>
           {{#if this.children}}
           <button onclick="ShowNestedNestedComments({{this.id}})">Show/Hide replies</button>
           <div id="level3Comments{{this.id}}" style="display: none">
@@ -62,8 +62,8 @@
               <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
               {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
             </div>
-            <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-            <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button><br>
+            <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes <span>{{this.upvotes}}</span></button>
+            <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes <span>{{this.downvotes}}</span></button><br>
             {{/each}}
           </div>
           {{!-- {{#if user}} --}}
@@ -168,7 +168,18 @@
   }
 
   function addUpvote(commentID) {
-    document.getElementById(`upvote${commentID}`).disabled = true;
+    const upvoteButton = document.getElementById(`upvote${commentID}`);
+
+    if (upvoteButton.disabled == false) {
+      upvoteButton.disabled = true;
+    } else {
+        upvoteButton.disabled = false;
+    }
+    
+//    if (upvoteButton.disabled == true) {
+//      upvoteButton.disabled = false;
+//    }
+//    const clickedUpvote = document.getElementById(`upvote${commentID}`).disabled = true;
   }
 
   function addDownvote(commentID) {
