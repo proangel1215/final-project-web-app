@@ -2,22 +2,35 @@
 <p>{{message}}</p>
 {{/if}}
 
-<h1>Login</h1>
+<h1 id="loginHeader">Login</h1>
 
-<form action="./login" method="POST">
-    <fieldset>
+
+<div id="loginFormDiv">
+<form action="./login" method="POST" id="loginForm">
+
+    <div id="loginInputsDiv">
         <div>
-            <label for="usernameID">Username:</label>
-            <input type="text" id="usernameID" name="username">
+            <label for="usernameID" id="usernameLabel">Username:</label>
+            <input type="text" id="usernameID" class="loginInputs" name="username" size="30">
+        </div>
+        <br>
+
+        <div>
+            <label for="passwordID" id="passwordLabel">Password:</label>
+            <input type="password" id="passwordID" class="loginInputs" name="password" size="30">
+        </div>
+    </div>
+    <br>
+
+    <div id="loginButtonsDiv">
+        <div>
+            <button type="submit" class="loginButtons">Log in</button>
         </div>
 
         <div>
-            <label>Password:</label>
-            <input type="password" id="passwordID" name="password">
+            <button type="button" onclick="location.href='./create-account'" class="loginButtons">Create an account</button>
         </div>
+    </div>
 
-        <div>
-            <button type="submit">Log in</button>
-        </div>
-    </fieldset>
 </form>
+</div>

@@ -93,3 +93,21 @@ div > a {
     display: flex;
     padding: 10px;
 }
+
+#loginForm {
+    display: table;
+    margin: auto;
+}
+
+#loginForm > div {
+    display: table-row;
+}
+
+#loginInputsDiv label {
+    display: table-cell;
+}
+
+.loginButtons {
+    margin: 10px 0px 10px 0px;
+}
+
