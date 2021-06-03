@@ -5,31 +5,34 @@
 <h1>Newest articles for you:</h1>
 {{/if}}
 
-
-<p class="sort">Sort by: </p> 
-<button type="button" class="sort" id="title" onclick="getSort(this.id)">Title</button>
-<button type="button" class="sort" id="username" onclick="getSort(this.id)">Author</button>
-<button type="button" class="sort" id="postTime" onclick="getSort(this.id)">Oldest</button>
-<button type="button" class="sort" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
-
-
-<div class="articleContainer">
-{{#if articles}}
-    <table>
-    <tr>
-        <td>Title</td>
-        <td>Author</td>
-        <td>Posted on</td>
-    </tr>
-    {{#each articles}}
+<div class="sortAndArticlesContainer">
+    <div class="sortButtonContainer">
+        <p class="sort">Sort by: </p> 
+        <button type="button" class="sort" id="title" onclick="getSort(this.id)">Title</button>
+        <button type="button" class="sort" id="username" onclick="getSort(this.id)">Author</button>
+        <button type="button" class="sort" id="postTime" onclick="getSort(this.id)">Oldest</button>
+        <button type="button" class="sort" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
+    </div>
+    <br>
+    
+    <div class="articleContainer">
+    {{#if articles}}
+        <table class="articlesTable">
         <tr>
-        <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
-        <td>{{this.username}}</td>
-        <td>{{this.postTime}}</td>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Posted on</td>
         </tr>
-    {{/each}}
-{{/if}}
-</table>
+        {{#each articles}}
+            <tr>
+            <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
+            <td>{{this.username}}</td>
+            <td>{{this.postTime}}</td>
+            </tr>
+        {{/each}}
+    {{/if}}
+    </table>
+    </div>
 </div>
 
 <script type="text/javascript" src="sort.js"></script>
