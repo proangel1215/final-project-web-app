@@ -54,8 +54,18 @@
             <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
             {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
           </div>
-          <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-          <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
+          <form action="./giveupvote" method="POST">
+            <input type="hidden" id="comment" name="comment" value="{{this.id}}">
+            <input type="hidden" id="userid" name="userid" value="{{../../user.id}}">
+            <input type="hidden" id="articleid" name="articleid" value="{{../../article.id}}">
+            <input type = "submit" id="upvote{{this.id}}" value="Upvotes {{this.upvotes}}">
+          </form>
+          <form action="./givedownvote" method="POST">
+            <input type="hidden" id="comment" name="comment" value="{{this.id}}">
+            <input type="hidden" id="userid" name="userid" value="{{../../user.id}}">
+            <input type="hidden" id="articleid" name="articleid" value="{{../../article.id}}">
+            <input type = "submit" id="downvote{{this.id}}" value="Downvotes {{this.downvotes}}">
+          </form>
           {{#if this.children}}
           <button onclick="ShowNestedNestedComments({{this.id}})">Show/Hide replies</button>
           <div id="level3Comments{{this.id}}" style="display: none">
@@ -64,8 +74,18 @@
               <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
               {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
             </div>
-            <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-            <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button><br>
+            <form action="./giveupvote" method="POST">
+              <input type="hidden" id="comment" name="comment" value="{{this.id}}">
+              <input type="hidden" id="userid" name="userid" value="{{../../../user.id}}">
+              <input type="hidden" id="articleid" name="articleid" value="{{../../../article.id}}">
+              <input type = "submit" id="upvote{{this.id}}" value="Upvotes {{this.upvotes}}">
+            </form>
+            <form action="./givedownvote" method="POST">
+              <input type="hidden" id="comment" name="comment" value="{{this.id}}">
+              <input type="hidden" id="userid" name="userid" value="{{../../../user.id}}">
+              <input type="hidden" id="articleid" name="articleid" value="{{../../../article.id}}">
+              <input type = "submit" id="downvote{{this.id}}" value="Downvotes {{this.downvotes}}">
+            </form>
             {{/each}}
           </div>
           {{!-- {{#if user}} --}}
