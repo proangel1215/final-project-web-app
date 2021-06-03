@@ -19,6 +19,7 @@
   </div>
 
   <div id="commentContainer">
+    <input type = "hidden" id = "votedComments" value = {{votedComments}} >
     <br>
     {{#if comments}}
     <button onclick="ShowHideComments()">Click to show / hide comments</button>
@@ -175,6 +176,20 @@
   function addDownvote(commentID) {
     document.getElementById(`downvote${commentID}`).disabled = true;
   }
+
+  function disableIfVoted(disableVotes) {
+    for (let i = 0; i < disableVotes.length; i++) {
+      var disableCommentId = disableVotes[i];
+      var convertedID = parseInt(disableCommentId);
+      if (Number.isInteger(convertedID)) {
+        document.getElementById(`upvote${convertedID}`).disabled = true;
+        document.getElementById(`downvote${convertedID}`).disabled = true;
+      }
+    }
+  }
+
+  var disableVotes = document.getElementById("votedComments").value;
+  window.onload = disableIfVoted(disableVotes);
 
 </script>
 
