@@ -152,6 +152,7 @@ router.post("/edit-article", multer.upload.single("articleImage"), verifyAuthent
 router.get('/read-article', async function (req, res) {
 
     const articleID = req.query.articleID;
+    let votedComments = new Array();
     //req.params = articleID;
     //console.log(articleID);
     const article = await appDao.retrieveArticleById(articleID); 
@@ -160,6 +161,7 @@ router.get('/read-article', async function (req, res) {
 
     // Initialise user so we can check if userID = authorID: if so display edit article button
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
+    //console.log(user.id);
     res.locals.user = user; 
 
     if (user != undefined) {
@@ -170,6 +172,7 @@ router.get('/read-article', async function (req, res) {
     
     //console.log(article.imageSource)
     const comments = await appDao.retrieveCommentsByArticleId(articleID); 
+    //console.log(comments[0].id);
     var newcomments = null;
     if (comments.length != 0) {
         var usersArray = new Array(); 
@@ -197,9 +200,23 @@ router.get('/read-article', async function (req, res) {
             };
 
         newcomments = unflatten(comments);
-        //console.log(newcomments);
+        
+        if (user) {
+            for (let i = 0; i < comments.length; i++) {
+                    const commentID = comments[i].id;
+                    const voter = await appDao.getVoterIdByCommentId(commentID);
+                    if (voter != null || undefined) {
+                        if (user.id == voter.voterID) {
+                            votedComments.push(commentID);
+                        }
+                    }
+                    
+            }
+        }
+        
     }
 
+    res.locals.votedComments = votedComments;
     res.locals.comments = newcomments;
     res.render("read-article");
   });

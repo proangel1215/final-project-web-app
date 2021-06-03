@@ -244,6 +244,12 @@ async function addDownvoteByCommentId(id, userid) {
     return await db.run(SQL`UPDATE comments SET downvotes = downvotes + 1 WHERE id = ${id}`);
 };
 
+async function getVoterIdByCommentId(id) {
+    const db = await dbPromise;
+    voterID = await db.get(SQL`SELECT voterID FROM votes WHERE commentID = ${id}`);
+    return voterID;
+};
+
 module.exports = {
     retrieveAllArticles,
     retrieveArticlesBySort,
@@ -267,6 +273,7 @@ module.exports = {
     editArticle,
     retrieveAllUsers,
     updatePassword,
-    editAuthorOfArticles, 
+    editAuthorOfArticles,
+    getVoterIdByCommentId,
     retrieveAvatars
 };
