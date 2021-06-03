@@ -265,6 +265,7 @@ router.post("/edit-account", verifyAuthenticated, async function(req, res) {
         var imageSource = user.imageSource;
     }
     
+    await appDao.editAuthorOfArticles(username, user.id);
     await appDao.editUser(user.id, fname, lname, username, dob, description, imageSource);
     res.redirect("account-details");
 });
