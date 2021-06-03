@@ -9,8 +9,8 @@ const dbPromise = require("./database.js");
     const db = await dbPromise;
 
     const user = await db.get(SQL`
-        select * from users
-        where username = ${username} and password = ${password}`);
+        SELECT * FROM users
+        WHERE username = ${username} AND password = ${password}`);
 
     return user;
 }
@@ -23,8 +23,8 @@ const dbPromise = require("./database.js");
     const db = await dbPromise;
 
     const user = await db.get(SQL`
-        select * from users
-        where authToken = ${authToken}`);
+        SELECT * FROM users
+        WHERE authToken = ${authToken}`);
 
     return user;
 }
@@ -36,14 +36,14 @@ const dbPromise = require("./database.js");
     const db = await dbPromise;
 
     await db.run(SQL`
-        update users
-        set authToken = ${user.authToken}
-        where id = ${user.id}`);
+        UPDATE users
+        SET authToken = ${user.authToken}
+        WHERE id = ${user.id}`);
 }
 
 async function retrieveHashByUsername(username) {
     const db = await dbPromise;
-    return await db.get(SQL`select password from users where username = ${username}`);
+    return await db.get(SQL`SELECT password FROM users WHERE username = ${username}`);
 }
 
 module.exports = {

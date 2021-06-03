@@ -51,6 +51,16 @@ router.post("/replyToComment", async function(req, res) {
     res.redirect(`/read-article?articleID=${articleID}`);
 });
 
+router.post("/replyToCommentsComment", async function(req, res) {
+    const content = req.body.replyToCommentsCommentInput; 
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken); 
+    const articleID = req.body.articleID;
+    const parentID = req.body.parentID;
+    const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: parentID}; 
+    await appDao.createComment(comment);
+    res.redirect(`/read-article?articleID=${articleID}`);
+});
+
 router.get("/create-article", verifyAuthenticated, async function(req, res) {
     res.render("create-article");
 });
@@ -138,7 +148,8 @@ router.get('/read-article', async function (req, res) {
 
     // Initialise user so we can check if userID = authorID: if so display edit article button
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    
+    res.locals.user = user; 
+
     if (user != undefined) {
         if (user.id == article.userID) {
             res.locals.author = true;
@@ -153,6 +164,7 @@ router.get('/read-article', async function (req, res) {
         for (let i = 0; i < comments.length; i++){
             usersArray[i] = await appDao.retrieveUserById(comments[i].commenterID);
             comments[i].username = usersArray[i].username;
+            comments[i].imageSource = usersArray[i].imageSource;
         }
 
         const unflatten = data => {
@@ -226,6 +238,7 @@ router.get("/usernames", async function(req, res) {
 
 
 router.get("/account-details", verifyAuthenticated, async function(req, res) {
+    res.locals.message = req.query.message;
     res.render("account-details");
 });
 
@@ -274,5 +287,29 @@ router.post("/deleteuser", async function(req, res) {
     await appDao.deleteUserById(user.id);
     res.redirect("./login?message=Successfully deleted account!");
 });
+
+
+router.get("/change-password", function(req, res) {
+    res.render("change-password");
+});
+
+
+router.post("/change-password", async function(req, res) {
+    const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
+
+    const plaintextPassword = req.body.newPassword;
+
+    // Hashes and salts the provided password all in one go
+    const saltRounds = 10;
+    const hash = await bcrypt.hash(plaintextPassword, saltRounds);
+
+    user.password = hash;
+
+    await appDao.updatePassword(user);
+
+    res.locals.user = user;
+    res.redirect("/account-details?message=Password changed!");    
+});
+
 
 module.exports = router;
