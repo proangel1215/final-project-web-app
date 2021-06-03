@@ -45,38 +45,49 @@
         </tr>
     </table>
 
-    <form action="./edit-account" method="GET">
-        <div class="edit">
-            <input type="submit" value="Edit account">
-        </div>
-    </form>
+    <div id="buttons">
 
-    <div class="delete">
-        <form action="./deleteuser" method="POST">
-            <input type="submit" name="deleteButton"
-                onclick="return confirm('Are you sure you want to delete your account?')" value="Delete acccount">
-        </form>
+        <div id="edit">
+            <form action="./edit-account" method="GET">
+                <input type="submit" value="Edit account">
+            </form>
+        </div>
+
+        <div id="delete">
+            <form action="./deleteuser" method="POST">
+                <input type="submit" name="deleteButton"
+                    onclick="return confirm('Are you sure you want to delete your account?')" value="Delete account">
+            </form>
+        </div>
+
     </div>
+
 </div>
 
 <style>
-
     table, th, tr, td {
-        
+
         text-align: left;
         font-size: large;
-        border-radius: 10px;
+        border-radius: 20px;
+        padding: 10px;
+        table-layout: fixed;
+        width: 100%;
+        border-spacing: 20px;
+    }
+
+    th, tr {
+        background-color: rgb(212, 212, 212);
         padding: 10px;
     }
 
-    table {
-        background-color: rgb(211, 211, 211);
-        
+    #buttons {
+        display: flex;
+        justify-content: center;
     }
 
-    th, td {
-        background-color: white;
-        padding: 10px;
+    #delete, #edit {
+        padding: 20px;
     }
 
 </style>
