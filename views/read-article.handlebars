@@ -23,20 +23,26 @@
     <div id="level1Comments"> 
         <h2>Comments: </h2>
           {{#each comments}}
-          <img src="/avatars/{{this.imageSource}}" id="avatar">
-          {{this.username}}: {{this.content}}
+          <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
+          {{this.username}} posted on {{this.postTime}}:<br> {{this.content}} 
+          <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
+          <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
             {{#if this.children}}
               <button onclick="ShowNestedComments({{this.id}})">Show/Hide replies</button>
               <div id="level2Comments{{this.id}}" style="display: none">
               {{#each this.children}}
-                  <img src="/avatars/{{this.imageSource}}" id="avatar">
-                  {{this.username}}: {{this.content}}    
+                  <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
+                  {{this.username}} posted on {{this.postTime}}:<br> {{this.content}} 
+                  <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
+                  <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>    
                   {{#if this.children}}
                   <button onclick="ShowNestedNestedComments({{this.id}})">Show/Hide replies</button>
                   <div id="level3Comments{{this.id}}" style="display: none">
                     {{#each this.children}}
-                    <img src="/avatars/{{this.imageSource}}" id="avatar">
-                    {{this.username}}: {{this.content}} <br>
+                    <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
+                    {{this.username}} posted on: {{this.postTime}}:<br> {{this.content}}
+                    <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
+                    <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button><br>
                     {{/each}}
                   </div>
               {{!-- {{#if user}} --}}
@@ -133,11 +139,19 @@ var x = document.getElementById(`level3Comments${id}`);
   }
 }
 
+function addUpvote(commentID) {
+  document.getElementById(`upvote${commentID}`).disabled = true;
+}
+
+function addDownvote(commentID) {
+  document.getElementById(`downvote${commentID}`).disabled = true; 
+}
+
 </script>
 
 <style>
 #avatar {
-  transform: scale(0.5, 0.5); 
+  transform: scale(1); 
 }
 
 #commentBox div {
@@ -145,15 +159,15 @@ var x = document.getElementById(`level3Comments${id}`);
 }
 
 #level1Comments > div {
-  margin-left: 20px;
+  margin-left: 20px; 
 }
 
 #level1Comments > div > div {
-  margin-left: 20px;
+  margin-left: 20px; 
 }
 
 #commentBox button {
-  margin: 8px
+  margin: 8px; 
 }
 
 </style>
