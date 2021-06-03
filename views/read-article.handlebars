@@ -23,24 +23,31 @@
     <div id="level1Comments"> 
         <h2>Comments: </h2>
           {{#each comments}}
-          <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
-          {{this.username}} posted on {{this.postTime}}:<br> {{this.content}} 
-          <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-          <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
+            <div class="eachComment">
+            <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
+            {{this.username}} posted on {{this.postTime}}:<br>{{this.content}}<br>
+            </div>
+            <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
+            <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
+          
             {{#if this.children}}
               <button onclick="ShowNestedComments({{this.id}})">Show/Hide replies</button>
               <div id="level2Comments{{this.id}}" style="display: none">
               {{#each this.children}}
+                <div class="eachComment">
                   <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
-                  {{this.username}} posted on {{this.postTime}}:<br> {{this.content}} 
+                  {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
+                </div>
                   <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
                   <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>    
                   {{#if this.children}}
                   <button onclick="ShowNestedNestedComments({{this.id}})">Show/Hide replies</button>
                   <div id="level3Comments{{this.id}}" style="display: none">
                     {{#each this.children}}
+                  <div class="eachComment">
                     <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
-                    {{this.username}} posted on: {{this.postTime}}:<br> {{this.content}}
+                    {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
+                    </div>
                     <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
                     <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button><br>
                     {{/each}}
@@ -168,6 +175,11 @@ function addDownvote(commentID) {
 
 #commentBox button {
   margin: 8px; 
+}
+
+.eachComment {
+  display: flex;
+  padding: 10px;
 }
 
 </style>
