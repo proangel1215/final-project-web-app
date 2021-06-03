@@ -29,6 +29,7 @@ div > a {
     grid-template-columns: 2fr 6fr 2fr;
     grid-template-rows: auto;
     grid-template-areas: ". c .";
+    margin-top: 20px;
 }
 
 #content {
@@ -56,6 +57,9 @@ div > a {
     cursor: pointer;
     transition-property: background-color;
     transition-duration: 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .articleCard:hover {

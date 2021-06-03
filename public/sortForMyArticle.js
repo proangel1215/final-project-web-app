@@ -27,9 +27,13 @@ async function getSort(sortBy) {
             }
         };
 
-        articleCardDiv.innerHTML = `<h3>${articlesJsonObject[i].title}</h3> 
-                                    <p>Posted by <strong>${articlesJsonObject[i].username}</strong> on ${articlesJsonObject[i].postTime} </p>
-                                    <img src="/avatars/${userImage}">`;
+        articleCardDiv.innerHTML = `<div class="articleSummary">
+                                        <h3>${articlesJsonObject[i].title}</h3> 
+                                        <p>Posted by <strong>${articlesJsonObject[i].username}</strong> on ${articlesJsonObject[i].postTime} </p>
+                                    </div>
+                                    <div class="authorAvatars">
+                                        <img src="/avatars/${userImage}">
+                                    </div>`;
 
         articleCardDiv.addEventListener("click", function() {
             location = `./read-article?articleID=${articleCardDiv.id}`;
