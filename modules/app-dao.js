@@ -73,6 +73,16 @@ async function editUser(id, fname, lname, username, dob, description, imageSourc
     return await db.run(SQL`UPDATE users SET fname = ${fname}, lname = ${lname}, username = ${username}, dob = ${dob}, description = ${description}, imageSource = ${imageSource} WHERE id = ${id};`);
 };
 
+//Updates the users password in database using input of user object
+
+async function updatePassword(user) {
+    const db = await dbPromise;
+    return await db.run(SQL`
+    UPDATE users
+    SET password = ${user.password}
+    WHERE id = ${user.id}`);
+}
+
     //ARTICLE FUNCTIONS//
 //Gets all articles in order by post time
 
@@ -241,5 +251,6 @@ module.exports = {
     addDownvoteByCommentId,
     editUser,
     editArticle,
-    retrieveAllUsers
+    retrieveAllUsers,
+    updatePassword
 };
