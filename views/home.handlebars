@@ -20,24 +20,11 @@
     
     <div class="articleContainer">
         {{#if articles}}
-            {{!-- <table class="articlesTable">
-            <tr>
-                <td>Title</td>
-                <td>Author</td>
-                <td>Posted on</td>
-            </tr>
-            {{#each articles}}
-                <tr>
-                <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
-                <td>{{this.username}}</td>
-                <td>{{this.postTime}}</td>
-                </tr>
-            {{/each}} --}}
             {{#each articles}}
                 <div class="articleCard" id="{{this.id}}">
                     <h3>{{this.title}}</h3>
                     <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
-                    
+
                 </div>
             {{/each}}
         {{/if}}
