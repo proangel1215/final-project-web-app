@@ -50,6 +50,6 @@ div > a {
 .articleCard {
     border: 1px black solid;
     border-radius: 30px;
-    padding: 3px 10px 3px 10px;
-    margin: 20px;
+    padding: 1px 20px 1px 20px;
+    margin: 30px;
 }

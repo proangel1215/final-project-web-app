@@ -20,7 +20,7 @@
         <br>
 
         <div class="articleContainer">
-            <table class="articlesTable">
+            {{!-- <table class="articlesTable">
                 <tr>
                     <td>Title</td>
                     <td>Author</td>
@@ -31,11 +31,16 @@
                     <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
                     <td>{{this.username}}</td>
                     <td>{{this.postTime}}</td>
-                    {{!-- <td><button type="button" class="editArticleButton"
-                            onclick="location.href='./edit-article?articleID={{this.id}}'">Edit article</button></td> --}}
                 </tr>
                 {{/each}}
-            </table>
+            </table> --}}
+
+            {{#each articles}}
+                <div class="articleCard" id="{{this.id}}">
+                    <h3>{{this.title}}</h3>
+                    <p>Posted by {{this.username}} on {{this.postTime}}</p>
+                </div>
+            {{/each}}
 
             {{else}}
             <h2>You haven't written any articles!</h2>
