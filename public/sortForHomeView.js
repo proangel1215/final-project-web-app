@@ -14,7 +14,8 @@ async function getSort(sortBy) {
         const articleCardDiv = document.createElement("div");
         articleCardDiv.id = `${articleJsonObject[i].id}`;
         articleCardDiv.setAttribute("class", "articleCard");
-        articleCardDiv.innerHTML = `<h3>${articleJsonObject[i].title}</h3> <p>Posted by <strong>${articleJsonObject[i].username}</strong> on ${articleJsonObject[i].postTime} </p>`;
+        articleCardDiv.innerHTML = `<h3>${articleJsonObject[i].title}</h3> 
+                                    <p>Posted by <strong>${articleJsonObject[i].username}</strong> on ${articleJsonObject[i].postTime} </p>`;
 
         articleCardDiv.addEventListener("click", function() {
             location = `./read-article?articleID=${articleCardDiv.id}`;

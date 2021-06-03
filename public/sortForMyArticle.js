@@ -8,7 +8,6 @@ async function getSort(sortBy) {
     const articleContainer = document.querySelector(".articleContainer"); 
     articleContainer.innerHTML = "";
 
-
 // iterate through articles 
     for (let i = 0; i < articleJsonObject.length; i++){
 
