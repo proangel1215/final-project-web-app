@@ -239,7 +239,7 @@ async function addDownvoteByCommentId(id, userid) {
 
 async function getVoterIdByCommentId(id) {
     const db = await dbPromise;
-    voterID = await db.get(SQL`SELECT voterID FROM votes WHERE commentID = ${id}`);
+    const voterID = await db.all(SQL`SELECT voterID FROM votes WHERE commentID = ${id}`);
     return voterID;
 };
 

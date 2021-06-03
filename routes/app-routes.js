@@ -194,8 +194,11 @@ router.get('/read-article', async function (req, res) {
                     const commentID = comments[i].id;
                     const voter = await appDao.getVoterIdByCommentId(commentID);
                     if (voter != null || undefined) {
-                        if (user.id == voter.voterID) {
-                            votedComments.push(commentID);
+                        for (let a = 0; a < voter.length; a++) {
+                            const check = voter[a];
+                            if (user.id == check.voterID) {
+                                votedComments.push(commentID);
+                            }
                         }
                     }
                     
@@ -208,6 +211,26 @@ router.get('/read-article', async function (req, res) {
     res.locals.comments = newcomments;
     res.render("read-article");
   });
+
+router.post("/giveupvote", verifyAuthenticated, async function (req, res) {
+    const commentID = req.body.comment;
+    const userid = req.body.userid;
+    const articleid = req.body.articleid;
+
+    await appDao.addUpvoteByCommentId(commentID, userid);
+
+    res.redirect(`/read-article?articleID=${articleid}`);
+});
+
+router.post("/givedownvote", verifyAuthenticated, async function (req, res) {
+    const commentID = req.body.comment;
+    const userid = req.body.userid;
+    const articleid = req.body.articleid;
+
+    await appDao.addDownvoteByCommentId(commentID, userid);
+
+    res.redirect(`/read-article?articleID=${articleid}`);
+});
 
 router.post("/delete-article", verifyAuthenticated, async function (req, res) {
 
