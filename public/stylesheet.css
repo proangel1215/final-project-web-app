@@ -94,22 +94,13 @@ div > a {
     padding: 10px;
 }
 
-#loginFormDiv {
-    position: relative;
-    top: 5%;
-}
-
-#loginForm, #editAccountForm, #createAccountForm {
+.form {
     display: table;
     margin: auto;
 }
 
-#loginForm > div, #editAccountForm > div, #createAccountForm > div {
+.form > div {
     display: table-row;
-}
-
-#loginInputsDiv label {
-    display: table-cell;
 }
 
 .loginButtons {
@@ -120,11 +111,11 @@ div > a {
     margin-top: 10px;
 }
 
-.homeGreeting, .header, #noArticles {
+.homeGreeting, .header, #noArticles, .passwordNotMatching {
     text-align: center;
 }
 
-#editAccountInputsDiv label, #createAccountInputsDiv label {
+#loginInputsDiv label, #editAccountInputsDiv label, #createAccountInputsDiv label, #changePasswordInputsDiv label {
     display: table-cell;
     padding-top: 15px;
 }
