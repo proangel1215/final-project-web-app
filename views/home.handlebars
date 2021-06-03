@@ -2,11 +2,12 @@
 <script type="text/javascript" src="addLinksToArticleCards.js"></script>
 
 {{#if user}}
-<h1>Hi {{user.fname}}!</h1>
-<h2>Newest articles for you:</h2>
+<h1 class="homeGreeting">Hi {{user.fname}}!</h1>
+<h2 class="homeGreeting">Newest articles for you:</h2>
 {{else}}
-<h1>Newest articles for you:</h1>
+<h1 class="homeGreeting">Newest articles for you:</h1>
 {{/if}}
+<br>
 
 <div class="sortAndArticlesContainer">
     <div class="sortButtonContainer">
@@ -16,7 +17,6 @@
         <button type="button" class="sortButtons" id="postTime" onclick="getSort(this.id)">Oldest</button>
         <button type="button" class="sortButtons" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
     </div>
-    {{!-- <br> --}}
     
     <div class="articleContainer">
         {{#if articles}}
