@@ -55,7 +55,7 @@ div > a {
     margin: 30px;
     cursor: pointer;
     transition-property: background-color;
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
 }
 
 .articleCard:hover {

@@ -11,20 +11,16 @@ async function getSort(sortBy) {
 
 // iterate through articles 
     for (let i = 0; i < articleJsonObject.length; i++){
-        // const articleRow = document.createElement("tr"); 
-        // articleTable.appendChild(articleRow); 
-        // const articleTitle = document.createElement("td"); 
-        // articleTitle.innerHTML = "<a href='./read-article?articleID=" + articleJsonObject[i].id + "'>" + articleJsonObject[i].title + "</a>"; 
-        // const articleAuthor = document.createElement("td");
-        // articleAuthor.innerHTML = articleJsonObject[i].username; 
-        // const articleTime = document.createElement("td"); 
-        // articleTime.innerHTML = articleJsonObject[i].postTime;
-        // articleRow.appendChild(articleTitle);articleRow.appendChild(articleAuthor);articleRow.appendChild(articleTime); 
 
         const articleCardDiv = document.createElement("div");
         articleCardDiv.id = `${articleJsonObject[i].id}`;
         articleCardDiv.setAttribute("class", "articleCard");
         articleCardDiv.innerHTML = `<h3>${articleJsonObject[i].title}</h3> <p>Posted by <strong>${articleJsonObject[i].username}</strong> on ${articleJsonObject[i].postTime} </p>`;
+
+        articleCardDiv.addEventListener("click", function() {
+            location = `./read-article?articleID=${articleCardDiv.id}`;
+        });
+
         articleContainer.appendChild(articleCardDiv);
     }
 
