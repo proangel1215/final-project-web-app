@@ -94,11 +94,6 @@ div > a {
     padding: 10px;
 }
 
-#loginFormDiv {
-    position: relative;
-    top: 2%;
-}
-
 .form {
     display: table;
     margin: auto;
