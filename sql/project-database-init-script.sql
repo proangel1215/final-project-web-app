@@ -66,7 +66,7 @@ INSERT INTO users VALUES (4,'Rachel', 'Yang', 'rachel', '2001-05-11', '$2b$10$B/
 INSERT INTO users VALUES (5,'Vita', 'Tsai', 'vita', '1990-11-11', '$2b$10$AQKuMYmocFmo4alOM/Xdke.pKYyKdt15dvI/U5dAKlG61sLSFgEqW', 'I love science and teaching 718', 'fox-icon.png', 'null', 0);
 INSERT INTO users VALUES (6,'Tyne', 'Crow', 'tyne', '1990-11-11', '$2b$10$b2q9HGDoCmaar6fh9Nj0.uNvolNAU8OnxcDJgWx9WyA3/yISbEszW', 'Loving photography and teaching 719', 'parrot-icon.png', 'null', 0);
 INSERT INTO users VALUES (7,'Andrew', 'Meads', 'andrew', '1990-11-11', '$2b$10$EaZrj1oDd4ezGCB1DJZ4AOlJSdFsUlRJ72CE62jWM9bdQDWzvAhpq', 'Loving singing and teaching online', 'alpaca-icon.png', 'null', 0);
-INSERT INTO users VALUES (8,'Yu Cheng', 'Tu', 'yucheng', '1990-11-11', '$2b$10$L919kSukv/2SCcqnj0S.U.Fnt2ddhRG77ti5AO2oCorG5d6ExO4C.', 'I love to assign extremely diffucult javascript test questions', 'octopus-icon.png', 'null', 0);
+INSERT INTO users VALUES (8,'Yu Cheng', 'Tu', 'yucheng', '1990-11-11', '$2b$10$L919kSukv/2SCcqnj0S.U.Fnt2ddhRG77ti5AO2oCorG5d6ExO4C.', 'I love extremely diffucult javascript <3', 'octopus-icon.png', 'null', 0);
 
 INSERT INTO articles VALUES (1, 'Review: Avatar the Last Airbender is still amazing', '2021-01-19 03:14:07','<p><span style="margin: 0px; padding: 0px;">Despite being 15 years old, Avatar the Last Airbender (ATLA) is still an entertaining, nicely paced and an awesome TV series.</span></p>
 <p><span style="margin: 0px; padding: 0px;">ATLA starts off with Katara and her brother, Sokka, two members of the Southern Water Tribe, fishing. When Sokka makes a sexist remark and angers his sister into waterbending, they discover a boy trapped in a glacier.</span></p>
