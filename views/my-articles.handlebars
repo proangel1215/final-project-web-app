@@ -7,7 +7,8 @@
     <p>{{message}}</p>
     {{/if}}
 
-    <h1>My Articles</h1>
+    <h1 class="header">My Articles</h1>
+    <br>
 
     {{#if articles}}
 
@@ -35,7 +36,7 @@
             {{/each}}
 
             {{else}}
-            <h2>You haven't written any articles!</h2>
+            <h2 id="noArticles">You haven't written any articles!</h2>
         </div>
         {{/if}}
     </div>

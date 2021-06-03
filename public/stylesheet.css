@@ -99,12 +99,12 @@ div > a {
     top: 5%;
 }
 
-#loginForm, #editAccountForm {
+#loginForm, #editAccountForm, #createAccountForm {
     display: table;
     margin: auto;
 }
 
-#loginForm > div, #editAccountForm > div {
+#loginForm > div, #editAccountForm > div, #createAccountForm > div {
     display: table-row;
 }
 
@@ -120,11 +120,11 @@ div > a {
     margin-top: 10px;
 }
 
-.homeGreeting, #loginHeader {
+.homeGreeting, .header, #noArticles {
     text-align: center;
 }
 
-#editAccountInputsDiv label {
+#editAccountInputsDiv label, #createAccountInputsDiv label {
     display: table-cell;
     padding-top: 15px;
 }
@@ -133,7 +133,7 @@ div > a {
     padding-top: 5px;
 }
 
-#editAvatar > img {
+#editAvatar > img, #chooseAvatar > img {
     margin: 0px 20px 0px 2px;
     /* margin-right: 20px; */
 }
