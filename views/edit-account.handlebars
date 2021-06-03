@@ -2,68 +2,68 @@
 
 <h1>Edit account:</h1>
 
-    <div class="editDetails">
-        <form action="./edit-account" method="POST">
-            <div class="field">
-                <label for="txtfName">First name:</label>
-                <input type="text" name="fname" id="txtfName" value="{{user.fname}}" required>
-            </div>
-
-            <div class="field">
-                <label for="txtlName">Last name:</label>
-                <input type="text" name="lname" id="txtlName" value="{{user.lname}}" required>
-            </div>
-
-            <div class="field">
-                <label for="dob">Date of birth:</label>
-                <input type="date" name="dob" id="dob" value="{{user.dob}}" required>
-            </div>
-            
-            <div class="field" id="usernameDiv">
-                <label for="txtUsername">Username:</label>
-                <input type="text" name="username" id="txtUsername" value="{{user.username}}" required>
-                <span id="usernameMessage"></span>
-            </div>
-
-            <div class="field">
-                <label for="txtdesc">Description:</label>
-                <textarea id="txtdesc" name="description" rows="4" cols="50" maxlength="300">{{user.description}}</textarea>
-            </div>
-
-            Pick your avatar!
-
-            <div class="field">
-                <input type="radio" id="bear" name="avatar" value="bear-icon.png">
-                <img src="avatars\bear-icon.png">
-                <input type="radio" id="dino" name="avatar" value="dino-icon.png">
-                <img src="avatars\dino-icon.png">
-                <input type="radio" id="fox" name="avatar" value="fox-icon.png">
-                <img src="avatars\fox-icon.png">
-                <input type="radio" id="sloth" name="avatar" value="sloth-icon.png">
-                <img src="avatars\sloth-icon.png">
-                <input type="radio" id="alpaca" name="avatar" value="alpaca-icon.png">
-                <img src="avatars\alpaca-icon.png">
-                <input type="radio" id="dragon" name="avatar" value="dragon-icon.png">
-                <img src="avatars\dragon-icon.png">
-                <input type="radio" id="octopus" name="avatar" value="octopus-icon.png">
-                <img src="avatars\octopus-icon.png">
-                <input type="radio" id="snake" name="avatar" value="snake-icon.png">
-                <img src="avatars\snake-icon.png">
-                <input type="radio" id="parrot" name="avatar" value="parrot-icon.png">
-                <img src="avatars\parrot-icon.png">
-                <input type="radio" id="elephant" name="avatar" value="elephant-icon.png">
-                <img src="avatars\elephant-icon.png">
-            </div>
-
-            
-
-            <div class="field justify-sb align-center">
-
-                <input type="submit" id="submitButton">
-            </div>
-        </form>
-
-        <div class="changePassword">
-             <input type="button" onclick="location.href='./change-password'" value="Change Password">
+<div class="editDetails">
+    <form action="./edit-account" method="POST">
+        <div class="field">
+            <label for="txtfName">First name:</label>
+            <input type="text" name="fname" id="txtfName" value="{{user.fname}}" required>
         </div>
+
+        <div class="field">
+            <label for="txtlName">Last name:</label>
+            <input type="text" name="lname" id="txtlName" value="{{user.lname}}" required>
+        </div>
+
+        <div class="field">
+            <label for="dob">Date of birth:</label>
+            <input type="date" name="dob" id="dob" value="{{user.dob}}" required>
+        </div>
+
+        <div class="field" id="usernameDiv">
+            <label for="txtUsername">Username:</label>
+            <input type="text" name="username" id="txtUsername" value="{{user.username}}" required>
+            <span id="usernameMessage"></span>
+        </div>
+
+        <div class="field">
+            <label for="txtdesc">Description:</label>
+            <textarea id="txtdesc" name="description" rows="4" cols="50" maxlength="300">{{user.description}}</textarea>
+        </div>
+
+        Pick your avatar!
+
+        <div class="field">
+            <input type="radio" id="bear" name="avatar" value="bear-icon.png">
+            <img src="avatars\bear-icon.png">
+            <input type="radio" id="dino" name="avatar" value="dino-icon.png">
+            <img src="avatars\dino-icon.png">
+            <input type="radio" id="fox" name="avatar" value="fox-icon.png">
+            <img src="avatars\fox-icon.png">
+            <input type="radio" id="sloth" name="avatar" value="sloth-icon.png">
+            <img src="avatars\sloth-icon.png">
+            <input type="radio" id="alpaca" name="avatar" value="alpaca-icon.png">
+            <img src="avatars\alpaca-icon.png">
+            <br>
+            <input type="radio" id="dragon" name="avatar" value="dragon-icon.png">
+            <img src="avatars\dragon-icon.png">
+            <input type="radio" id="octopus" name="avatar" value="octopus-icon.png">
+            <img src="avatars\octopus-icon.png">
+            <input type="radio" id="snake" name="avatar" value="snake-icon.png">
+            <img src="avatars\snake-icon.png">
+            <input type="radio" id="parrot" name="avatar" value="parrot-icon.png">
+            <img src="avatars\parrot-icon.png">
+            <input type="radio" id="elephant" name="avatar" value="elephant-icon.png">
+            <img src="avatars\elephant-icon.png">
+        </div>
+
+        <div class="field justify-sb align-center" id="submitButton">
+            <input type="submit" id="submitButton">
+        </div>
+
+    </form>
+
+    <div class="changePassword" id="changePasswordButton">
+        <input type="button" onclick="location.href='./change-password'" value="Change Password">
     </div>
+
+</div>

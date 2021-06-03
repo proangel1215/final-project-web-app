@@ -4,7 +4,7 @@
 }
 
 #header {
-    background-color: orange;
+    background-color: rgb(255, 184, 51);
     display: flex;
     justify-content: center;
 }
