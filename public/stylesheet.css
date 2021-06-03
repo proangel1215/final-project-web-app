@@ -5,6 +5,7 @@
 
 #header {
     background-color: orange;
+    font-size: 140%;
     display: flex;
     justify-content: center;
 }
