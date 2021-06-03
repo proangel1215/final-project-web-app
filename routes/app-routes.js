@@ -284,21 +284,16 @@ router.get("/change-password", function(req, res) {
 
 router.post("/change-password", async function(req, res) {
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    console.log(user);
 
     const plaintextPassword = req.body.newPassword;
-    console.log(plaintextPassword);
 
     // Hashes and salts the provided password all in one go
     const saltRounds = 10;
     const hash = await bcrypt.hash(plaintextPassword, saltRounds);
-    console.log("My hash: ", hash);
 
     user.password = hash;
-    console.log(user);
 
-    const message = await appDao.updatePassword(user);
-    console.log(message);
+    await appDao.updatePassword(user);
 
     res.locals.user = user;
     res.redirect("/account-details?message=Password changed!");    
