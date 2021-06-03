@@ -26,6 +26,13 @@ async function retrieveAllUsernames() {
     return await db.all(SQL`SELECT username FROM users`);
 };
 
+//Gets all avatars for all users
+
+async function retrieveAvatars() {
+    const db = await dbPromise;
+    return await db.all(SQL`SELECT id, imageSource FROM users`);
+}
+
 //Deletes a user account using an input of their id. The function deletes their articles first, then their comments and votes then finally deletes the 
 //user account. 
 
@@ -260,5 +267,6 @@ module.exports = {
     editArticle,
     retrieveAllUsers,
     updatePassword,
-    editAuthorOfArticles
+    editAuthorOfArticles, 
+    retrieveAvatars
 };

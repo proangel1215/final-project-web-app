@@ -248,6 +248,11 @@ router.get("/usernames", async function(req, res) {
     res.json(usernames);
 });
 
+router.get("/avatars", async function(req, res) {
+    const avatars = await appDao.retrieveAvatars();
+    res.json(avatars);
+});
+
 
 router.get("/account-details", verifyAuthenticated, async function(req, res) {
     res.locals.message = req.query.message;
