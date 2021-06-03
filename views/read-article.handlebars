@@ -1,185 +1,195 @@
 <div id="readArticleContainer">
 
-    <div id="articleView">
-        
-        <br>
-        {{#if author}}
-        <button type="button" class="editArticleButton" onclick="location.href='./edit-article?articleID={{article.id}}'">Edit article</button>
-        {{/if}}
+  <div id="articleView">
 
-        <h1>{{article.title}}</h1>
-        <p><i>Submitted by: {{article.username}}</i></p>
-        {{#if article.imageSource}}
-        <img src="./imagesResized/{{article.imageSource}}">
-        {{/if}}
-        <br>
-        {{{article.content}}}
-        
-    </div>
+    <br>
+    {{#if author}}
+    <button type="button" class="editArticleButton"
+      onclick="location.href='./edit-article?articleID={{article.id}}'">Edit article</button>
+    {{/if}}
+
+    <h1>{{article.title}}</h1>
+    <p><i>Submitted by: {{article.username}}</i></p>
+    {{#if article.imageSource}}
+    <img src="./imagesResized/{{article.imageSource}}">
+    {{/if}}
+    <br>
+    {{{article.content}}}
+
+  </div>
+
+  <div id="commentContainer">
     <br>
     {{#if comments}}
     <button onclick="ShowHideComments()">Click to show / hide comments</button>
     <div id="commentBox">
-    <div id="level1Comments"> 
+
+      <div id="level1Comments">
         <h2>Comments: </h2>
-          {{#each comments}}
-            <div class="eachComment">
+        {{#each comments}}
+        <div class="eachComment">
+          <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
+          {{this.username}} posted on {{this.postTime}}:<br>{{this.content}}<br>
+        </div>
+        <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
+        <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
+
+        {{#if this.children}}
+        <button onclick="ShowNestedComments({{this.id}})">Show/Hide replies</button>
+        <div id="level2Comments{{this.id}}" style="display: none">
+          {{#each this.children}}
+          <div class="eachComment">
             <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
-            {{this.username}} posted on {{this.postTime}}:<br>{{this.content}}<br>
+            {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
+          </div>
+          <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
+          <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
+          {{#if this.children}}
+          <button onclick="ShowNestedNestedComments({{this.id}})">Show/Hide replies</button>
+          <div id="level3Comments{{this.id}}" style="display: none">
+            {{#each this.children}}
+            <div class="eachComment">
+              <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
+              {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
             </div>
             <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-            <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>
-          
-            {{#if this.children}}
-              <button onclick="ShowNestedComments({{this.id}})">Show/Hide replies</button>
-              <div id="level2Comments{{this.id}}" style="display: none">
-              {{#each this.children}}
-                <div class="eachComment">
-                  <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
-                  {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
-                </div>
-                  <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-                  <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button>    
-                  {{#if this.children}}
-                  <button onclick="ShowNestedNestedComments({{this.id}})">Show/Hide replies</button>
-                  <div id="level3Comments{{this.id}}" style="display: none">
-                    {{#each this.children}}
-                  <div class="eachComment">
-                    <img src="/avatars-thumbnail/{{this.imageSource}}" id="avatar">
-                    {{this.username}} posted on {{this.postTime}}:<br> {{this.content}}<br>
-                    </div>
-                    <button id="upvote{{this.id}}" onclick="addUpvote({{this.id}})">Upvotes</button>
-                    <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button><br>
-                    {{/each}}
-                  </div>
-              {{!-- {{#if user}} --}}
-              <button onclick="level3CommentsBox({{this.id}})">Reply</button>
-              <div id="replyToCommentsComment{{this.id}}" style="display: none">
-                <form action="./replyToCommentsComment" method="POST">
-                <label for="replyToCommentsCommentInput">Your Comments:</label>
-                <br>
-                 <textarea id="replyToCommentsCommentInput" name="replyToCommentsCommentInput" rows="4" cols="50" maxlength="300" placeholder="Reply to a comment!"></textarea>
-                 <textarea style="display: none" id="articleID" name="articleID" row="0" cols="0">{{this.articleID}}</textarea>  
-                 <textarea style="display: none" id="parentID" name="parentID" row="0" cols="0">{{this.id}}</textarea>
-                 <input type="submit" value="Submit your comment!">
-                 </form>
-              </div>
-              {{/if}}
-              {{!-- {{/if}} --}}
-              {{/each}}
-              </div>
-            {{/if}}
-            {{!-- {{#if user}} --}}
-            <button onclick="level2CommentsBox({{this.id}})">Reply</button>
-              <div id="replyToComment{{this.id}}" style="display: none">
-                <form action="./replyToComment" method="POST">
-                <label for="replyToCommentInput">Your Comments:</label>
-                <br>
-                 <textarea id="replyToCommentInput" name="replyToCommentInput" rows="4" cols="50" maxlength="300" placeholder="Reply to a comment!"></textarea>
-                 <textarea style="display: none" id="articleID" name="articleID" row="0" cols="0">{{this.articleID}}</textarea>  
-                 <textarea style="display: none" id="parentID" name="parentID" row="0" cols="0">{{this.id}}</textarea>
-                 <input type="submit" value="Submit your comment!">
-                 </form>
-              </div>
-            {{!-- {{/if}} --}}
-              </div>
+            <button id="downvote{{this.id}}" onclick="addDownvote({{this.id}})">Downvotes</button><br>
             {{/each}}
+          </div>
+          {{!-- {{#if user}} --}}
+          <button onclick="level3CommentsBox({{this.id}})">Reply</button>
+          <div id="replyToCommentsComment{{this.id}}" style="display: none">
+            <form action="./replyToCommentsComment" method="POST">
+              <label for="replyToCommentsCommentInput">Your Comments:</label>
+              <br>
+              <textarea id="replyToCommentsCommentInput" name="replyToCommentsCommentInput" rows="4" cols="50"
+                maxlength="300" placeholder="Reply to a comment!"></textarea>
+              <textarea style="display: none" id="articleID" name="articleID" row="0"
+                cols="0">{{this.articleID}}</textarea>
+              <textarea style="display: none" id="parentID" name="parentID" row="0" cols="0">{{this.id}}</textarea>
+              <input type="submit" value="Submit your comment!">
+            </form>
+          </div>
+          {{/if}}
+          {{!-- {{/if}} --}}
+          {{/each}}
+        </div>
         {{/if}}
+        {{!-- {{#if user}} --}}
+        <button onclick="level2CommentsBox({{this.id}})">Reply</button>
+        <div id="replyToComment{{this.id}}" style="display: none">
+          <form action="./replyToComment" method="POST">
+            <label for="replyToCommentInput">Your Comments:</label>
+            <br>
+            <textarea id="replyToCommentInput" name="replyToCommentInput" rows="4" cols="50" maxlength="300"
+              placeholder="Reply to a comment!"></textarea>
+            <textarea style="display: none" id="articleID" name="articleID" row="0"
+              cols="0">{{this.articleID}}</textarea>
+            <textarea style="display: none" id="parentID" name="parentID" row="0" cols="0">{{this.id}}</textarea>
+            <input type="submit" value="Submit your comment!">
+          </form>
+        </div>
+        {{!-- {{/if}} --}}
+
+        {{/each}}
+        {{/if}}
+
+        {{#if user}}
+        <form action="./createComment" method="POST">
+          <label for="commentInput">Your Comments:</label>
+          <br>
+          <textarea id="commentInput" name="commentInput" rows="4" cols="50" maxlength="300"
+            placeholder="Add a comment!"></textarea>
+          <textarea style="display: none" id="articleID" name="articleID" row="0" cols="0">{{article.id}}</textarea>
+          <input type="submit" value="Submit your comment!">
+        </form>
+        {{/if}}
+
+      </div>
     </div>
     <br>
-    {{#if user}}
-    <form action="./createComment" method="POST">
-            <label for="commentInput">Your Comments:</label>
-            <br>
-            <textarea id="commentInput" name="commentInput" rows="4" cols="50" maxlength="300" placeholder="Add a comment!"></textarea>
-            <textarea style="display: none" id="articleID" name="articleID" row="0" cols="0">{{article.id}}</textarea>
-            <input type="submit" value="Submit your comment!">
-    </form>
-    {{/if}}
-
-
+  </div>
 </div>
 
 <script>
-function ShowHideComments() {
-var x = document.getElementById("commentBox");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  function ShowHideComments() {
+    var x = document.getElementById("commentBox");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
-}
 
-function level2CommentsBox(id) {
-var x = document.getElementById(`replyToComment${id}`);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  function level2CommentsBox(id) {
+    var x = document.getElementById(`replyToComment${id}`);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
-}
 
-function level3CommentsBox(id) {
-var x = document.getElementById(`replyToCommentsComment${id}`);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  function level3CommentsBox(id) {
+    var x = document.getElementById(`replyToCommentsComment${id}`);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
-}
 
-function ShowNestedComments(id) {
-var x = document.getElementById(`level2Comments${id}`);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  function ShowNestedComments(id) {
+    var x = document.getElementById(`level2Comments${id}`);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
-}
 
-function ShowNestedNestedComments(id) {
-var x = document.getElementById(`level3Comments${id}`);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  function ShowNestedNestedComments(id) {
+    var x = document.getElementById(`level3Comments${id}`);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
-}
 
-function addUpvote(commentID) {
-  document.getElementById(`upvote${commentID}`).disabled = true;
-}
+  function addUpvote(commentID) {
+    document.getElementById(`upvote${commentID}`).disabled = true;
+  }
 
-function addDownvote(commentID) {
-  document.getElementById(`downvote${commentID}`).disabled = true; 
-}
+  function addDownvote(commentID) {
+    document.getElementById(`downvote${commentID}`).disabled = true;
+  }
 
 </script>
 
 <style>
-#avatar {
-  transform: scale(1); 
-}
+  #avatar {
+    transform: scale(1);
+  }
 
-#commentBox div {
-  border: 0.5px dashed orange; 
-}
+  #commentBox div {
+    border: 0.5px dashed orange;
+  }
 
-#level1Comments > div {
-  margin-left: 20px; 
-}
+  #level1Comments>div {
+    margin-left: 20px;
+  }
 
-#level1Comments > div > div {
-  margin-left: 20px; 
-}
+  #level1Comments>div>div {
+    margin-left: 20px;
+  }
 
-#commentBox button {
-  margin: 8px; 
-}
+  #commentBox button {
+    margin: 8px;
+  }
 
-.eachComment {
-  display: flex;
-  padding: 10px;
-}
-
+  .eachComment {
+    display: flex;
+    padding: 10px;
+  }
 </style>
