@@ -35,14 +35,14 @@ div > a {
     grid-area: c;
 }
 
-#sortAndArticlesContainer {
+.sortAndArticlesContainer {
     font-size: large;
 }
 
-#sortButtonContainer {
+.sortButtonContainer {
     text-align: center;
 }
 
-#articlesTable {
+.articlesTable {
     margin: auto;
 }

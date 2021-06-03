@@ -2,42 +2,45 @@
 
 <div id="myArticlesContainer">
 
-{{#if message}}
-<p>{{message}}</p>
-{{/if}}
+    {{#if message}}
+    <p>{{message}}</p>
+    {{/if}}
 
     <h1>My Articles</h1>
 
     {{#if articles}}
 
-        <p class="sort">Sort by: </p>
+    <div class="sortAndArticlesContainer">
+        <div class="sortButtonContainer">
+            <p class="sort">Sort by: </p>
             <button type="button" class="sort" id="postTime" onclick="getSort(this.id)">Oldest</button>
             <button type="button" class="sort" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
             <button type="button" class="sort" id="title" onclick="getSort(this.id)">Title</button>
+        </div>
+        <br>
 
         <div class="articleContainer">
-            <table>
-            <tr>
-                <td>Title</td>
-                <td>Author</td>
-                <td>Posted on</td>
-            </tr>
-            {{#each articles}}
+            <table class="articlesTable">
+                <tr>
+                    <td>Title</td>
+                    <td>Author</td>
+                    <td>Posted on</td>
+                </tr>
+                {{#each articles}}
                 <tr>
                     <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
                     <td>{{this.username}}</td>
                     <td>{{this.postTime}}</td>
-                    {{!-- <td><button type="button" class="editArticleButton" onclick="location.href='./edit-article?articleID={{this.id}}'">Edit article</button></td> --}}
+                    {{!-- <td><button type="button" class="editArticleButton"
+                            onclick="location.href='./edit-article?articleID={{this.id}}'">Edit article</button></td> --}}
                 </tr>
-            {{/each}}
+                {{/each}}
             </table>
-        
-        {{else}}
-        <h2>You haven't written any articles!</h2>
-        {{/if}}
-        </div>
 
+            {{else}}
+            <h2>You haven't written any articles!</h2>
+        </div>
+        {{/if}}
+    </div>
 
 </div>
-
-
