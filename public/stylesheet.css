@@ -26,11 +26,23 @@ div > a {
 
 #container {
     display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-columns: 2fr 6fr 2fr;
     grid-template-rows: auto;
     grid-template-areas: ". c .";
 }
 
 #content {
     grid-area: c;
+}
+
+#sortAndArticlesContainer {
+    font-size: large;
+}
+
+#sortButtonContainer {
+    text-align: center;
+}
+
+#articlesTable {
+    margin: auto;
 }
