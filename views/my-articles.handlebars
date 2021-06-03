@@ -1,4 +1,5 @@
 <script type="text/javascript" src="sortForMyArticle.js"></script>
+<script type="text/javascript" src="addLinksToArticleCards.js"></script>
 
 <div id="myArticlesContainer">
 
@@ -6,39 +7,36 @@
     <p>{{message}}</p>
     {{/if}}
 
-    <h1>My Articles</h1>
+    <h1 class="header">My Articles</h1>
+    <br>
 
     {{#if articles}}
 
     <div class="sortAndArticlesContainer">
         <div class="sortButtonContainer">
             <p class="sort">Sort by: </p>
-            <button type="button" class="sort" id="postTime" onclick="getSort(this.id)">Oldest</button>
-            <button type="button" class="sort" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
-            <button type="button" class="sort" id="title" onclick="getSort(this.id)">Title</button>
+            <button type="button" class="sortButtons" id="title" onclick="getSort(this.id)">Title</button>
+            <button type="button" class="sortButtons" id="postTime" onclick="getSort(this.id)">Oldest</button>
+            <button type="button" class="sortButtons" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
         </div>
-        <br>
+        {{!-- <br> --}}
 
         <div class="articleContainer">
-            <table class="articlesTable">
-                <tr>
-                    <td>Title</td>
-                    <td>Author</td>
-                    <td>Posted on</td>
-                </tr>
-                {{#each articles}}
-                <tr>
-                    <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
-                    <td>{{this.username}}</td>
-                    <td>{{this.postTime}}</td>
-                    {{!-- <td><button type="button" class="editArticleButton"
-                            onclick="location.href='./edit-article?articleID={{this.id}}'">Edit article</button></td> --}}
-                </tr>
-                {{/each}}
-            </table>
+
+            {{#each articles}}
+                <div class="articleCard" id="{{this.id}}">
+                    <div class="articleSummary">
+                        <h3>{{this.title}}</h3>
+                        <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
+                    </div>
+                    <div class="authorAvatars">
+                        <img src="/avatars/{{this.userImage}}">
+                    </div>
+                </div>
+            {{/each}}
 
             {{else}}
-            <h2>You haven't written any articles!</h2>
+            <h2 id="noArticles">You haven't written any articles!</h2>
         </div>
         {{/if}}
     </div>

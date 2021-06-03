@@ -1,9 +1,12 @@
 <script src="checkNewUsername.js"></script>
 
-<h1>Edit account:</h1>
+<h1 class="header">Edit account:</h1>
 
-    <div class="editDetails">
-        <form action="./edit-account" method="POST">
+<div class="editDetails">
+    <form action="./edit-account" method="POST" id="editAccountForm">
+
+        <div id="editAccountInputsDiv">
+
             <div class="field">
                 <label for="txtfName">First name:</label>
                 <input type="text" name="fname" id="txtfName" value="{{user.fname}}" required>
@@ -18,7 +21,7 @@
                 <label for="dob">Date of birth:</label>
                 <input type="date" name="dob" id="dob" value="{{user.dob}}" required>
             </div>
-            
+
             <div class="field" id="usernameDiv">
                 <label for="txtUsername">Username:</label>
                 <input type="text" name="username" id="txtUsername" value="{{user.username}}" required>
@@ -30,9 +33,9 @@
                 <textarea id="txtdesc" name="description" rows="4" cols="50" maxlength="300">{{user.description}}</textarea>
             </div>
 
-            Pick your avatar!
+            <p>Pick your avatar!</p>
 
-            <div class="field">
+            <div class="field" id="editAvatar">
                 <input type="radio" id="bear" name="avatar" value="bear-icon.png">
                 <img src="avatars\bear-icon.png">
                 <input type="radio" id="dino" name="avatar" value="dino-icon.png">
@@ -43,6 +46,7 @@
                 <img src="avatars\sloth-icon.png">
                 <input type="radio" id="alpaca" name="avatar" value="alpaca-icon.png">
                 <img src="avatars\alpaca-icon.png">
+                <br>
                 <input type="radio" id="dragon" name="avatar" value="dragon-icon.png">
                 <img src="avatars\dragon-icon.png">
                 <input type="radio" id="octopus" name="avatar" value="octopus-icon.png">
@@ -54,16 +58,20 @@
                 <input type="radio" id="elephant" name="avatar" value="elephant-icon.png">
                 <img src="avatars\elephant-icon.png">
             </div>
-
-            
-
-            <div class="field justify-sb align-center">
-
-                <input type="submit" id="submitButton">
-            </div>
-        </form>
-
-        <div class="changePassword">
-             <input type="button" onclick="location.href='./change-password'" value="Change Password">
+        
         </div>
-    </div>
+        <br>
+        <br>
+
+        <div class="field justify-sb align-center" id="submitButton">
+            <input type="submit" id="submitButton">
+        </div>
+
+        <br>
+        <div class="changePassword" id="changePasswordButton">
+            <input type="button" onclick="location.href='./change-password'" value="Change Password">
+        </div>
+
+    </form>
+
+</div>

@@ -1,38 +1,36 @@
+<script type="text/javascript" src="sortForHomeView.js"></script>
+<script type="text/javascript" src="addLinksToArticleCards.js"></script>
+
 {{#if user}}
-<h1>Hi {{user.fname}}!</h1>
-<h2>Newest articles for you:</h2>
+<h1 class="homeGreeting">Hi {{user.fname}}!</h1>
+<h2 class="homeGreeting">Newest articles for you:</h2>
 {{else}}
-<h1>Newest articles for you:</h1>
+<h1 class="homeGreeting">Newest articles for you:</h1>
 {{/if}}
+<br>
 
 <div class="sortAndArticlesContainer">
     <div class="sortButtonContainer">
         <p class="sort">Sort by: </p> 
-        <button type="button" class="sort" id="title" onclick="getSort(this.id)">Title</button>
-        <button type="button" class="sort" id="username" onclick="getSort(this.id)">Author</button>
-        <button type="button" class="sort" id="postTime" onclick="getSort(this.id)">Oldest</button>
-        <button type="button" class="sort" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
+        <button type="button" class="sortButtons" id="title" onclick="getSort(this.id)">Title</button>
+        <button type="button" class="sortButtons" id="username" onclick="getSort(this.id)">Author</button>
+        <button type="button" class="sortButtons" id="postTime" onclick="getSort(this.id)">Oldest</button>
+        <button type="button" class="sortButtons" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
     </div>
-    <br>
     
     <div class="articleContainer">
-    {{#if articles}}
-        <table class="articlesTable">
-        <tr>
-            <td>Title</td>
-            <td>Author</td>
-            <td>Posted on</td>
-        </tr>
-        {{#each articles}}
-            <tr>
-            <td><a href="./read-article?articleID={{this.id}}">{{this.title}}</a></td>
-            <td>{{this.username}}</td>
-            <td>{{this.postTime}}</td>
-            </tr>
-        {{/each}}
-    {{/if}}
-    </table>
+        {{#if articles}}
+            {{#each articles}}
+                <div class="articleCard" id="{{this.id}}">
+                    <div class="articleSummary">
+                        <h3>{{this.title}}</h3>
+                        <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
+                    </div>
+                    <div class="authorAvatars">
+                        <img src="/avatars/{{this.userImage}}">
+                    </div>
+                </div>
+            {{/each}}
+        {{/if}}
     </div>
 </div>
-
-<script type="text/javascript" src="sort.js"></script>
