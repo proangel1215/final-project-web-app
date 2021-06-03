@@ -15,22 +15,27 @@ tinymce.init({
 <div id="newArticleContainer">
 
     <h1>Edit your article:</h1>
+    <br>
 
     <form action="./edit-article" method="POST" enctype="multipart/form-data">
 
         <div>
             <label for="articleTitle">Add a title:</label>
-            <input type="text" id="articleTitle" name="articleTitle" maxlength="100" value="{{article.title}}" required>
+            <input type="text" id="articleTitle" name="articleTitle" maxlength="100" size="40" value="{{article.title}}" required>
         </div>
+        <br>
         <br>
         <div>
             {{#if article.imageSource}}
                 Current image: <i name="imageSource">{{article.imageSource}}</i>
                 <br>
+                <br>
                 <img src="./imagesResized/{{article.imageSource}}">
+                <br>
                 <br>
                 <input type="checkbox" id="deleteImageButton" name="deleteImageButton">
                 <label for="deleteImageButton">Delete current image</label>
+                <br>
                 <br>
 
             {{/if}}
@@ -47,10 +52,12 @@ tinymce.init({
         <textarea style="display: none" id="hiddenIDbox" name="hiddenIDbox" rows="0" cols="0">{{article.id}}</textarea>
         
         <br>
-        <button type="submit">Save and post article</button>
+        <br>
+        <button type="submit">Save changes</button>
         
     </form>
     <br>
+
     <form action="./delete-article" method="POST">
         <textarea style="display: none" id="hiddenIDbox" name="hiddenIDbox" rows="0" cols="0">{{article.id}}</textarea>
         <button type="submit" onclick="return confirm('Are you sure you want to delete this article?')">Delete article</button>

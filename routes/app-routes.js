@@ -16,9 +16,11 @@ router.get("/", async function(req, res) {
     
     var usersArray = new Array(); 
     for (let i = 0; i < articles.length; i++){
-    usersArray[i] = await appDao.retrieveUserById(articles[i].userID); 
-    articles[i].username = usersArray[i].username;
-    }; 
+        usersArray[i] = await appDao.retrieveUserById(articles[i].userID); 
+        articles[i].username = usersArray[i].username;
+        articles[i].userImage = usersArray[i].imageSource;
+        }; 
+
     res.locals.articles = articles;
     res.render("home");
 }); 
@@ -26,7 +28,17 @@ router.get("/", async function(req, res) {
 router.get("/my-articles", verifyAuthenticated, async function(req, res) {
     res.locals.message = req.query.message;
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    res.locals.articles = await appDao.retrieveArticlesByAuthorId(user.id); 
+    // res.locals.articles = await appDao.retrieveArticlesByAuthorId(user.id); 
+
+    const articles = await appDao.retrieveArticlesByAuthorId(user.id); 
+
+    for (let i = 0; i < articles.length; i++){
+        const author = await appDao.retrieveUserById(articles[i].userID); 
+        articles[i].userImage = author.imageSource;
+    }; 
+
+    res.locals.articles = articles;
+
     res.render("my-articles");
 });
 
@@ -251,6 +263,11 @@ router.post("/create-account", async function(req, res) {
 router.get("/usernames", async function(req, res) {
     const usernames = await appDao.retrieveAllUsernames();
     res.json(usernames);
+});
+
+router.get("/avatars", async function(req, res) {
+    const avatars = await appDao.retrieveAvatars();
+    res.json(avatars);
 });
 
 
