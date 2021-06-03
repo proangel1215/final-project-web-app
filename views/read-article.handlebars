@@ -3,26 +3,35 @@
   <div id="articleView">
 
     <br>
-    {{#if author}}
+    {{!-- {{#if author}}
     <button type="button" class="editArticleButton"
       onclick="location.href='./edit-article?articleID={{article.id}}'">Edit article</button>
-    {{/if}}
+    {{/if}} --}}
 
     <h1>{{article.title}}</h1>
+
+    {{#if author}}
+    <button type="button" class="editArticleButton" onclick="location.href='./edit-article?articleID={{article.id}}'">Edit article</button>
+    {{/if}}
+
     <p><i>Submitted by: {{article.username}}</i></p>
     {{#if article.imageSource}}
     <img src="./imagesResized/{{article.imageSource}}">
     {{/if}}
     <br>
+    <br>
+    <br>
     {{{article.content}}}
 
   </div>
+
+  <br>
 
   <div id="commentContainer">
     <input type = "hidden" id = "votedComments" value = {{votedComments}} >
     <br>
     {{#if comments}}
-    <button onclick="ShowHideComments()">Click to show / hide comments</button>
+    <button onclick="ShowHideComments()">Show / hide comments</button>
     <div id="commentBox">
 
       <div id="level1Comments">
@@ -61,7 +70,7 @@
           <button onclick="level3CommentsBox({{this.id}})">Reply</button>
           <div id="replyToCommentsComment{{this.id}}" style="display: none">
             <form action="./replyToCommentsComment" method="POST">
-              <label for="replyToCommentsCommentInput">Your Comments:</label>
+              {{!-- <label for="replyToCommentsCommentInput">Your Comments:</label> --}}
               <br>
               <textarea id="replyToCommentsCommentInput" name="replyToCommentsCommentInput" rows="4" cols="50"
                 maxlength="300" placeholder="Reply to a comment!"></textarea>
@@ -80,7 +89,7 @@
         <button onclick="level2CommentsBox({{this.id}})">Reply</button>
         <div id="replyToComment{{this.id}}" style="display: none">
           <form action="./replyToComment" method="POST">
-            <label for="replyToCommentInput">Your Comments:</label>
+            {{!-- <label for="replyToCommentInput">Your Comments:</label> --}}
             <br>
             <textarea id="replyToCommentInput" name="replyToCommentInput" rows="4" cols="50" maxlength="300"
               placeholder="Reply to a comment!"></textarea>
@@ -94,13 +103,13 @@
 
         {{/each}}
         {{/if}}
-
         {{#if user}}
         <form action="./createComment" method="POST">
-          <label for="commentInput">Your Comments:</label>
+          {{!-- <label for="commentInput">Your Comments:</label> --}}
+          <label for="commentInput">Add a comment!</label>
           <br>
           <textarea id="commentInput" name="commentInput" rows="4" cols="50" maxlength="300"
-            placeholder="Add a comment!"></textarea>
+            placeholder="Your comment here"></textarea>
           <textarea style="display: none" id="articleID" name="articleID" row="0" cols="0">{{article.id}}</textarea>
           <input type="submit" value="Submit your comment!">
         </form>
@@ -181,30 +190,3 @@
   window.onload = disableIfVoted(disableVotes);
 
 </script>
-
-<style>
-  #avatar {
-    transform: scale(1);
-  }
-
-  #commentBox div {
-    border: 0.5px dashed orange;
-  }
-
-  #level1Comments>div {
-    margin-left: 20px;
-  }
-
-  #level1Comments>div>div {
-    margin-left: 20px;
-  }
-
-  #commentBox button {
-    margin: 8px;
-  }
-
-  .eachComment {
-    display: flex;
-    padding: 10px;
-  }
-</style>

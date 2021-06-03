@@ -5,6 +5,7 @@
 
 #header {
     background-color: orange;
+    font-size: 140%;
     display: flex;
     justify-content: center;
 }
@@ -22,6 +23,7 @@ div > a {
     text-decoration: none;
     margin-left: 10px;
     margin-right: 10px;
+    font-weight: bold;
 }
 
 #container {
@@ -29,6 +31,7 @@ div > a {
     grid-template-columns: 2fr 6fr 2fr;
     grid-template-rows: auto;
     grid-template-areas: ". c .";
+    margin-top: 20px;
 }
 
 #content {
@@ -43,6 +46,50 @@ div > a {
     text-align: center;
 }
 
-.articlesTable {
-    margin: auto;
+.sortButtons {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.articleCard {
+    border: 2px black solid;
+    border-radius: 30px;
+    padding: 1px 20px 1px 20px;
+    margin: 30px;
+    cursor: pointer;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.articleCard:hover {
+    background-color: rgb(170, 197, 224);
+    /* border-color: royalblue; */
+}
+
+#avatar {
+    transform: scale(1);
+  }
+
+#commentBox div {
+    padding: 10px;
+}
+
+#level1Comments > div {
+    margin-left: 30px;
+}
+
+#level1Comments > div > div {
+    margin-left: 30px;
+}
+
+#commentBox button {
+    margin: 8px;
+}
+
+.eachComment {
+    display: flex;
+    padding: 10px;
 }
