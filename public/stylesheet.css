@@ -11,7 +11,7 @@
 }
 
 #navbar {
-    background-color: #8fd0f5;
+    background-color: #10cde6;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -92,4 +92,34 @@ div > a {
 .eachComment {
     display: flex;
     padding: 10px;
+}
+
+#loginFormDiv {
+    position: relative;
+    top: 5%;
+}
+
+#loginForm {
+    display: table;
+    margin: auto;
+}
+
+#loginForm > div {
+    display: table-row;
+}
+
+#loginInputsDiv label {
+    display: table-cell;
+}
+
+.loginButtons {
+    margin: 5px 0px 10px 0px;
+}
+
+#loginButton {
+    margin-top: 10px;
+}
+
+.homeGreeting, #loginHeader {
+    text-align: center;
 }
