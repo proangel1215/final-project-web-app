@@ -22,6 +22,7 @@ div > a {
     text-decoration: none;
     margin-left: 10px;
     margin-right: 10px;
+    font-weight: bold;
 }
 
 #container {
@@ -65,4 +66,29 @@ div > a {
 .articleCard:hover {
     background-color: rgb(170, 197, 224);
     /* border-color: royalblue; */
+}
+
+#avatar {
+    transform: scale(1);
+  }
+
+#commentBox div {
+    padding: 10px;
+}
+
+#level1Comments > div {
+    margin-left: 30px;
+}
+
+#level1Comments > div > div {
+    margin-left: 30px;
+}
+
+#commentBox button {
+    margin: 8px;
+}
+
+.eachComment {
+    display: flex;
+    padding: 10px;
 }

@@ -14,22 +14,26 @@ tinymce.init({
 <div id="newArticleContainer">
 
     <h1>Create an article:</h1>
+    <br>
 
     <form action="./create-article" method="POST" enctype="multipart/form-data">
 
         <div>
             <label for="articleTitle">Add a title:</label>
-            <input type="text" id="articleTitle" name="articleTitle" maxlength="100" required>
+            <input type="text" id="articleTitle" name="articleTitle" maxlength="100" size="40" required>
         </div>
+        <br>
         <br>
         <div>
             <label for="articleImage">Upload image:</label>
             <input type="file" id="articleImage" name="articleImage" accept="image/*">
         </div>
         <br>
+        <br>
         <textbox id="newArticleContent" name="newArticleContent" required>
          {{! WYSIWYG implemented here for paragraph input}}
         </textbox>
+        <br>
         <br>
         <button type="submit">Post article</button>
         
