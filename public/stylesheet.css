@@ -53,4 +53,12 @@ div > a {
     border-radius: 30px;
     padding: 1px 20px 1px 20px;
     margin: 30px;
+    cursor: pointer;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+}
+
+.articleCard:hover {
+    background-color: rgb(170, 197, 224);
+    /* border-color: royalblue; */
 }

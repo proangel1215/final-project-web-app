@@ -1,4 +1,5 @@
 <script type="text/javascript" src="sortForHomeView.js"></script>
+<script type="text/javascript" src="addLinksToArticleCards.js"></script>
 
 {{#if user}}
 <h1>Hi {{user.fname}}!</h1>
@@ -36,6 +37,7 @@
                 <div class="articleCard" id="{{this.id}}">
                     <h3>{{this.title}}</h3>
                     <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
+                    
                 </div>
             {{/each}}
         {{/if}}
