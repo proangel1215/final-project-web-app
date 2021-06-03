@@ -94,6 +94,11 @@ div > a {
     padding: 10px;
 }
 
+#loginFormDiv {
+    position: relative;
+    top: 5%;
+}
+
 #loginForm {
     display: table;
     margin: auto;
@@ -115,3 +120,6 @@ div > a {
     margin-top: 10px;
 }
 
+.homeGreeting, #loginHeader {
+    text-align: center;
+}
