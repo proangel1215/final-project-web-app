@@ -4,10 +4,11 @@
 tinymce.init({
     selector: '#editedArticleContent',
     menubar: false,
-    plugins: 'autoresize lists save emoticons wordcount',
+    plugins: 'autoresize lists paste emoticons wordcount',
     autoresize_bottom_margin: 50,
     toolbar: 'undo redo | styleselect | forecolor | bold italic underline | numlist bullist | emoticons | wordcount',
-    paste_data_images: false
+    paste_data_images: false,
+    block_unsupported_drop: true
     });
 </script>
 
