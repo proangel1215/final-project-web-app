@@ -73,6 +73,13 @@ async function editUser(id, fname, lname, username, dob, description, imageSourc
     return await db.run(SQL`UPDATE users SET fname = ${fname}, lname = ${lname}, username = ${username}, dob = ${dob}, description = ${description}, imageSource = ${imageSource} WHERE id = ${id};`);
 };
 
+//Updates the article author name on all articles by input user id with inputted username
+
+async function editAuthorOfArticles(username, id) {
+    const db = await dbPromise;
+    return await db.run(SQL`UPDATE articles SET username = ${username} WHERE id = ${id};`);
+};
+
 //Updates the users password in database using input of user object
 
 async function updatePassword(user) {
@@ -252,5 +259,6 @@ module.exports = {
     editUser,
     editArticle,
     retrieveAllUsers,
-    updatePassword
+    updatePassword,
+    editAuthorOfArticles
 };
