@@ -56,7 +56,7 @@ async function deleteUserById(id) {
 };
 
 //Creates a user account in the database using inputs of firstname, lastname, username, date of birth, password, description, imageSoruce(avatar) and 
-//assigning an auth token
+//assigns an auth token
 
 async function createUser(user) {
     const db = await dbPromise;
