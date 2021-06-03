@@ -13,9 +13,9 @@
     <div class="sortAndArticlesContainer">
         <div class="sortButtonContainer">
             <p class="sort">Sort by: </p>
+            <button type="button" class="sortButtons" id="title" onclick="getSort(this.id)">Title</button>
             <button type="button" class="sortButtons" id="postTime" onclick="getSort(this.id)">Oldest</button>
             <button type="button" class="sortButtons" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
-            <button type="button" class="sortButtons" id="title" onclick="getSort(this.id)">Title</button>
         </div>
         {{!-- <br> --}}
 
@@ -38,7 +38,7 @@
             {{#each articles}}
                 <div class="articleCard" id="{{this.id}}">
                     <h3>{{this.title}}</h3>
-                    <p>Posted by {{this.username}} on {{this.postTime}}</p>
+                    <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
                 </div>
             {{/each}}
 
