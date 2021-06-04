@@ -26,9 +26,11 @@ router.get("/login", async function(req, res) {
 /**
  * When a POST request is received, retrieve the inputted username and password
  * from the body. Retrieve the hashed password for the username from the
- * database and compare it to the inputted password. If they match, log
- * the user in and redirect to the home view. Else, send an eror message
- * and redirect to the login view.
+ * database and compare it to the inputted password. 
+ * If the hashed password is undefined (i.e. the username does not exist),
+ * send an error message and redirect to the login view.
+ * If they match, log the user in and redirect to the home view. 
+ * If they don't match, send an eror message and redirect to the login view.
  */
 router.post("/login", async function(req, res) {
     const username = req.body.username;
