@@ -1,8 +1,5 @@
-/**
- * Main application file.
- * 
- * NOTE: This file contains many required packages, but not all of them - you may need to add more!
- */
+// Main application file
+
 
 // Setup Express
 const express = require("express");

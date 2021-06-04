@@ -27,14 +27,17 @@
         </div>
         <br>
         <br>
+
         <div>
             {{#if article.imageSource}}
             Current image: <i name="imageSource">{{article.imageSource}}</i>
             <br>
             <br>
+
             <img src="./imagesResized/{{article.imageSource}}">
             <br>
             <br>
+
             <input type="checkbox" id="deleteImageButton" name="deleteImageButton">
             <label for="deleteImageButton">Delete current image</label>
             <br>
@@ -47,6 +50,7 @@
         </div>
         <br>
         <br>
+
         <textbox id="editedArticleContent" name="editedArticleContent">
             {{! WYSIWYG implemented here for paragraph input}}
             {{{article.content}}}

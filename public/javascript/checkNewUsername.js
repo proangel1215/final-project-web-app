@@ -7,6 +7,10 @@ window.addEventListener("load", function () {
     const currentUsername = usernameInput.value;
     let validUsername;
 
+    /**
+     * Disables the submit button if the inputted username is already taken.
+     * Still allows the user to input their original username.
+     */
     usernameInput.addEventListener("change", async function() {
         usernameMessage.innerHTML = "";
         validUsername = true;
@@ -26,6 +30,7 @@ window.addEventListener("load", function () {
         }
     });
 
+    // Retrieves all usernames form the database
     async function getUsernames() {
         const response = await fetch(`./usernames`);
         const reponseObject = await response.json();
