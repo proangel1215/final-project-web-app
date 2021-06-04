@@ -12,14 +12,17 @@ window.addEventListener("load", function () {
     const usernameMessage = document.querySelector("#usernameMessage");
     const confirmPasswordMessage = document.querySelector("#confirmPasswordMessage");
 
-    // Disables the submit button
+    // Disables the submit button initially
     submitButton.disabled = true;
 
     let validUsername;
     let validPassword;
 
-
-    // Checks if the username is valid each time the user inputs a username
+    /** 
+     * Checks if the username is valid each time the user inputs a username
+     * by checking against every username in the database. If it is already
+     * taken, keep the submit button disabled and display a warning message.
+     */
     usernameInput.addEventListener("change", async function() {
         usernameMessage.innerHTML = "";
         validUsername = true;
@@ -53,8 +56,8 @@ window.addEventListener("load", function () {
     
     /** 
      * Checks if the passwords entered in the two password fields
-     * are matching, and enables the submit button if they do. If not,
-     * the submit button remains disabled and a warning message is displayed.
+     * are matching. If they don't, the submit button remains disabled
+     * and a warning message is displayed.
      */
     function checkPasswords() {
         confirmPasswordMessage.innerHTML = "";
