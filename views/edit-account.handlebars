@@ -1,11 +1,11 @@
-<script src="checkNewUsername.js"></script>
+<script src="/javascript/checkNewUsername.js"></script>
 
 <h1 class="header">Edit account:</h1>
 
 <div class="editDetails">
     <form action="./edit-account" method="POST" class="form">
 
-        <div id="editAccountInputsDiv">
+        <div class="inputsDiv">
 
             <div class="field">
                 <label for="txtfName">First name:</label>
@@ -30,7 +30,8 @@
 
             <div class="field">
                 <label for="txtdesc">Description:</label>
-                <textarea id="txtdesc" name="description" rows="4" cols="50" maxlength="300">{{user.description}}</textarea>
+                <textarea id="txtdesc" name="description" rows="4" cols="50"
+                    maxlength="300">{{user.description}}</textarea>
             </div>
 
             <p>Pick your avatar!</p>
@@ -58,12 +59,12 @@
                 <input type="radio" id="elephant" name="avatar" value="elephant-icon.png">
                 <img src="avatars\elephant-icon.png">
             </div>
-        
+
         </div>
         <br>
         <br>
 
-        <div class="field justify-sb align-center" id="submitButton">
+        <div class="field justify-sb align-center" id="submitButtonDiv">
             <input type="submit" id="submitButton">
         </div>
 

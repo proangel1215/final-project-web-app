@@ -1,3 +1,6 @@
+/** On window load, disable the submit button, and only enable it
+ * once the user has entered matching passwords
+ */
 window.addEventListener("load", function () {
 
     const passwordInput = document.querySelector("#txtNewPassword");
@@ -6,6 +9,7 @@ window.addEventListener("load", function () {
 
     const confirmPasswordMessage = document.querySelector("#confirmPasswordMessage");
 
+    // Disables the submit button initially
     submitButton.disabled = true;
 
     let validPassword;
@@ -13,6 +17,11 @@ window.addEventListener("load", function () {
     passwordInput.addEventListener("change", checkPasswords);
     confirmPasswordInput.addEventListener("change", checkPasswords);
     
+    /** 
+     * Checks if the passwords entered in the two password fields
+     * are matching. If they don't, the submit button remains disabled
+     * and a warning message is displayed.
+     */
     function checkPasswords() {
         confirmPasswordMessage.innerHTML = "";
         validPassword = true;

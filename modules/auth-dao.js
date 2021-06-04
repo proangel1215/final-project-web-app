@@ -1,6 +1,7 @@
 const SQL = require("sql-template-strings");
 const dbPromise = require("./database.js");
 
+
 /**
  * Gets the user with the given username and password from the database.
  * If there is no such user, undefined will be returned.
@@ -30,7 +31,7 @@ const dbPromise = require("./database.js");
 }
 
 /**
- * Updates the given user in the database, not including auth token
+ * Updates the given user's auth token in the database
  */
  async function updateAuthToken(user) {
     const db = await dbPromise;
@@ -41,10 +42,16 @@ const dbPromise = require("./database.js");
         WHERE id = ${user.id}`);
 }
 
+/**
+ * Gets the hashed and salted password for a given username
+ * from the database. If the username does not exist,
+ * undefined will be returned.
+ */
 async function retrieveHashByUsername(username) {
     const db = await dbPromise;
     return await db.get(SQL`SELECT password FROM users WHERE username = ${username}`);
 }
+
 
 module.exports = {
     retrieveUserWithCredentials,

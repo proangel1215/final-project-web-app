@@ -1,5 +1,5 @@
-<script type="text/javascript" src="sortForHomeView.js"></script>
-<script type="text/javascript" src="addLinksToArticleCards.js"></script>
+<script type="text/javascript" src="/javascript/sortForHomeView.js"></script>
+<script type="text/javascript" src="/javascript/addLinksToArticleCards.js"></script>
 
 {{#if user}}
 <h1 class="homeGreeting">Hi {{user.fname}}!</h1>
@@ -11,26 +11,26 @@
 
 <div class="sortAndArticlesContainer">
     <div class="sortButtonContainer">
-        <p class="sort">Sort by: </p> 
+        <p class="sort">Sort by: </p>
         <button type="button" class="sortButtons" id="title" onclick="getSort(this.id)">Title</button>
         <button type="button" class="sortButtons" id="username" onclick="getSort(this.id)">Author</button>
         <button type="button" class="sortButtons" id="postTime" onclick="getSort(this.id)">Oldest</button>
         <button type="button" class="sortButtons" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
     </div>
-    
+
     <div class="articleContainer">
         {{#if articles}}
-            {{#each articles}}
-                <div class="articleCard" id="{{this.id}}">
-                    <div class="articleSummary">
-                        <h3>{{this.title}}</h3>
-                        <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
-                    </div>
-                    <div class="authorAvatars">
-                        <img src="/avatars/{{this.userImage}}">
-                    </div>
-                </div>
-            {{/each}}
+        {{#each articles}}
+        <div class="articleCard" id="{{this.id}}">
+            <div class="articleSummary">
+                <h3>{{this.title}}</h3>
+                <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
+            </div>
+            <div class="authorAvatars">
+                <img src="/avatars/{{this.userImage}}">
+            </div>
+        </div>
+        {{/each}}
         {{/if}}
     </div>
 </div>

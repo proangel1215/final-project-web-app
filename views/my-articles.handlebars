@@ -1,5 +1,5 @@
-<script type="text/javascript" src="sortForMyArticle.js"></script>
-<script type="text/javascript" src="addLinksToArticleCards.js"></script>
+<script type="text/javascript" src="/javascript/sortForMyArticles.js"></script>
+<script type="text/javascript" src="/javascript/addLinksToArticleCards.js"></script>
 
 <div id="myArticlesContainer">
 
@@ -19,20 +19,19 @@
             <button type="button" class="sortButtons" id="postTime" onclick="getSort(this.id)">Oldest</button>
             <button type="button" class="sortButtons" id="postTime DESC" onclick="getSort(this.id)">Newest</button>
         </div>
-        {{!-- <br> --}}
 
         <div class="articleContainer">
 
             {{#each articles}}
-                <div class="articleCard" id="{{this.id}}">
-                    <div class="articleSummary">
-                        <h3>{{this.title}}</h3>
-                        <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
-                    </div>
-                    <div class="authorAvatars">
-                        <img src="/avatars/{{this.userImage}}">
-                    </div>
+            <div class="articleCard" id="{{this.id}}">
+                <div class="articleSummary">
+                    <h3>{{this.title}}</h3>
+                    <p>Posted by <strong>{{this.username}}</strong> on {{this.postTime}}</p>
                 </div>
+                <div class="authorAvatars">
+                    <img src="/avatars/{{this.userImage}}">
+                </div>
+            </div>
             {{/each}}
 
             {{else}}
