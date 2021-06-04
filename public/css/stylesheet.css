@@ -131,7 +131,7 @@ div > a {
     text-align: center;
 }
 
-#loginInputsDiv label, #editAccountInputsDiv label, #createAccountInputsDiv label, #changePasswordInputsDiv label {
+.inputsDiv label {
     display: table-cell;
     padding-top: 15px;
 }
