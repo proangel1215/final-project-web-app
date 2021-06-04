@@ -1,9 +1,3 @@
-/*
- * Upon submission, this file should contain the SQL script to initialize your database.
- * It should contain all DROP TABLE and CREATE TABLE statments, and any INSERT statements
- * required...
- */
-
 DROP TABLE IF EXISTS votes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS articles;
@@ -59,6 +53,7 @@ CREATE TABLE votes (
 
 );
 
+
 INSERT INTO users VALUES (1, 'Hollie', 'White', 'hols', '1994-03-20', '$2b$10$sxioZDL6KnmOZ1XN3BtPputkHrHk7pcrJUsL1HFGV4SneY7akhWMm', 'Love my life', 'dragon-icon.png', 'null', 1);
 INSERT INTO users VALUES (2,'Matthew', 'Ding', 'matt', '1997-09-14', '$2b$10$s9fGaUDYtlvsTU71RrRUtOP7ZOx1ZQuHqIZeKvYVG/BLBRNjzW1s2', 'Enjoying cricket and life', 'sloth-icon.png', 'null', 1);
 INSERT INTO users VALUES (3,'Declan', 'Williams', 'declan', '1993-01-11', '$2b$10$eMczFg51lxdIWNAJi8lrTODDXRwkWbWsQlKX06swXqf/bUGBqCI/6', 'Loving my car', 'dino-icon.png', 'null', 1);
@@ -67,6 +62,7 @@ INSERT INTO users VALUES (5,'Vita', 'Tsai', 'vita', '1990-11-11', '$2b$10$AQKuMY
 INSERT INTO users VALUES (6,'Tyne', 'Crow', 'tyne', '1990-11-11', '$2b$10$b2q9HGDoCmaar6fh9Nj0.uNvolNAU8OnxcDJgWx9WyA3/yISbEszW', 'Loving photography and teaching 719', 'parrot-icon.png', 'null', 0);
 INSERT INTO users VALUES (7,'Andrew', 'Meads', 'andrew', '1990-11-11', '$2b$10$EaZrj1oDd4ezGCB1DJZ4AOlJSdFsUlRJ72CE62jWM9bdQDWzvAhpq', 'Loving singing and teaching online', 'alpaca-icon.png', 'null', 0);
 INSERT INTO users VALUES (8,'Yu Cheng', 'Tu', 'yucheng', '1990-11-11', '$2b$10$L919kSukv/2SCcqnj0S.U.Fnt2ddhRG77ti5AO2oCorG5d6ExO4C.', 'I love extremely difficult javascript', 'octopus-icon.png', 'null', 0);
+
 
 INSERT INTO articles VALUES (1, 'Review: Avatar the Last Airbender is still amazing', '2021-01-19 03:14:07','<p><span style="margin: 0px; padding: 0px;">Despite being 15 years old, Avatar the Last Airbender (ATLA) is still an entertaining, nicely paced and an awesome TV series.</span></p>
 <p><span style="margin: 0px; padding: 0px;">ATLA starts off with Katara and her brother, Sokka, two members of the Southern Water Tribe, fishing. When Sokka makes a sexist remark and angers his sister into waterbending, they discover a boy trapped in a glacier.</span></p>
@@ -178,9 +174,6 @@ INSERT INTO comments VALUES (18, '2021-06-14 09:40:06', 'I know, I wanted so muc
 INSERT INTO comments VALUES (19, '2021-06-14 09:40:06', 'Hard', 0, 0, 18, 1, 7);
 INSERT INTO comments VALUES (20, '2021-01-12 06:05:00', 'Eh, it wasnt that bad!', 0, 2, NULL, 4, 7);
 
--- CREATE TABLE votes (
---     voterID INTEGER NOT NULL, 
---     commentID INTEGER NOT NULL,
 
 INSERT INTO votes VALUES (1, 16);
 INSERT INTO votes VALUES (1, 20);
