@@ -7,7 +7,8 @@
     <h1>{{article.title}}</h1>
 
     {{#if author}}
-    <button type="button" class="editArticleButton" onclick="location.href='./edit-article?articleID={{article.id}}'">Edit article</button>
+    <button type="button" class="editArticleButton"
+      onclick="location.href='./edit-article?articleID={{article.id}}'">Edit article</button>
     {{/if}}
 
     <p><i>Submitted by: {{article.username}}</i></p>
@@ -24,7 +25,7 @@
   <br>
 
   <div id="commentContainer">
-    <input type = "hidden" id = "votedComments" value = {{votedComments}} >
+    <input type="hidden" id="votedComments" value={{votedComments}}>
     <br>
     {{#if comments}}
     <button onclick="ShowHideComments()">Show / hide comments</button>
@@ -41,15 +42,15 @@
           <input type="hidden" id="comment" name="comment" value="{{this.id}}">
           <input type="hidden" id="userid" name="userid" value="{{../user.id}}">
           <input type="hidden" id="articleid" name="articleid" value="{{../article.id}}">
-          <input type = "submit" id="upvote{{this.id}}" value="Upvotes {{this.upvotes}}">
+          <input type="submit" id="upvote{{this.id}}" value="Upvotes {{this.upvotes}}">
         </form>
         <form action="./givedownvote" method="POST">
           <input type="hidden" id="comment" name="comment" value="{{this.id}}">
           <input type="hidden" id="userid" name="userid" value="{{../user.id}}">
           <input type="hidden" id="articleid" name="articleid" value="{{../article.id}}">
-          <input type = "submit" id="downvote{{this.id}}" value="Downvotes {{this.downvotes}}">
+          <input type="submit" id="downvote{{this.id}}" value="Downvotes {{this.downvotes}}">
         </form>
-        
+
 
         {{#if this.children}}
         <button onclick="ShowNestedComments({{this.id}})">Show/Hide replies</button>
@@ -63,13 +64,13 @@
             <input type="hidden" id="comment" name="comment" value="{{this.id}}">
             <input type="hidden" id="userid" name="userid" value="{{../../user.id}}">
             <input type="hidden" id="articleid" name="articleid" value="{{../../article.id}}">
-            <input type = "submit" id="upvote{{this.id}}" value="Upvotes {{this.upvotes}}">
+            <input type="submit" id="upvote{{this.id}}" value="Upvotes {{this.upvotes}}">
           </form>
           <form action="./givedownvote" method="POST">
             <input type="hidden" id="comment" name="comment" value="{{this.id}}">
             <input type="hidden" id="userid" name="userid" value="{{../../user.id}}">
             <input type="hidden" id="articleid" name="articleid" value="{{../../article.id}}">
-            <input type = "submit" id="downvote{{this.id}}" value="Downvotes {{this.downvotes}}">
+            <input type="submit" id="downvote{{this.id}}" value="Downvotes {{this.downvotes}}">
           </form>
           {{#if this.children}}
           <button onclick="ShowNestedNestedComments({{this.id}})">Show/Hide replies</button>
@@ -83,21 +84,21 @@
               <input type="hidden" id="comment" name="comment" value="{{this.id}}">
               <input type="hidden" id="userid" name="userid" value="{{../../../user.id}}">
               <input type="hidden" id="articleid" name="articleid" value="{{../../../article.id}}">
-              <input type = "submit" id="upvote{{this.id}}" value="Upvotes {{this.upvotes}}">
+              <input type="submit" id="upvote{{this.id}}" value="Upvotes {{this.upvotes}}">
             </form>
             <form action="./givedownvote" method="POST">
               <input type="hidden" id="comment" name="comment" value="{{this.id}}">
               <input type="hidden" id="userid" name="userid" value="{{../../../user.id}}">
               <input type="hidden" id="articleid" name="articleid" value="{{../../../article.id}}">
-              <input type = "submit" id="downvote{{this.id}}" value="Downvotes {{this.downvotes}}">
+              <input type="submit" id="downvote{{this.id}}" value="Downvotes {{this.downvotes}}">
             </form>
             {{/each}}
           </div>
-          {{!-- {{#if user}} --}}
+
           <button onclick="level3CommentsBox({{this.id}})">Reply</button>
           <div id="replyToCommentsComment{{this.id}}" style="display: none">
             <form action="./replyToCommentsComment" method="POST">
-              {{!-- <label for="replyToCommentsCommentInput">Your Comments:</label> --}}
+
               <br>
               <textarea id="replyToCommentsCommentInput" name="replyToCommentsCommentInput" rows="4" cols="50"
                 maxlength="300" placeholder="Reply to a comment!"></textarea>
@@ -108,15 +109,15 @@
             </form>
           </div>
           {{/if}}
-          {{!-- {{/if}} --}}
+
           {{/each}}
         </div>
         {{/if}}
-        {{!-- {{#if user}} --}}
+
         <button onclick="level2CommentsBox({{this.id}})">Reply</button>
         <div id="replyToComment{{this.id}}" style="display: none">
           <form action="./replyToComment" method="POST">
-            {{!-- <label for="replyToCommentInput">Your Comments:</label> --}}
+
             <br>
             <textarea id="replyToCommentInput" name="replyToCommentInput" rows="4" cols="50" maxlength="300"
               placeholder="Reply to a comment!"></textarea>
@@ -126,13 +127,13 @@
             <input type="submit" value="Submit your comment!">
           </form>
         </div>
-        {{!-- {{/if}} --}}
+
 
         {{/each}}
         {{/if}}
         {{#if user}}
         <form action="./createComment" method="POST">
-          {{!-- <label for="commentInput">Your Comments:</label> --}}
+
           <label for="commentInput">Add a comment!</label>
           <br>
           <textarea id="commentInput" name="commentInput" rows="4" cols="50" maxlength="300"
