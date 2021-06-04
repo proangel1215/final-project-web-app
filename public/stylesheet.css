@@ -145,3 +145,32 @@ div > a {
     /* margin-right: 20px; */
 }
 
+#accountDetailsTable {
+
+    font-size: large;
+    border-radius: 5px;
+    padding: 10px;
+    table-layout: fixed;
+    border-spacing: 20px;
+    margin: auto;
+}
+
+.accountDetailsTableHead, .accountDetailsTable {
+    background-color: #f5f5f5;
+    padding: 10px;   
+}
+
+.accountDetailsTable {
+    width: 70%;
+    text-align: center;
+}
+
+#accountDetailsButtons {
+    display: flex;
+    justify-content: center;
+}
+
+#accountDetailsEdit,
+#accountDetailsDelete {
+    padding: 20px;
+}
