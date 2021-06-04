@@ -1,9 +1,10 @@
 const SQL = require("sql-template-strings");
 const dbPromise = require("./database.js");
 
-    //USER FUNCTIONS//
-//Gets users but inputted ID number
 
+//USER FUNCTIONS//
+
+// Gets a user by their ID number
 async function retrieveUserById(id) {
     const db = await dbPromise;
     const user = await db.get(SQL`
@@ -12,32 +13,32 @@ async function retrieveUserById(id) {
     return user;
 };
 
-//Gets all users
-
+// Gets all users
 async function retrieveAllUsers() {
     const db = await dbPromise;
     return await db.all(SQL`SELECT * FROM users`);
 };
 
-//Gets all usernames
-
+// Gets all usernames
 async function retrieveAllUsernames() {
     const db = await dbPromise;
     return await db.all(SQL`SELECT username FROM users`);
 };
 
-//Gets all avatars for all users
-
+// Gets all avatars for all users
 async function retrieveAvatars() {
     const db = await dbPromise;
     return await db.all(SQL`SELECT id, imageSource FROM users`);
-}
+};
 
-//Deletes a user account using an input of their id. The function deletes their articles first, then their comments and votes then finally deletes the 
-//user account. 
-
+/**
+ * Deletes a user account using their ID number.
+ * It deletes their articles first, then their comments and votes, then finally deletes the user account. 
+ * then finally the user itself.
+ */
 async function deleteUserById(id) {
     const db = await dbPromise;
+
     const userArticles = await db.all(SQL`SELECT id FROM articles WHERE userID = ${id}`);
     if (userArticles != null || nestedID != undefined) {
         for (let i = 0; i < userArticles.length; i++) {
@@ -62,33 +63,37 @@ async function deleteUserById(id) {
     return await db.run(SQL`DELETE FROM users WHERE id = ${id}`);
 };
 
-//Creates a user account in the database using inputs of firstname, lastname, username, date of birth, password, description, imageSoruce(avatar) and 
-//assigns an auth token
-
+/**
+ * Creates a user in the database using inputs of firstname, lastname,
+ * username, date of birth, password, description, imageSource (avatar), and auth token,
+ * and auto-generates a unique ID number
+ */
 async function createUser(user) {
     const db = await dbPromise;
+
     const newUser =  await db.run(SQL`INSERT INTO users (fname, lname, username, dob, password, description, imageSource, authToken) VALUES (${user.fname}, ${user.lname}, ${user.username}, ${user.dob}, ${user.password}, ${user.description}, ${user.imageSource}, ${user.authToken})`);
     user.id = newUser.lastID;
+
     return newUser;
 };
 
-//Updates the users details in the database using inputs of firstname, lastname, username, date of birht, description and imageSource(avatar) using their
-//previously assigned unique user id
-
+/**
+ * Updates a user's details in the database using inputs of firstname, lastname,
+ * username, date of birth, description and imageSource (avatar)
+ * using their ID number
+ */
 async function editUser(id, fname, lname, username, dob, description, imageSource) {
     const db = await dbPromise;
     return await db.run(SQL`UPDATE users SET fname = ${fname}, lname = ${lname}, username = ${username}, dob = ${dob}, description = ${description}, imageSource = ${imageSource} WHERE id = ${id};`);
 };
 
-//Updates the article author name on all articles by input user id with inputted username
-
+// Updates author name on all of their articles using the author's user id and inputted username
 async function editAuthorOfArticles(username, id) {
     const db = await dbPromise;
     return await db.run(SQL`UPDATE articles SET username = ${username} WHERE id = ${id};`);
 };
 
-//Updates the users password in database using input of user object
-
+// Updates the user's password in the database using a user object
 async function updatePassword(user) {
     const db = await dbPromise;
     return await db.run(SQL`
@@ -97,9 +102,11 @@ async function updatePassword(user) {
     WHERE id = ${user.id}`);
 }
 
-    //ARTICLE FUNCTIONS//
-//Gets all articles in order by post time
 
+
+//ARTICLE FUNCTIONS//
+
+// Gets all articles in order of post time descending (i.e newest first)
 async function retrieveAllArticles() {
     const db = await dbPromise; 
     return await db.all(SQL`
@@ -108,8 +115,7 @@ async function retrieveAllArticles() {
     `);
 }; 
 
-//Gets all articles and sorts by the inputted desired sort
-
+// Gets all articles and sorts by the desired sortBy criteria
 async function retrieveArticlesBySort(sortBy) {
     const db = await dbPromise; 
     return await db.all(`
@@ -118,8 +124,7 @@ async function retrieveArticlesBySort(sortBy) {
     `); 
 }; 
 
-//Gets all articles by a specific user and sorts by desired sort using inputs of id and sortBy
-
+// Gets all articles by a specific user and sorts by desired sortBy criteria
 async function retrieveMyArticlesBySort(id, sortBy) {
     const db = await dbPromise; 
     return await db.all(`
@@ -129,30 +134,26 @@ async function retrieveMyArticlesBySort(id, sortBy) {
     `); 
 }; 
 
-//Gets all articles by a specific author id using an id input
-
+// Gets all articles by a specific author using their ID number
 async function retrieveArticlesByAuthorId(id) {
     const db = await dbPromise;
     return await db.all(SQL`SELECT * FROM articles WHERE userID = ${id}`);
 };
 
-//Gets a single article using an id input
-
+// Gets a single article using its ID number
 async function retrieveArticleById(id) {
     const db = await dbPromise;
     return await db.get(SQL`SELECT * FROM articles WHERE id = ${id}`);
 };
 
-//Adds a newly created article to the database using inputs of title, content, imagesource, userid and username
-
+// Adds a newly created article to the database using an article object
 async function createNewArticle(article) {
     const db = await dbPromise;
     return await db.run(SQL`
         INSERT INTO articles (title, postTime, content, imageSource, userID, username) VALUES (${article.title}, CURRENT_TIMESTAMP, ${article.content}, ${article.imageSource}, ${article.userID}, ${article.username})`);
 };
 
-//Gets the article id of the newly created article
-
+// Gets the article id of the newly-created article
 async function retrieveNewArticleID() {
     const db = await dbPromise;
 
@@ -163,10 +164,10 @@ async function retrieveNewArticleID() {
         return newArticleID.id;
 };
 
-//Deletes an article using an input of the article id. The function deletes the comments on the article first and then the article itself
-
+// Deletes an article using its ID. It deletes comments on the article first and then the article itself.
 async function deleteArticleById(id) {
     const db = await dbPromise;
+
     const articleComments = await db.all(SQL`SELECT id FROM comments WHERE articleID = ${id}`);
     for (let i = 0; i < articleComments.length; i++) {
         const commentID = articleComments[i];
@@ -175,25 +176,26 @@ async function deleteArticleById(id) {
     return await db.run(SQL`DELETE FROM articles WHERE id = ${id}`);
 };
 
-//Updates the article content in the database using inputs of article id, title, content and imageSource
-
+// Updates the article's properties in the database.
 async function editArticle(id, title, content, imageSource) {
     const db = await dbPromise;
     return await db.run(SQL`UPDATE articles SET title = ${title}, content = ${content}, imageSource = ${imageSource} WHERE id = ${id};`);
 };
 
-    //COMMENT FUNCTIONS//
-//Gets all comments that are attached to and article using an input of article id
 
+
+//COMMENT FUNCTIONS//
+
+// Gets all comments that are attached to an article using the article ID
 async function retrieveCommentsByArticleId(id) {
     const db = await dbPromise;
     return await db.all(SQL`SELECT * FROM comments WHERE articleID = ${id}`);
 };
 
-//Deletes comments using a comment ID input. The child comments of the inputted comment are deleted first before the parent comment. 
-
+// Deletes a comment using its ID. The child comments of the comment are deleted first before the parent comment. 
 async function deleteCommentById(id) {
     const db = await dbPromise;
+
     const nestedID = await db.get(SQL`SELECT id FROM comments WHERE parentCommentID = ${id}`);
 
         if (nestedID != null || nestedID != undefined) {
@@ -211,39 +213,39 @@ async function deleteCommentById(id) {
         }
 };
 
-//Inserts the newly created comment into the database using inputs of content, parent comment ID(if there is one), the commenters id and the articles id
-
+// Inserts the newly created comment into the database
 async function createComment(comment){
     const db = await dbPromise; 
     const newComment = await db.run(SQL`INSERT INTO comments (postTime, content, parentCommentID, commenterID, articleID) VALUES (CURRENT_TIMESTAMP, ${comment.content}, ${comment.parentID}, ${comment.commenterID}, ${comment.articleID})`); 
     return newComment; 
 };
 
-    //VOTE FUNCTIONS//
-//Gets all upvotes and downvotes on a comment using the comment id
 
+
+//VOTE FUNCTIONS//
+
+// Gets all upvotes and downvotes on a comment using comment ID
 async function retrieveVotesByCommentId(id) {
     const db = await dbPromise;
     votes = await db.get(SQL`SELECT upvotes, downvotes FROM comments WHERE id = ${id}`);
     return votes;
 };
 
-//Adds an upvote to a comment using an input of the users unique id and the id of the comment
-
+// Adds an upvote to a comment using comment ID and voter ID
 async function addUpvoteByCommentId(id, userid) {
     const db = await dbPromise;
     await db.run(SQL`INSERT INTO votes (commentID, voterID) VALUES (${id}, ${userid});`);
     return await db.run(SQL`UPDATE comments SET upvotes = upvotes + 1 WHERE id = ${id}`);
 };
 
-//Adds an downvote to a comment using an input of the users unique id and the id of the comment
-
+// Adds a downvote to a comment using comment ID and voter ID
 async function addDownvoteByCommentId(id, userid) {
     const db = await dbPromise;
     await db.run(SQL`INSERT INTO votes (commentID, voterID) VALUES (${id}, ${userid});`);
     return await db.run(SQL`UPDATE comments SET downvotes = downvotes + 1 WHERE id = ${id}`);
 };
 
+// Retrieves the ID of a voter for a particular comment
 async function getVoterIdByCommentId(id) {
     const db = await dbPromise;
     const voterID = await db.all(SQL`SELECT voterID FROM votes WHERE commentID = ${id}`);

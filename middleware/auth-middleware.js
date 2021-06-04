@@ -7,7 +7,6 @@ const authDao = require("../modules/auth-dao.js");
  * The next function is then called.
  */
 async function addUserToLocals(req, res, next) {
-
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     res.locals.user = user;
     next();
@@ -20,7 +19,6 @@ async function addUserToLocals(req, res, next) {
  * otherwise redirect back to the login page.
  */
 function verifyAuthenticated(req, res, next) {
-
     if (res.locals.user) {
         next();
     }
