@@ -1,9 +1,9 @@
-Team name: async function (af)
+Team Name: async function (af)
 
-Set up instruction: 
-1. Run npm install in terminal; 
-2. Create a database by using the code in project-database-init-script.sql; 
-3. Run node app in terminal; 
+Set up instructions: 
+1. Run npm install in the terminal; 
+2. Create the database using the code in project-database-init-script.sql; 
+3. Run [node app.js] in the terminal; 
 4. Done! 
 
 Existing users:
@@ -17,5 +17,6 @@ Existing users:
 8. username: yucheng; password: yucheng
 
 Additionally:
-There are a few instances of use of var - we understand this is not best practice in this course however we had trouble with using let.
-We do apologise sincerly...
+There are a few instances of use of var - we understand that this is not best practice in this course, however we had some trouble when using let.
+
+We do apologise sincerely...
