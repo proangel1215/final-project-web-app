@@ -105,7 +105,7 @@ INSERT INTO articles VALUES (4, 'Why you should watch ‘Totally Spies!’ as an
 <p>Finally, one of the show&rsquo;s strengths is that it is satisfyingly self-aware. Throughout the episodes, the girls seem more invested in their appearance and any persisting teen drama that awaits them back home, rather than the mission itself. When Clover eventually gets kidnapped (which happens in almost every episode), Sam and Alex don&rsquo;t look particularly concerned, and instead focus on investigating the case a bit further, as if already knowing that their findings will inevitably lead to a living, breathing Clover. The show plays with its own conventions like that quite hilariously, being fully aware that no one, not even the youngest viewer, would really be on the edge of their seat over the main character&rsquo;s short absence.</p>
 <p>The focus lies on spectacular action scenes and punch line opportunities more than anything, to the extent where the &lsquo;cool&rsquo; factor overrides any logic or cohesion of plot a lot of the time. The gadgets are oddly specific, so much so that Jerry appears to be extraordinarily gifted in the intuition department, thus accurately foreseeing each and every action scene, down to the last detail. And frankly, it&rsquo;s&nbsp;<em>totally</em>&nbsp;awesome!</p>', 'totallyspies-article4.jpg', 4, 'rachel');
 
-INSERT INTO articles VALUES (5, 'Why Digimon is Superior to Pokemon', '2020-06-20 02:16:07','<p>If you grew up in the &rsquo;90s, chances are your first exposure to anime was either&nbsp;<em>Pok&eacute;mon&nbsp;</em>or&nbsp;<em>Digimon</em>, and your parents would regularly mix one up with the other. Honestly, it&rsquo;s not that hard to see why. Both shows originated as video games &ndash;&nbsp;<em>Digimon&nbsp;</em>started out as Tamagotchi-like virtual pets and&nbsp;<em>Pok&eacute;mon</em>&nbsp;was a series of&nbsp;role-playing games &ndash; before expanding to trading cards, TV shows, and movies.</p>
+INSERT INTO articles VALUES (5, 'Why Digimon is Superior to Pokemon', '2021-04-31 01:30:00','<p>If you grew up in the &rsquo;90s, chances are your first exposure to anime was either&nbsp;<em>Pok&eacute;mon&nbsp;</em>or&nbsp;<em>Digimon</em>, and your parents would regularly mix one up with the other. Honestly, it&rsquo;s not that hard to see why. Both shows originated as video games &ndash;&nbsp;<em>Digimon&nbsp;</em>started out as Tamagotchi-like virtual pets and&nbsp;<em>Pok&eacute;mon</em>&nbsp;was a series of&nbsp;role-playing games &ndash; before expanding to trading cards, TV shows, and movies.</p>
 <p>While&nbsp;<em>Pok&eacute;mon&nbsp;</em>grew to become a multimedia juggernaut that has churned out TV seasons non-stop since 1997 and produced over 20 feature films,&nbsp;<em>Digimon&nbsp;</em>has quietly but steadily remained in its shadow since it premiered in 1999. But with the recent release of&nbsp;<em>Digimon Adventure: Last Evolution Kizuna</em>, and with the franchise&rsquo;s first film, celebrating its 20th anniversary this month, it&rsquo;s about time we take out our Digivice, become champions of the Digital World, and explore why Digimon is the superior &rsquo;90s franchise about young kids who befriend small fighting monsters.</p>
 <h3><strong>IT&nbsp;WAS APPOINTMENT TV</strong></h3>
 <p>By the late &rsquo;90s, we were already entering the era of prestige TV, as the arrival of shows like&nbsp;<em>The Sopranos</em>&nbsp;and&nbsp;<em>The West Wing</em>, with a stronger focus on serialized narratives, forced people to tune in every week or risk missing important plot points. Though children&rsquo;s television at the time was mostly episodic,&nbsp;<em>Digimon&nbsp;</em>marked a groundbreaking development for many kids of the era who discovered that they too had to&nbsp;watch every episode if they wanted to follow along with the story.</p>
@@ -137,36 +137,83 @@ INSERT INTO articles VALUES (7, 'Review: New ‘Kim Possible’ movie is possibl
 <p>Overall, the new &ldquo;Kim Possible&rdquo; movie just felt flat and uninspired. It seemed obvious that Disney really tried to create an honest reboot of the &ldquo;Kim Possible&rdquo; franchise by sticking really close to the source material, but in doing so &ldquo;Kim Possible&rdquo; merely feels like a high-budget fan film.</p>
 <p>I&rsquo;m afraid this movie is a problem even Kim Possible herself can&rsquo;t solve.</p>', 'kimpossible-article7.jpg', 5, 'vita');
 
+INSERT INTO articles VALUES (8, 'Top 5 reasons why Pokemon is better than Digimon', '2021-05-01 01:30:00','<p>The comparisons between Pokemon and Digimon has divided fans ever since the latter was first introduced.</p>
+<p>Digimon and Pokemon are extremely similar. They are also extremely different. Both franchises have their own set of die-hard fans who wont hesitate to stand up for their favorite.</p>
+<p>It is quite obvious that Pokemon has become much more successful than Digimon ever has or will. There is clearly a reason behind that. Pokemon came first and did plenty of things better than its counterpart.</p>
+<p><strong><em>Note: This article is subjective and reflects the opinion of the writer.</em></strong></p>
+<h3>#5 - Family friendly</h3>
+<p>This isnt to say Digimon is a hardcore adult-only series. It often touches on darker topics and more "grown-up" themes. Pokemon has its share of those as well, but overall, it is much more family-friendly.</p>
+<p>It is extremely accessible to children, and that is what makes parents happy. Something that everyone can enjoy is always going to be much more popular.</p>
+<h3>#4 - Catch Em All</h3>
+<p>A lot of people are collectors at heart. In Digimon, each character only has one monster at their disposal. This can make for great connections and friendships, but Pokemons decision to let trainers "Catch Em All" was the right move.</p>
+<p>In the series and the games, trainers can have as many creatures as their PC Box will hold, allowing fans to enjoy some variety.</p>
+<h3>#3 - Other media</h3>
+<p>Digimon was often more fun to watch than Pokemon. Pokemon moved on to different forms of media, however. Yes, Digimon had games and movies, but it couldnt compare to eight generations of games and over 20 movies. Pokemon became a media franchise and ran with it.</p>
+<h3>#2 - Names</h3>
+<p>Pokemon names are infinitely better than Digimon names. It made the series feel more creative and thoughtful. Nearly every Digimon has "mon" in their name somewhere.</p>
+<p>While the "mon" name was the niche Digimon aimed for, it was a little lazy. Great names like Charizard, Rayquaza, and Lucario make each creature feel more personal.</p>
+<h3>#1 - It Came First</h3>
+<p>The fact that Pokemon came before Digimon is one of the main reasons it is better. Digimon basically never stood a chance. Even if the creators had never heard of Pokemon, it was always going to be seen as a clone of the series.</p>
+<p>Pokemon had plenty of time to become the juggernaut it is prior to Digimon entering the scene. That gave it the leg up.</p>', 'pokemon-article8.jpg', 7, 'andrew');
+
 
 INSERT INTO comments VALUES (1, '2021-04-20 11:01:07', 'This is the best show ever.', 4, 0, NULL, 3, 1);
 INSERT INTO comments VALUES (2, '2021-03-10 05:00:07', 'This isnt even real anime...', 0, 1, 1, 2, 1);
-INSERT INTO comments VALUES (3, '2021-04-20 11:01:07', 'My favourite character is Sokka', 2, 0, NULL, 4, 1);
-INSERT INTO comments VALUES (4, '2021-01-12 06:05:00', 'Danny was my first crush...', 8, 0, NULL, 1, 2);
-INSERT INTO comments VALUES (5, '2021-02-16 04:20:07', 'I need to rewatch this!', 6, 0, NULL, 2, 3);
-INSERT INTO comments VALUES (6, '2021-01-14 08:40:06', 'I recently did it did not hold up tbh', 0, 4, 5, 6, 3);
-INSERT INTO comments VALUES (7, '2021-03-11 08:15:06', 'Yesss I love this show', 1, 1, NULL, 1, 4);
-INSERT INTO comments VALUES (8, '2021-06-14 09:40:06', 'I need to watch this again...', 0, 0, 7, 5, 4);
-INSERT INTO comments VALUES (9, '2021-06-14 09:40:06', 'Oh, this is blasphemy...', 7, 0, NULL, 7, 5);
-INSERT INTO comments VALUES (10, '2021-06-14 09:40:06', 'Yup, who do they think they are kidding..', 2, 0, 9, 5, 5);
-INSERT INTO comments VALUES (11, '2021-06-14 09:40:06', 'I lowkey agree', 0, 4, NULL, 6, 5);
-INSERT INTO comments VALUES (12, '2021-06-14 09:40:06', 'Smh', 2, 0, 11, 8, 5);
-INSERT INTO comments VALUES (13, '2021-06-14 09:40:06', 'Dope show', 2, 0, NULL, 3, 6);
-INSERT INTO comments VALUES (14, '2021-06-14 09:40:06', 'I love dragons', 2, 0, NULL, 1, 6);
+INSERT INTO comments VALUES (3, '2021-04-20 11:01:07', 'My favourite character is Sokka', 1, 0, NULL, 4, 1);
+INSERT INTO comments VALUES (4, '2021-01-12 06:05:00', 'Danny was my first crush...', 3, 0, NULL, 1, 2);
+INSERT INTO comments VALUES (5, '2021-02-16 04:20:07', 'I need to rewatch this!', 2, 0, NULL, 2, 3);
+INSERT INTO comments VALUES (6, '2021-01-14 08:40:06', 'I recently did it did not hold up tbh', 0, 2, 5, 6, 3);
+INSERT INTO comments VALUES (7, '2021-03-11 08:15:06', 'Yesss I love this show', 2, 0, NULL, 1, 4);
+INSERT INTO comments VALUES (8, '2021-06-14 09:40:06', 'I need to watch this again...', 1, 0, 7, 5, 4);
+INSERT INTO comments VALUES (9, '2021-06-14 09:40:06', 'Oh, this is blasphemy...', 3, 0, NULL, 7, 5);
+INSERT INTO comments VALUES (10, '2021-06-14 09:40:06', 'Yup, who do they think they are kidding..', 1, 0, 9, 5, 5);
+INSERT INTO comments VALUES (11, '2021-06-14 09:40:06', 'I lowkey agree', 0, 3, NULL, 6, 5);
+INSERT INTO comments VALUES (12, '2021-06-14 09:40:06', 'Smh', 0, 0, 11, 8, 5);
+INSERT INTO comments VALUES (13, '2021-06-14 09:40:06', 'Dope show', 3, 0, NULL, 3, 6);
+INSERT INTO comments VALUES (14, '2021-06-14 09:40:06', 'I love dragons', 1, 0, NULL, 1, 6);
 INSERT INTO comments VALUES (15, '2021-06-14 09:40:06', 'Me too!', 1, 0, 14, 7, 6);
-INSERT INTO comments VALUES (16, '2021-01-12 06:05:00', 'Girl same', 2, 0, 4, 4, 2);
-INSERT INTO comments VALUES (17, '2021-06-14 09:40:06', 'This movie was such an offense to the original cartoon.', 5, 1, NULL, 7, 7);
-INSERT INTO comments VALUES (18, '2021-06-14 09:40:06', 'I know, I wanted so much more...', 2, 0, 17, 8, 7);
-INSERT INTO comments VALUES (19, '2021-06-14 09:40:06', 'Hard', 1, 0, 18, 1, 7);
-INSERT INTO comments VALUES (20, '2021-01-12 06:05:00', 'Eh, it wasnt that bad!', 1, 3, NULL, 4, 7);
+INSERT INTO comments VALUES (16, '2021-01-12 06:05:00', 'Girl same', 1, 0, 4, 4, 2);
+INSERT INTO comments VALUES (17, '2021-06-14 09:40:06', 'This movie was such an offense to the original cartoon.', 3, 0, NULL, 7, 7);
+INSERT INTO comments VALUES (18, '2021-06-14 09:40:06', 'I know, I wanted so much more...', 1, 0, 17, 8, 7);
+INSERT INTO comments VALUES (19, '2021-06-14 09:40:06', 'Hard', 0, 0, 18, 1, 7);
+INSERT INTO comments VALUES (20, '2021-01-12 06:05:00', 'Eh, it wasnt that bad!', 0, 2, NULL, 4, 7);
 
-INSERT INTO votes VALUES (1, 1);
-INSERT INTO votes VALUES (2, 2);
-INSERT INTO votes VALUES (3, 3);
-INSERT INTO votes VALUES (2, 3);
-INSERT INTO votes VALUES (1, 5);
-INSERT INTO votes VALUES (2, 5);
-INSERT INTO votes VALUES (3, 5);
+-- CREATE TABLE votes (
+--     voterID INTEGER NOT NULL, 
+--     commentID INTEGER NOT NULL,
+
+INSERT INTO votes VALUES (1, 16);
+INSERT INTO votes VALUES (1, 20);
+INSERT INTO votes VALUES (1, 8);
+INSERT INTO votes VALUES (1, 11);
+INSERT INTO votes VALUES (1, 15);
+INSERT INTO votes VALUES (2, 4);
+INSERT INTO votes VALUES (2, 17);
 INSERT INTO votes VALUES (2, 6);
-INSERT INTO votes VALUES (4, 6);
-INSERT INTO votes VALUES (3, 7);
-INSERT INTO votes VALUES (2, 7);
+INSERT INTO votes VALUES (4, 13);
+INSERT INTO votes VALUES (4, 14);
+INSERT INTO votes VALUES (4, 9);
+INSERT INTO votes VALUES (4, 1);
+INSERT INTO votes VALUES (4, 2);
+INSERT INTO votes VALUES (3, 17);
+INSERT INTO votes VALUES (3, 18);
+INSERT INTO votes VALUES (3, 3);
+INSERT INTO votes VALUES (3, 1);
+INSERT INTO votes VALUES (6, 13);
+INSERT INTO votes VALUES (6, 1);
+INSERT INTO votes VALUES (6, 5);
+INSERT INTO votes VALUES (6, 7);
+INSERT INTO votes VALUES (5, 1);
+INSERT INTO votes VALUES (5, 13);
+INSERT INTO votes VALUES (5, 4);
+INSERT INTO votes VALUES (5, 20);
+INSERT INTO votes VALUES (7, 10);
+INSERT INTO votes VALUES (7, 11);
+INSERT INTO votes VALUES (7, 17);
+INSERT INTO votes VALUES (7, 7);
+INSERT INTO votes VALUES (7, 9);
+INSERT INTO votes VALUES (8, 9);
+INSERT INTO votes VALUES (8, 4);
+INSERT INTO votes VALUES (8, 5);
+INSERT INTO votes VALUES (8, 6);
+INSERT INTO votes VALUES (8, 11);
