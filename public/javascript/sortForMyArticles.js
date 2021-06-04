@@ -1,3 +1,8 @@
+/**
+ * This function is called in the my-articles view when a sort button is clicked.
+ * It retrieves all of the user's articles sorted according to the sortBy criteria passed
+ * to it, and creates the article cards for those articles.
+ */
 async function getSort(sortBy) {
 
 // fetch sorted articles from the server
