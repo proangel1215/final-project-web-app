@@ -44,6 +44,10 @@ div > a {
         grid-template-areas: "c c c c c c";
         margin-top: 20px;
     }
+
+    #articleImage {
+        width: 100%;
+    }
 }
 
 #content {
@@ -140,3 +144,4 @@ div > a {
     margin: 0px 20px 0px 2px;
     /* margin-right: 20px; */
 }
+
