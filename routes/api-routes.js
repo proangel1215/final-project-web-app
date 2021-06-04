@@ -7,31 +7,30 @@ const authDao = require("../modules/auth-dao.js");
 const appDao = require("../modules/app-dao.js");
 
 
-// Used to simulate Java app sending login credentials - will be deleted before submitting
-router.get("/api/login", function(req, res) {
-    res.render("api-login-test");
-});
-
-
-// This route handler is invoked whenever the user attempts to log in from the Java app
+/**
+ * When a POST request is received, retrieve the inputted username and password
+ * from the body. Retrieve the hashed password for the username from the
+ * database and compare it to the inputted password. 
+ * If the hashed password is undefined (i.e. the username does not exist),
+ * send a 401 error code.
+ * If the passwords match, log the user in and send a 204 success code.
+ * If they don't match, send a 401 error code.
+ */
 router.post("/api/login", async function(req, res) {
     const userJSON = req.body;
-    // console.log(userJSON);
 
     const username = userJSON.username;
     const plaintextPassword = userJSON.password;
 
     const hash = await authDao.retrieveHashByUsername(username);
-    // console.log(hash);
 
     if (hash != undefined) {
         const passwordsMatch = await bcrypt.compare(plaintextPassword, hash.password);
-        // console.log(passwordsMatch);
 
-         // if the passwords match...
         if (passwordsMatch) {
             const user = await authDao.retrieveUserWithCredentials(username, hash.password);
 
+            // Auth success - give that user an authToken, save the token in a cookie, and send a 204 success code
             const authToken = uuid();
             user.authToken = authToken;
             await authDao.updateAuthToken(user);
@@ -46,14 +45,17 @@ router.post("/api/login", async function(req, res) {
 });
 
 
-// This route handler is invoked whenever the user logs out from the Java app
+// When a GET request is received, delete the authToken cookie and send a 204 success code
 router.get("/api/logout", function(req, res) {
     res.clearCookie("authToken");
     res.status(204).send();
 });
 
 
-// This route handler returns an array of all users if the user is an admin, or a 401 response if they are not an admin or not a user
+/**
+ * When a GET request is received, return an array of all users if the requestor is an
+ * admin. If the requestor is not an admin, or is not authenticated, send a 401 error code.
+ */
 router.get("/api/users", async function(req, res) {
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
 
@@ -76,7 +78,11 @@ router.get("/api/users", async function(req, res) {
 });
 
 
-// This route handler deletes the user with the given id, as well as their articles and comments, if the requestor is an admin
+/**
+ * When a DELETE request is received, delete the user with the given ID from the 
+ * database, as well as their articles and comments, if the requestor is an admin.
+ * If the requestor is not an admin, or is not authenticated, send a 401 error code.
+ */
 router.delete("/api/users/:id", async function(req, res) {
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const userIdToDelete = req.params.id;
@@ -95,12 +101,6 @@ router.delete("/api/users/:id", async function(req, res) {
         res.status(401).send();
     }
 });
-
-
-// This test route handler renders a Handlebars view that runs a JS file that sends a DELETE request to router.delete 
-router.get("/delete", async function(req, res) {
-    res.render("api-delete-test");
-})
 
 
 module.exports = router;
