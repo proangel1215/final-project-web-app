@@ -15,3 +15,7 @@ Existing users:
 6. username: tyne; password: tyne 
 7. username: andrew; password: andrew
 8. username: yucheng; password: yucheng
+
+Additionally:
+There are a few instances of use of var - we understand this is not best practice in this course however we had trouble with using let.
+We do apologise sincerly...
