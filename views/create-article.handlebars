@@ -1,14 +1,15 @@
-<script src="https://cdn.tiny.cloud/1/4zc1z98ilf3klitpp7ou6h01pbtqopz2i2r62lq5kp86weu2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/4zc1z98ilf3klitpp7ou6h01pbtqopz2i2r62lq5kp86weu2/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
 
 <script>
-tinymce.init({
-    selector: '#newArticleContent',
-    menubar: false,
-    plugins: 'autoresize lists paste emoticons wordcount',
-    autoresize_bottom_margin: 50,
-    toolbar: 'undo redo | styleselect | forecolor | bold italic underline | numlist bullist | emoticons | wordcount',
-    paste_data_images: false,
-    block_unsupported_drop: true
+    tinymce.init({
+        selector: '#newArticleContent',
+        menubar: false,
+        plugins: 'autoresize lists paste emoticons wordcount',
+        autoresize_bottom_margin: 50,
+        toolbar: 'undo redo | styleselect | forecolor | bold italic underline | numlist bullist | emoticons | wordcount',
+        paste_data_images: false,
+        block_unsupported_drop: true
     });
 </script>
 
@@ -25,19 +26,22 @@ tinymce.init({
         </div>
         <br>
         <br>
+
         <div>
             <label for="articleImage">Upload image:</label>
             <input type="file" id="articleImage" name="articleImage" accept="image/*">
         </div>
         <br>
         <br>
+
         <textbox id="newArticleContent" name="newArticleContent" required>
-         {{! WYSIWYG implemented here for paragraph input}}
+            {{! WYSIWYG implemented here for paragraph input}}
         </textbox>
         <br>
         <br>
-        <button type="submit">Post article</button>
         
+        <button type="submit">Post article</button>
+
     </form>
 
 </div>
