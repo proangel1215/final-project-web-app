@@ -34,6 +34,18 @@ div > a {
     margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+    
+    #container {
+
+        display: grid;
+        grid-template-columns: 6fr;
+        grid-template-rows: auto;
+        grid-template-areas: "c c c c c c";
+        margin-top: 20px;
+    }
+}
+
 #content {
     grid-area: c;
 }
