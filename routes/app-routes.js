@@ -28,7 +28,6 @@ router.get("/", async function(req, res) {
 router.get("/my-articles", verifyAuthenticated, async function(req, res) {
     res.locals.message = req.query.message;
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    // res.locals.articles = await appDao.retrieveArticlesByAuthorId(user.id); 
 
     const articles = await appDao.retrieveArticlesByAuthorId(user.id); 
 
@@ -43,6 +42,7 @@ router.get("/my-articles", verifyAuthenticated, async function(req, res) {
 });
 
 router.post("/createComment", async function(req, res) {
+
     const content = req.body.commentInput; 
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken); 
     const articleID = req.body.articleID;
@@ -54,22 +54,26 @@ router.post("/createComment", async function(req, res) {
 });
 
 router.post("/replyToComment", async function(req, res) {
+
     const content = req.body.replyToCommentInput; 
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken); 
     const articleID = req.body.articleID;
     const parentID = req.body.parentID;
     const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: parentID}; 
     await appDao.createComment(comment);
+
     res.redirect(`/read-article?articleID=${articleID}`);
 });
 
 router.post("/replyToCommentsComment", async function(req, res) {
+
     const content = req.body.replyToCommentsCommentInput; 
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken); 
     const articleID = req.body.articleID;
     const parentID = req.body.parentID;
     const comment = {content: content, commenterID: user.id, articleID: articleID, parentID: parentID}; 
     await appDao.createComment(comment);
+
     res.redirect(`/read-article?articleID=${articleID}`);
 });
 
@@ -90,13 +94,13 @@ router.post("/create-article", multer.upload.single("articleImage"), verifyAuthe
         fs.renameSync(oldFileName, newFileName);
 
         const resizedImage = await jimp.read(newFileName);
-        resizedImage.resize(800, jimp.AUTO); // arbitrary size
+        resizedImage.resize(800, jimp.AUTO); // nice size fit for landscape
         await resizedImage.write(`./public/imagesResized/${imageFile.originalname}`);
 
         imageSource = imageFile.originalname;
     }
     
-    //create article in database
+    // create article in database
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const newArticle = {title: title, content: content, imageSource: imageSource, userID: user.id, username: user.username}; 
     await appDao.createNewArticle(newArticle);
@@ -153,15 +157,11 @@ router.get('/read-article', async function (req, res) {
 
     const articleID = req.query.articleID;
     let votedComments = new Array();
-    //req.params = articleID;
-    //console.log(articleID);
     const article = await appDao.retrieveArticleById(articleID); 
-    //console.log(article); 
     res.locals.article = article;
 
     // Initialise user so we can check if userID = authorID: if so display edit article button
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
-    //console.log(user.id);
     res.locals.user = user; 
 
     if (user != undefined) {
@@ -170,9 +170,7 @@ router.get('/read-article', async function (req, res) {
         }
     }
     
-    //console.log(article.imageSource)
     const comments = await appDao.retrieveCommentsByArticleId(articleID); 
-    //console.log(comments[0].id);
     var newcomments = null;
     if (comments.length != 0) {
         var usersArray = new Array(); 
@@ -183,7 +181,6 @@ router.get('/read-article', async function (req, res) {
         }
 
         const unflatten = data => {
-            // console.log(data);
             const tree = data.map(e => ({...e}))
                 .sort((a, b) => a.id - b.id)
                 .reduce((a, e) => {
@@ -221,10 +218,12 @@ router.get('/read-article', async function (req, res) {
 
     res.locals.votedComments = votedComments;
     res.locals.comments = newcomments;
+
     res.render("read-article");
   });
 
 router.post("/giveupvote", verifyAuthenticated, async function (req, res) {
+
     const commentID = req.body.comment;
     const userid = req.body.userid;
     const articleid = req.body.articleid;
@@ -235,6 +234,7 @@ router.post("/giveupvote", verifyAuthenticated, async function (req, res) {
 });
 
 router.post("/givedownvote", verifyAuthenticated, async function (req, res) {
+
     const commentID = req.body.comment;
     const userid = req.body.userid;
     const articleid = req.body.articleid;
@@ -256,6 +256,7 @@ router.get("/create-account", async function(req, res) {
 });
 
 router.post("/create-account", async function(req, res) {
+
     const fname = req.body.fname;
     const lname = req.body.lname;
     const username = req.body.username;
@@ -270,7 +271,6 @@ router.post("/create-account", async function(req, res) {
         // Hashes and salts the provided password all in one go
         const saltRounds = 10;
         const hash = await bcrypt.hash(password, saltRounds);
-        // console.log("My hash: ", hash);
 
         const authToken = uuid();
         const newUser = {fname: fname, lname: lname, username: username, dob: dob, password: hash, description: description, imageSource: imageSource, authToken: authToken};
@@ -301,15 +301,19 @@ router.get("/account-details", verifyAuthenticated, async function(req, res) {
 
 
 router.get("/articles", async function(req, res){
+
     const sortBy = req.query.sortBy;
     const articles = await appDao.retrieveArticlesBySort(sortBy);
+
     res.json(articles);
 });
 
 router.get("/my-sorted-articles", verifyAuthenticated, async function(req, res){
+
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const sortBy = req.query.sortBy; 
     const articles = await appDao.retrieveMyArticlesBySort(user.id, sortBy);
+
     res.json(articles);
 });
 
@@ -353,6 +357,7 @@ router.get("/change-password", function(req, res) {
 
 
 router.post("/change-password", async function(req, res) {
+    
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
 
     const plaintextPassword = req.body.newPassword;
