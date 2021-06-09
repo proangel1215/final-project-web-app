@@ -19,10 +19,17 @@ const appDao = require("../modules/app-dao.js");
 router.post("/api/login", async function(req, res) {
     const userJSON = req.body;
 
+    console.log(userJSON);
+
     const username = userJSON.username;
     const plaintextPassword = userJSON.password;
 
+    console.log("Username: " + username);
+    console.log("Password: " + plaintextPassword);
+
     const hash = await authDao.retrieveHashByUsername(username);
+
+    console.log(hash);
 
     if (hash != undefined) {
         const passwordsMatch = await bcrypt.compare(plaintextPassword, hash.password);
@@ -35,11 +42,15 @@ router.post("/api/login", async function(req, res) {
             user.authToken = authToken;
             await authDao.updateAuthToken(user);
             res.cookie("authToken", authToken);
+
+            console.log("Success - valid username and password!");
             res.status(204).send();
         } else {
+            console.log("Failure - valid username but invalid password");
             res.status(401).send();
         }
     } else {
+        console.log("Failure - invalid username");
         res.status(401).send();
     }
 });
