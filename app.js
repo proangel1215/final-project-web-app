@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // Setup cookie-parser
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
+app.use(express.json());
 
 // Make the "public" folder available statically
 const path = require("path");
