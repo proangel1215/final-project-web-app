@@ -29,13 +29,17 @@ router.post("/api/login", async function(req, res) {
 
         if (passwordsMatch) {
             const user = await authDao.retrieveUserWithCredentials(username, hash.password);
+            
+            if (user.admin) {
+                const authToken = uuid();
+                user.authToken = authToken;
+                await authDao.updateAuthToken(user);
+                res.cookie("authToken", authToken);
 
-            // Auth success - give that user an authToken, save the token in a cookie, and send a 204 success code
-            const authToken = uuid();
-            user.authToken = authToken;
-            await authDao.updateAuthToken(user);
-            res.cookie("authToken", authToken);
-            res.status(204).send();
+                res.status(204).send();
+            } else {
+                res.status(401).send();
+            }
         } else {
             res.status(401).send();
         }
@@ -87,12 +91,9 @@ router.delete("/api/users/:id", async function(req, res) {
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const userIdToDelete = req.params.id;
 
-    console.log("User ID to delete: " + userIdToDelete);
-
     if (user) {
         if (user.admin) {
             const message = await appDao.deleteUserById(userIdToDelete);
-            console.log(message);
             res.status(204).send();
         } else {
             res.status(401).send();
