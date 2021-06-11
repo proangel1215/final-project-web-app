@@ -19,17 +19,10 @@ const appDao = require("../modules/app-dao.js");
 router.post("/api/login", async function(req, res) {
     const userJSON = req.body;
 
-    console.log(userJSON);
-
     const username = userJSON.username;
     const plaintextPassword = userJSON.password;
 
-    console.log("Username: " + username);
-    console.log("Password: " + plaintextPassword);
-
     const hash = await authDao.retrieveHashByUsername(username);
-
-    console.log(hash);
 
     if (hash != undefined) {
         const passwordsMatch = await bcrypt.compare(plaintextPassword, hash.password);
@@ -43,18 +36,14 @@ router.post("/api/login", async function(req, res) {
                 await authDao.updateAuthToken(user);
                 res.cookie("authToken", authToken);
 
-                console.log("Success - valid username and password!");
                 res.status(204).send();
             } else {
-                console.log("Failure - not an admin");
                 res.status(401).send();
             }
         } else {
-            console.log("Failure - valid username but invalid password");
             res.status(401).send();
         }
     } else {
-        console.log("Failure - invalid username");
         res.status(401).send();
     }
 });
@@ -102,12 +91,9 @@ router.delete("/api/users/:id", async function(req, res) {
     const user = await authDao.retrieveUserWithAuthToken(req.cookies.authToken);
     const userIdToDelete = req.params.id;
 
-    console.log("User ID to delete: " + userIdToDelete);
-
     if (user) {
         if (user.admin) {
             const message = await appDao.deleteUserById(userIdToDelete);
-            console.log(message);
             res.status(204).send();
         } else {
             res.status(401).send();
